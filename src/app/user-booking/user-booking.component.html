@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card my-4 shadow-sm">
+                <div class="card-header text-center">
+                    <h4>Đặt Lịch Khám</h4>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="doctor">Chọn bác sĩ:</label>
+                                <select id="doctor" class="form-control" name="doctor">
+                                    <option value="1">Bác sĩ Nguyễn Văn A</option>
+                                    <option value="2">Bác sĩ Trần Thị B</option>
+                                    <option value="3">Bác sĩ Lê Hoàng C</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email">Email</label>
+                                <input type="text" id="email" class="form-control" name="email" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="date">Ngày khám:</label>
+                                <input type="date" id="date" class="form-control" name="date" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="time">Thời gian:</label>
+                                <input type="time" id="time" class="form-control" name="time" required />
+                            </div>
+
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-success">Đặt lịch</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

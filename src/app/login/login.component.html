@@ -1,0 +1,39 @@
+<app-header></app-header>
+<div class="container">
+    <div class="login-form">
+        <h2>Đăng nhập</h2>
+        <form (submit)="onLogin()">
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password"
+                    required>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="remember">
+                <label for="remember">Ghi nhớ mật khẩu</label>
+            </div>
+            <button type="submit">Đăng nhập</button>
+        </form>
+        <div class="forgot-password">
+            <a href="#">Quên mật khẩu?</a>
+        </div>
+        <div class="register">
+            <p>Chưa có tài khoản? <a [routerLink]="['/register']">Đăng ký ngay</a></p>
+        </div>
+        <div class="social-login">
+            <button class="social-btn google-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo"
+                    class="social-icon">
+                Đăng nhập với Google
+            </button>
+            <button class="social-btn facebook-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                    alt="Facebook logo" class="social-icon">
+                Đăng nhập với Facebook
+            </button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

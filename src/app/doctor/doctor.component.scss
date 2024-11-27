@@ -1,0 +1,75 @@
+/* CSS cho phần quản lý bác sĩ */
+
+.doctor-management {
+    background-color: #f8f9fa; // Màu nền nhẹ cho toàn phần quản lý bác sĩ
+    padding: 20px;
+    border-radius: 8px;
+  
+    h2 {
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+  }
+  
+  .doctor-form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  
+    label {
+      font-weight: bold;
+    }
+  
+    .form-control {
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+  
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      margin-top: 20px;
+    }
+  
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  }
+  
+  /* Bảng danh sách bác sĩ */
+  .table {
+    margin-top: 20px;
+  
+    .table-header {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+  
+    th, td {
+      text-align: center;
+      vertical-align: middle;
+    }
+  
+    .btn-warning {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+  
+    .btn-warning:hover {
+      background-color: #e0a800;
+      border-color: #e0a800;
+    }
+  
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+  
+    .btn-danger:hover {
+      background-color: #c82333;
+      border-color: #c82333;
+    }
+  }
+  

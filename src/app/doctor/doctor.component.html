@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Nội dung chính cho quản lý bác sĩ -->
+        <div class="col-md-10">
+            <div class="doctor-management container mt-5">
+                <h2 class="text-center">Quản lý Bác Sĩ</h2>
+
+                <!-- Form thêm hoặc chỉnh sửa bác sĩ -->
+                <form (ngSubmit)="isEditMode ? updateDoctor() : addDoctor()"
+                    class="doctor-form shadow p-4 mb-5 bg-white rounded">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fullName" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="fullName" [(ngModel)]="newDoctor.fullName"
+                                name="fullName" placeholder="Nhập họ và tên" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" [(ngModel)]="newDoctor.email"
+                                name="email" placeholder="Nhập email" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                            <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newDoctor.phoneNumber"
+                                name="phoneNumber" placeholder="Nhập số điện thoại" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="specialty" class="form-label">Chuyên khoa</label>
+                            <select class="form-control" id="specialty" [(ngModel)]="newDoctor.specialty.id"
+                                name="specialty" required>
+                                <option [value]="1">Dentistry</option>
+                                <option [value]="2">Orthodontics</option>
+                                <option [value]="3">Pediatric Dentistry</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="gender" class="form-label">Giới tính</label>
+                            <select class="form-control" id="gender" [(ngModel)]="newDoctor.gender" name="gender"
+                                required>
+                                <option [value]="true">Nam</option>
+                                <option [value]="false">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="profilePicture" class="form-label">Ảnh đại diện</label>
+                            <input type="text" class="form-control" id="profilePicture"
+                                [(ngModel)]="newDoctor.profilePicture" name="profilePicture"
+                                placeholder="URL ảnh đại diện">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">{{ isEditMode ? 'Cập nhật' : 'Thêm bác sĩ'
+                        }}</button>
+                </form>
+
+                <!-- Danh sách bác sĩ -->
+                <table class="table table-striped shadow-sm">
+                    <thead class="table-header">
+                        <tr>
+                            <th>Họ và tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Chuyên khoa</th>
+                            <th>Giới tính</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let doctor of doctors">
+                            <td>{{ doctor.fullName }}</td>
+                            <td>{{ doctor.email }}</td>
+                            <td>{{ doctor.phoneNumber }}</td>
+                            <td>{{ doctor.specialty.name }}</td>
+                            <td>{{ doctor.gender ? 'Nam' : 'Nữ' }}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm me-2" (click)="editDoctor(doctor)">Chỉnh
+                                    sửa</button>
+                                <button class="btn btn-danger btn-sm" (click)="deleteDoctor(doctor.id)">Xóa</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

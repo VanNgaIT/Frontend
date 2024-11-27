@@ -1,0 +1,116 @@
+/* Đảm bảo ảnh phủ đầy chiều rộng của màn hình */
+.container{
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 15px; /* Thêm padding để không bị tràn ra ngoài */
+}
+
+/* Hero image */
+.hero-image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    display: block;
+    filter: brightness(50%); /* Làm tối ảnh một chút để text nổi bật hơn */
+    transition: transform 0.5s ease; /* Hiệu ứng di chuyển ảnh khi hover */
+}
+
+/* Thêm hiệu ứng parallax cho ảnh nền */
+.hero-image:hover img {
+    transform: scale(1.1); /* Khi hover, ảnh sẽ zoom vào */
+}
+
+/* Khung tìm kiếm */
+.search-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  /* Căn giữa theo cả 2 chiều */
+    color: white;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);  /* Nền mờ đổ bóng cho khu vực tìm kiếm */
+    padding: 30px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 1000px;  /* Giới hạn độ rộng tối đa */
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.5); /* Thêm đổ bóng */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+.search-section:hover {
+    background-color: rgba(0, 0, 0, 0); /* Làm nền tối hơn khi hover */
+    transform: translate(-50%, -50%) scale(1.02); /* Tăng nhẹ khi hover */
+}
+
+.search-section h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); /* Thêm đổ bóng cho tiêu đề */
+}
+
+.search-section p {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    font-weight: 500;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* Đổ bóng cho đoạn văn */
+}
+
+/* Khung form tìm kiếm */
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Ô nhập liệu */
+.search-input {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    width: 70%;
+    border-radius: 50px;
+    border: 1px solid #fff;  /* Viền trắng */
+    margin-right: 15px;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Thêm đổ bóng cho ô input */
+    transition: width 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng thay đổi độ rộng khi focus */
+}
+
+/* Thêm hiệu ứng cho ô input khi focus */
+.search-input:focus {
+    width: 85%;
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
+    border: 1px solid #007bff;
+}
+
+/* Nút tìm kiếm */
+.search-button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: 600;
+}
+
+/* Hiệu ứng khi hover lên nút */
+.search-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);  /* Nâng lên khi hover */
+}
+
+.search-button:active {
+    background-color: #003d8c;
+    transform: translateY(1px);  /* Nhấn xuống khi click */
+}

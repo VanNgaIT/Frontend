@@ -1,0 +1,38 @@
+body {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .navbar {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  
+  .card {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: white;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+  }
+  

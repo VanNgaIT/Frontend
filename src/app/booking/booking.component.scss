@@ -1,0 +1,123 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f9fc; /* Nền nhạt tạo sự thoải mái */
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid {
+    padding: 20px;
+}
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Tăng độ mờ */
+    border: none;
+    background-color: #ffffff; /* Nền trắng sạch */
+}
+
+.card-header {
+    background-color: #007bff; /* Màu chính */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 15px 20px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table {
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Tạo khoảng cách giữa các hàng */
+}
+
+.table thead {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.table th {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    padding: 15px;
+}
+
+.table tbody tr {
+    background-color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hiệu ứng khi hover */
+}
+
+.table tbody tr:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.table td {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #333;
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.status-pending {
+    color: #ffc107; /* Màu vàng */
+    font-weight: bold;
+    font-size: 0.9rem;
+    background-color: rgba(255, 193, 7, 0.2); /* Nền vàng nhạt */
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.status-confirmed {
+    color: #28a745; /* Màu xanh */
+    font-weight: bold;
+    font-size: 0.9rem;
+    background-color: rgba(40, 167, 69, 0.2); /* Nền xanh nhạt */
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.status-cancelled {
+    color: #dc3545; /* Màu đỏ */
+    font-weight: bold;
+    font-size: 0.9rem;
+    background-color: rgba(220, 53, 69, 0.2); /* Nền đỏ nhạt */
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.btn {
+    font-weight: 600;
+    padding: 8px 15px;
+    text-transform: uppercase;
+    border-radius: 6px;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}

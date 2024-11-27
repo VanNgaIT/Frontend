@@ -1,0 +1,99 @@
+/* Header */
+.header {
+  background-color: rgb(206, 227, 233);
+  color: #000; /* Màu chữ tối, dễ đọc */
+  padding: 15px 0;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Logo */
+.logo {
+  width: 60px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1); /* Phóng to nhẹ khi hover */
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 20px;
+}
+
+.navbar-nav .nav-link {
+  color: #000 !important;
+  font-size: 14px;
+  font-weight: bold;
+  transition: color 0.3s, background-color 0.3s;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgb(206, 227, 233) !important;
+  color: #007bff !important; /* Màu xanh khi hover */
+}
+
+/* Button "Đặt lịch khám" */
+.navbar-nav .btn {
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-nav .btn-primary {
+  background-color: rgb(206, 227, 233) ;
+  border: none;
+}
+
+.navbar-nav .btn-primary:hover {
+  background-color: rgb(206, 227, 233) ;
+}
+
+/* Dropdown User */
+.profile-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.dropdown-menu {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-menu .dropdown-item {
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-item.text-danger {
+  color: #dc3545;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .navbar-nav .nav-item {
+      margin-left: 0;
+      margin-bottom: 10px;
+  }
+
+  .navbar-nav .nav-link {
+      font-size: 14px;
+  }
+}

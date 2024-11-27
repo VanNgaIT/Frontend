@@ -1,0 +1,114 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.login-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: 600px;
+    text-align: center;
+}
+
+.login-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #1055e9;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0097a7;
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.forgot-password a {
+    color: #00bcd4;
+}
+
+.register {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register a {
+    color: #00bcd4;
+}
+.social-login {
+    margin-top: 20px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.social-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.google-btn {
+    background-color: #db4437;
+    color: white;
+}
+
+.google-btn:hover {
+    background-color: #c1351d;
+}
+
+.facebook-btn {
+    background-color: #3b5998;
+    color: white;
+}
+
+.facebook-btn:hover {
+    background-color: #2d4373;
+}

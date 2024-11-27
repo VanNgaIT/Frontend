@@ -1,0 +1,154 @@
+/* Cải thiện toàn bộ giao diện */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f9fc; /* Nền sáng, dễ chịu */
+    color: #495057;
+}
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Đổ bóng tinh tế */
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out; /* Thêm hiệu ứng chuyển động khi hover */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Đẩy lên một chút khi hover */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1); /* Tăng độ đổ bóng */
+}
+
+.card-header {
+    background-color: #007bff; /* Màu xanh nổi bật */
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 15px 20px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table {
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    width: 100%;
+}
+
+.table thead {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.table th {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    padding: 15px;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr {
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+
+.table tbody tr:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.table td {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #333;
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+.status-pending {
+    color: #ffc107;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status-confirmed {
+    color: #28a745;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status-cancelled {
+    color: #dc3545;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.btn {
+    font-weight: 600;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* Hiệu ứng cho các nút */
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Thêm hiệu ứng cho input và select */
+input, select, textarea {
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    transition: border 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
