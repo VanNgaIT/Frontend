@@ -29,7 +29,7 @@ export class RegisterComponent {
       return;
     }
 
-    this.authService.registerUser(this.email, this.password).subscribe(
+    this.authService.registerUser(this.email, this.password, this.retypePassword).subscribe(
       (response) => {
         alert('Đăng ký thành công');
         this.router.navigate(['/login']);

@@ -24,7 +24,7 @@ export class UserComponent{
     this.newUser.id = Math.floor(Math.random() * 10000);
     this.users.push(this.newUser);
 
-    this.authService.registerUser(this.newUser.email, 'defaultPassword').subscribe(response => {
+    this.authService.registerUser(this.newUser.email, 'defaultPassword', 'defaultPassword').subscribe(response => {
 
     });
 

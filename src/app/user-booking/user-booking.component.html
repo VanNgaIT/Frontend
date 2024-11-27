@@ -11,28 +11,40 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="doctor">Chọn bác sĩ:</label>
-                                <select id="doctor" class="form-control" name="doctor">
-                                    <option value="1">Bác sĩ Nguyễn Văn A</option>
-                                    <option value="2">Bác sĩ Trần Thị B</option>
-                                    <option value="3">Bác sĩ Lê Hoàng C</option>
+                                <select id="doctor" class="form-control" name="doctor" [(ngModel)]="selectedDoctorId"
+                                    (change)="onDoctorChange()">
+                                    <option *ngFor="let doctor of doctors" [value]="doctor.id">
+                                        {{ doctor.name }}
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="email">Email</label>
-                                <input type="text" id="email" class="form-control" name="email" required />
+                                <label for="specialty">Chọn chuyên khoa:</label>
+                                <select id="specialty" class="form-control" name="specialty"
+                                    [(ngModel)]="selectedSpecialtyId" (change)="onSpecialtyChange()">
+                                    <option *ngFor="let specialty of specialties" [value]="specialty.id">{{
+                                        specialty.name }}</option>
+                                </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="date">Ngày khám:</label>
-                                <input type="date" id="date" class="form-control" name="date" required />
+                                <label for="appointmentDate">Ngày khám:</label>
+                                <input type="date" class="form-control" id="appointmentDate"
+                                    [(ngModel)]="appointmentDate" name="date" />
                             </div>
                             <div class="col-md-6">
-                                <label for="time">Thời gian:</label>
-                                <input type="time" id="time" class="form-control" name="time" required />
+                                <label for="timeSlot">Chọn thời gian:</label>
+                                <select class="form-control" id="timeSlot" [(ngModel)]="selectedTimeSlot"
+                                    name="timeSlot">
+                                    <option *ngFor="let slot of timeSlots" [value]="slot.time">
+                                        {{ slot.time }}
+                                    </option>
+                                </select>
                             </div>
+
 
                         </div>
                         <div class="text-center mt-3">
-                            <button type="submit" class="btn btn-success">Đặt lịch</button>
+                            <button type="submit" class="btn btn-success" (click)="onSubmit()">Đặt lịch</button>
                         </div>
                     </form>
                 </div>

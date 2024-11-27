@@ -24,7 +24,7 @@ export class DoctorComponent {
     this.doctors.push(this.newDoctor);
 
     // Tạo user với role doctor
-    this.authService.registerUser(this.newDoctor.email, 'defaultPassword').subscribe(response => {
+    this.authService.registerUser(this.newDoctor.email, 'defaultPassword', 'defaultPassword').subscribe(response => {
       // Sau khi tạo user thành công, cập nhật role thành doctor
       // Gọi API để thêm user vào database với role là 'doctor'
     });

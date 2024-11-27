@@ -10,6 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserBookingComponent } from './user-booking/user-booking.component';
+import { UserHistoryComponent } from './user-history/user-history.component';
 
 
 export const routes: Routes = [
@@ -19,7 +22,10 @@ export const routes: Routes = [
         children: [
             { path: '', component: HomeComponent }, // Trang chủ
             { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegisterComponent }
+            { path: 'register', component: RegisterComponent },
+            { path: 'user-profile', component: UserProfileComponent},
+            { path: 'user-booking', component: UserBookingComponent},
+            { path: 'user-history', component: UserHistoryComponent}
         ]
     },
     { path: 'doctor', component: DoctorComponent },

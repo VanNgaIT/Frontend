@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +9,32 @@ export class AuthService {
 
   private apiUrlRegister = 'http://localhost:8080/api/auth/register';
   private apiUrlLogin = 'http://localhost:8080/api/auth/login';
+  private apiUrl = 'http://localhost:8080/api';
 
 
   constructor(private http: HttpClient) { }
 
-  registerUser(email: string, password: string): Observable<any> {
-    const body = { email, password };
-    return this.http.post(this.apiUrlRegister, body);
+  registerUser(email: string, password: string, retypePassword: string): Observable<any> {
+    const body = { email, password, retypePassword};
+    return this.http.post(this.apiUrlRegister, body, { responseType: 'text' }) ;
   }
-  loginUser(email: string, password: string): Observable<any> {
+  loginUser(email: string, password: string) {
     const body = { email, password };
-    return this.http.post(this.apiUrlLogin, body);  }
+    return this.http.post<string>('http://localhost:8080/api/auth/login', body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      responseType: 'text' as 'json'  // Đảm bảo Angular nhận phản hồi dưới dạng text
+    }).pipe(
+      tap(token => {
+        if (token) {
+          localStorage.setItem('token', token); // Lưu token
+          localStorage.setItem('email', email);
+        }
+      })
+    );
+  }
   isAuthenticated(): boolean {
-      return !!localStorage.getItem('auth_token');
-    }
+    return !!localStorage.getItem('token');
+  }
   
     // Lưu token vào localStorage sau khi đăng nhập thành công
   setToken(token: string): void {
@@ -35,12 +47,15 @@ export class AuthService {
     }
   
     // Thoát đăng nhập
-  logout(): void {
-      localStorage.removeItem('auth_token');
+    logout() {
+      localStorage.removeItem('token');
+  localStorage.removeItem('email'); // Xóa email trong localStorage khi đăng xuất
+  localStorage.removeItem('user');
     }
   // Lưu thông tin người dùng vào localStorage
-  saveUserToLocalStorage(user: any): void {
-    localStorage.setItem('user', JSON.stringify(user));
+  saveUserToLocalStorage(user: any, token: string) {
+    localStorage.setItem('token', token); // Lưu token
+    localStorage.setItem('user', JSON.stringify(user)); // Lưu thông tin người dùng
   }
 
   // Lấy thông tin người dùng từ localStorage

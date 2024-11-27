@@ -24,32 +24,24 @@
                     <a class="nav-link" href="/services">Liên hệ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/book-appointment">Đặt lịch khám</a>
+                    <a class="nav-link" [routerLink]="'/user-booking'">Đặt lịch khám</a>
                 </li>
 
                 <!-- Nếu người dùng đã đăng nhập -->
-                <li class="nav-item dropdown" *ngIf="user; else loginTemplate">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <img [src]="user.profileImageUrl" alt="User Profile" class="profile-image">
-                        <span>{{ user.fullName }}</span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="/profile">Hồ sơ</a></li>
-                        <li><a class="dropdown-item" href="/settings">Cài đặt</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><button class="dropdown-item text-danger" (click)="onLogout()">Đăng xuất</button></li>
-                    </ul>
+                <li *ngIf="email" class="nav-item">
+                    <a class="nav-link" routerLink="/user-profile">Thông tin cá nhân</a>
+                </li>
+                <li *ngIf="email" class="nav-item">
+                    <a class="nav-link" routerLink="/user-history">Hồ sơ bệnh án</a>
+                </li>
+                <li *ngIf="email" class="nav-item">
+                    <button class="nav-link text-danger" (click)="onLogout()">Đăng xuất</button>
                 </li>
 
                 <!-- Nếu người dùng chưa đăng nhập -->
-                <ng-template #loginTemplate>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white px-3" [routerLink]="'/login'">Đăng nhập</a>
-                    </li>
-                </ng-template>
+                <li *ngIf="!email" class="nav-item">
+                    <a class="nav-link btn btn-primary text-white px-3" [routerLink]="'/login'">Đăng nhập</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { CommonModule } from '@angular/common';
-import { Route, RouterModule } from '@angular/router';
+import { Route, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,16 +11,18 @@ import { Route, RouterModule } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  user: any;
+  email: string | null = null;
 
   ngOnInit(): void {
-    this.user = this.authService.getUserFromLocalStorage();
+    this.email = localStorage.getItem('email');
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onLogout() {
-    this.authService.removeUserFromLocalStorage();
-    this.user = null;  // Reset user information after logout
+    this.authService.logout(); // Đăng xuất
+    this.email = null; // Đặt lại giá trị email sau khi đăng xuất
+    localStorage.removeItem('email'); // Xóa email trong localStorage
+    this.router.navigate(['/login']); // Chuyển hướng đến trang đăng nhập
   }
 }
