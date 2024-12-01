@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -24,26 +25,34 @@ export class AuthService {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       responseType: 'text' as 'json'  // Đảm bảo Angular nhận phản hồi dưới dạng text
     }).pipe(
-      tap(token => {
-        if (token) {
-          localStorage.setItem('token', token); // Lưu token
-          localStorage.setItem('email', email);
+      tap(response => {
+        try {
+          const parsedResponse = JSON.parse(response); // Parse JSON response
+          const token = parsedResponse.token; // Lấy token từ đối tượng JSON
+  
+          if (token) {
+            localStorage.setItem('token', token); // Lưu token trực tiếp dưới dạng chuỗi
+            localStorage.setItem('email', email);
+          }
+        } catch (error) {
+          console.error("loi te le", error);
         }
       })
     );
   }
+  
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
   }
   
     // Lưu token vào localStorage sau khi đăng nhập thành công
   setToken(token: string): void {
-      localStorage.setItem('auth_token', token);
+      localStorage.setItem('token', token);
     }
   
     // Lấy token từ localStorage
   getToken(): string | null {
-      return localStorage.getItem('auth_token');
+      return localStorage.getItem('token');
     }
   
     // Thoát đăng nhập
