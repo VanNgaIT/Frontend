@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service'; // Giả sử bạn có AuthService để quản lý token
 
 @Injectable({
@@ -13,7 +13,13 @@ export class SpecialtyService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getSpecialties(): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.getToken());
+    const token = this.authService.getToken();
+    if (!token) {
+      console.error('No token available');
+      return throwError('Token không có, vui lòng đăng nhập lại.');
+    }
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.get(this.apiUrl, { headers });
   }
+  
 }

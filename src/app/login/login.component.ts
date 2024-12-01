@@ -18,19 +18,14 @@ export class LoginComponent {
 
   onLogin() {
     this.authService.loginUser(this.email, this.password).subscribe(
-      (token) => {
+      () => {
+        const token = localStorage.getItem('token'); // Lấy token từ localStorage
         if (token) {
-          console.log('Login response:', token);
-          localStorage.setItem('token', token);
-  
-          // Lưu thông tin người dùng vào localStorage ngay sau khi đăng nhập thành công
-          this.authService.saveUserToLocalStorage({ email: this.email }, token);
-  
+          console.log('Login success, token:', token);
           // Chuyển hướng đến trang home
           this.router.navigate(['/home']);
         } else {
-          console.error('Token is null or undefined!');
-          alert('Token không hợp lệ!');
+          console.error('Token không có trong localStorage');
         }
       },
       (error) => {
