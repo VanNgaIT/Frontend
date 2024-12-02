@@ -12,7 +12,7 @@
                             <div class="col-md-6">
                                 <label for="doctor">Chọn bác sĩ:</label>
                                 <select id="doctor" class="form-control" name="doctor" [(ngModel)]="selectedDoctorId"
-                                    (change)="onDoctorChange()">
+                                    (change)="onDoctorChange()" [disabled]="!appointmentDate">
                                     <option *ngFor="let doctor of doctors" [value]="doctor.id">
                                         {{ doctor.name }}
                                     </option>
@@ -21,9 +21,10 @@
                             <div class="col-md-6">
                                 <label for="specialty">Chọn chuyên khoa:</label>
                                 <select id="specialty" class="form-control" name="specialty"
-                                    [(ngModel)]="selectedSpecialtyId" (change)="onSpecialtyChange()">
-                                    <option *ngFor="let specialty of specialties" [value]="specialty.id">{{
-                                        specialty.name }}</option>
+                                    [(ngModel)]="selectedSpecialtyId" (change)="onSpecialtyChange()" [disabled]="!appointmentDate">
+                                    <option *ngFor="let specialty of specialties" [value]="specialty.id">
+                                        {{ specialty.name }}
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -34,21 +35,23 @@
                                   id="appointmentDate"
                                   [(ngModel)]="appointmentDate"
                                   name="date"
+                                  [min]="minDate"
+                                  [max]="maxDate"
                                 />
-                              </div>                             
-                              <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
                                 <label for="timeSlot">Chọn thời gian:</label>
-                                <select [(ngModel)]="selectedTimeSlot" name="timeSlot" class="form-control">
+                                <select [(ngModel)]="selectedTimeSlot" name="timeSlot" class="form-control" [disabled]="!appointmentDate">
                                   <ng-container *ngIf="timeSlots.length > 0">
                                     <option *ngFor="let slot of timeSlots" [value]="slot.startTime">
                                       {{ convertToTimeString(slot.startTime) }} - {{ convertToTimeString(slot.endTime) }}
                                     </option>
                                   </ng-container>
                                 </select>
-                              </div>
+                            </div>
                         </div>
                         <div class="text-center mt-3">
-                            <button type="submit" class="btn btn-success" (click)="onSubmit()">Đặt lịch</button>
+                            <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="!appointmentDate || !selectedDoctorId || !selectedSpecialtyId || !selectedTimeSlot">Đặt lịch</button>
                         </div>
                     </form>
                 </div>
@@ -56,6 +59,10 @@
         </div>
     </div>
 </div>
+<footer class="text-center text-lg-start bg-body-tertiary text-muted mt-4">
+    <!-- Footer content -->
+</footer>
+
 <footer class="text-center text-lg-start bg-body-tertiary text-muted mt-4">
     <div style="background-color: #97ddf8;">
         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">

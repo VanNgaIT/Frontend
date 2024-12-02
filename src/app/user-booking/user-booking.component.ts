@@ -26,10 +26,20 @@ export class UserBookingComponent implements OnInit {
   selectedTimeSlot: string = '';
   appointmentDate: string = '';
 
+  minDate: string = '';  // Khởi tạo giá trị mặc định
+  maxDate: string = '';  // Khởi tạo giá trị mặc định
+
+  isDateValid: boolean = true; // Biến kiểm tra tính hợp lệ của ngày
+
   constructor(private bookingService: BookingService, private specialtyService: SpecialtyService) {}
 
   ngOnInit(): void {
-    // Lấy danh sách chuyên khoa (ví dụ từ API của bạn)
+    const today = new Date();
+    const oneYearFromNow = new Date();
+    oneYearFromNow.setFullYear(today.getFullYear() + 1);
+
+    this.minDate = today.toISOString().split('T')[0]; // Định dạng yyyy-MM-dd
+    this.maxDate = oneYearFromNow.toISOString().split('T')[0]; // Định dạng yyyy-MM-dd
     this.loadSpecialties();
   }
 
@@ -51,69 +61,84 @@ export class UserBookingComponent implements OnInit {
     });
   }
 
+  // Thêm hàm onDoctorChange() vào đây để xử lý khi người dùng chọn bác sĩ
   onDoctorChange(): void {
-    if (this.selectedSpecialtyId && this.selectedDoctorId && this.appointmentDate) {
+    // Reset khung giờ trước khi gọi lại API
+    this.timeSlots = [];
+  
+    // Kiểm tra xem bác sĩ và ngày có hợp lệ không
+    if (this.selectedDoctorId && this.appointmentDate) {
+      this.loadAvailableTimeSlots();  // Gọi lại hàm tải khung giờ mới
+    } else {
+      console.error('Vui lòng chọn bác sĩ và ngày hợp lệ.');
+    }
+  }
+  // Kiểm tra ngày hợp lệ (không quá khứ và không quá xa 1 năm)
+  isValidAppointmentDate(date: string): boolean {
+    const selectedDate = new Date(date);
+    const today = new Date();
+    const oneYearFromNow = new Date();
+    oneYearFromNow.setFullYear(today.getFullYear() + 1);
+
+    // Kiểm tra ngày không phải quá khứ hoặc quá xa trong tương lai
+    return selectedDate >= today && selectedDate <= oneYearFromNow;
+  }
+
+  onDateChange(): void {
+    this.isDateValid = this.isValidAppointmentDate(this.appointmentDate);
+    if (!this.isDateValid) {
+      this.timeSlots = [];  // Nếu ngày không hợp lệ, làm trống các khung giờ
+      alert('Ngày chọn không hợp lệ. Vui lòng chọn ngày trong khoảng từ hôm nay đến 1 năm tới.');
+    } else {
+      this.loadAvailableTimeSlots();  // Nếu ngày hợp lệ, tải lại khung giờ
+    }
+  }
+
+  // Tải lại khung giờ cho bác sĩ và ngày đã chọn
+  loadAvailableTimeSlots(): void {
+    if (this.selectedDoctorId && this.appointmentDate) {
       const formattedDate = this.formatDate(this.appointmentDate);  // Chuyển đổi ngày thành yyyy-MM-dd
       this.bookingService.getAvailableTimeSlots(this.selectedSpecialtyId, this.selectedDoctorId, formattedDate)
         .subscribe((data: any) => {
-          // Lấy danh sách khung giờ từ dữ liệu trả về (kiểm tra đúng cấu trúc)
           this.timeSlots = data[0]?.availableTimeSlots || [];  // Đảm bảo lấy mảng availableTimeSlots
-  
-          console.log('Dữ liệu thời gian:', this.timeSlots);  // Kiểm tra dữ liệu thời gian
-  
-          // Kiểm tra nếu timeSlots không trống và có thông tin giờ hợp lệ
-          if (this.timeSlots && this.timeSlots.length > 0) {
-            this.timeSlots = this.timeSlots.filter(slot => {
-              console.log('Slot:', slot);  // Kiểm tra từng slot
-              return slot.startTime && slot.endTime;  // Kiểm tra sự tồn tại của startTime và endTime
-            });
-  
-            if (this.timeSlots.length === 0) {
-              console.error('Không có khung giờ hợp lệ.');
-            } else {
-              console.log('Khung giờ hợp lệ:', this.timeSlots);
-            }
-          } else {
-            console.error('Không có khung giờ nào được tìm thấy.');
+          if (this.timeSlots && this.timeSlots.length === 0) {
+            console.error('Không có khung giờ hợp lệ.');
           }
         }, (error) => {
-          console.error('Lỗi khi lấy khung giờ: ', error);
+          console.error('Lỗi khi lấy khung giờ:', error);
         });
-    } else {
-      console.error('Thông tin không hợp lệ: Chuyên khoa, bác sĩ hoặc ngày hẹn không hợp lệ.');
     }
   }
-  
+
   convertToTimeString(time: string): string {
     if (!time || typeof time !== 'string' || !time.includes(':')) {
       console.error('Thời gian không hợp lệ:', time);
       return 'Giờ không hợp lệ';  // Trả về chuỗi thông báo nếu thời gian không hợp lệ
     }
-  
+
     const [hours, minutes] = time.split(':').map(Number);
-  
+
     if (isNaN(hours) || isNaN(minutes)) {
       console.error('Giá trị giờ, phút không hợp lệ:', time);
       return 'Giờ không hợp lệ';  // Trả về chuỗi thông báo nếu thời gian không hợp lệ
     }
-  
+
     return `${hours}:${minutes < 10 ? '0' + minutes : minutes}`; // Trả về định dạng giờ:phút
   }
-  
-  
+
   convertToDate(time: string): Date {
     if (!time || typeof time !== 'string' || !time.includes(':')) {
       console.error('Thời gian không hợp lệ:', time);
       return new Date();  // Trả về ngày mặc định nếu thời gian không hợp lệ
     }
-  
+
     const [hours, minutes, seconds] = time.split(':').map(Number);
-  
+
     if (isNaN(hours) || isNaN(minutes) || isNaN(seconds)) {
       console.error('Giá trị giờ, phút, giây không hợp lệ:', time);
       return new Date();  // Trả về ngày mặc định nếu giờ, phút, giây không hợp lệ
     }
-  
+
     const now = new Date();
     now.setHours(hours, minutes, seconds, 0);  // Thiết lập giờ, phút, giây
     return now;
@@ -128,8 +153,14 @@ export class UserBookingComponent implements OnInit {
     return `${year}-${month}-${day}`; // Trả về định dạng yyyy-MM-dd
   }
 
+  
   // Đặt lịch
   onSubmit(): void {
+    if (!this.appointmentDate || !this.selectedDoctorId || !this.selectedTimeSlot || !this.selectedSpecialtyId) {
+      alert('Vui lòng chọn đầy đủ thông tin trước khi đặt lịch!');
+      return;
+    }
+
     const bookingData = {
       doctorId: this.selectedDoctorId,
       timeSlot: this.selectedTimeSlot,
