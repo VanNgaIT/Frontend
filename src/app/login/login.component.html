@@ -1,135 +1,49 @@
 <app-header></app-header>
 <div class="container">
     <div class="login-form">
-        <h2>Đăng nhập</h2>
-        <form (submit)="onLogin()">
-            <div class="form-group">
-                <input type="email" id="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+        <div class="row">
+            <div class="col-lg-7">
+                <a>
+                    <img src="https://hinduja-prod-assets.s3.ap-south-1.amazonaws.com/2022-03/Dental.png?VersionId=wxZ1WFYwTWlWfFPnOS1cbP3hGviv44n5"
+                        alt="" style="width: 100%;
+                        height: 498px;" class="img"></a>
             </div>
-            <div class="form-group">
-                <input type="password" id="password" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password"
-                    required>
+            <div class="col-lg-5">
+                <h2>Đăng nhập</h2>
+                <form (submit)="onLogin()">
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder="Nhập mật khẩu" [(ngModel)]="password"
+                            name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Ghi nhớ mật khẩu</label>
+                    </div>
+                    <button type="submit">Đăng nhập</button>
+                </form>
+                <div class="forgot-password">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+                <div class="register">
+                    <p>Chưa có tài khoản? <a [routerLink]="['/register']">Đăng ký ngay</a></p>
+                </div>
+                <div class="social-login">
+                    <button class="social-btn google-btn">
+                        <img src="assets/search.png"
+                            alt="Google logo" class="social-icon">
+                        Đăng nhập với Google
+                    </button>
+                    <button class="social-btn facebook-btn">
+                        <img src="assets/facebook.png"
+                            alt="Facebook logo" class="social-icon">
+                        Đăng nhập với Facebook
+                    </button>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="checkbox" id="remember">
-                <label for="remember">Ghi nhớ mật khẩu</label>
-            </div>
-            <button type="submit">Đăng nhập</button>
-        </form>
-        <div class="forgot-password">
-            <a href="#">Quên mật khẩu?</a>
-        </div>
-        <div class="register">
-            <p>Chưa có tài khoản? <a [routerLink]="['/register']">Đăng ký ngay</a></p>
-        </div>
-        <div class="social-login">
-            <button class="social-btn google-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo"
-                    class="social-icon">
-                Đăng nhập với Google
-            </button>
-            <button class="social-btn facebook-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                    alt="Facebook logo" class="social-icon">
-                Đăng nhập với Facebook
-            </button>
         </div>
     </div>
 </div>
-<footer class="text-center text-lg-start bg-body-tertiary text-muted mt-4">
-    <div style="background-color: #97ddf8;">
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-            <div class="me-5 d-none d-lg-block">
-                <span>Hãy kết nối với chúng tôi:</span>
-            </div>
-            <div>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </div>
-        </section>
-
-        <section class="">
-            <div class="container text-center text-md-start mt-5">
-                <div class="row mt-3">
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            <i class="fas fa-gem me-3"></i>Phòng Khám Nha Khoa Poly
-                        </h6>
-                        <p>
-                            Nha Khoa Đăng Lưu chuyên niềng răng thẩm mỹ.
-                        </p>
-                        <p> Dịch vụ Nha Khoa chính: Niềng răng, cấy ghép Implant, bọc răng sứ, trám
-                            răng, nhổ răng,
-                            tẩy
-                            trắng răng, cạo vôi răng.</p>
-                    </div>
-
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Dịch vụ
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Đặt khám bác sĩ</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Đặt khám bác sĩ</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Đặt khám phòng khám</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Đặt khám </a>
-                        </p>
-                    </div>
-
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Hỗ trợ
-                        </h6>
-                        <p>
-                            <a href="#!" class="text-reset">Câu hỏi thường gặp</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Điều khoản sử dụng</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Chính sách bảo mật</a>
-                        </p>
-                        <p>
-                            <a href="#!" class="text-reset">Chính sách giải quyết khiếu nại</a>
-                        </p>
-                    </div>
-
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <h6 class="text-uppercase fw-bold mb-4">Thông tin liên hệ</h6>
-                        <p><i class="fas fa-home me-3"></i>Nguyễn Hữu Thọ, TP Đà Nẵng</p>
-                        <p>
-                            <i class="fas fa-envelope me-3"></i>
-                            polynhakhoa
-                        </p>
-                        <p><i class="fas fa-phone me-3"></i> + 09 234 567 88</p>
-                        <p><i class="fas fa-print me-3"></i> + 04 234 567 89</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div class="text-center p-4">
-        © 2024 Copyright:
-        <a class="text-reset fw-bold" href="">NhaKhoaPoly.com</a>
-    </div>
-</footer>
+<app-footer></app-footer>

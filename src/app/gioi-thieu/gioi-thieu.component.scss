@@ -1,0 +1,36 @@
+.container {
+    margin-top: 30px;
+}
+
+h1 {
+    color: #0056b3;
+}
+
+p {
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+ul {
+    padding-left: 20px;
+    list-style: disc;
+    font-size: 18px;
+}
+
+img {
+    border: 2px solid #ddd;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-secondary {
+    font-style: italic;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+  

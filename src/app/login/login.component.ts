@@ -7,7 +7,7 @@ import { HeaderComponent } from '../header/header.component';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterModule, HeaderComponent],
+  imports: [FormsModule, RouterModule, HeaderComponent, FooterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

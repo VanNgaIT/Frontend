@@ -13,7 +13,8 @@ import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserBookingComponent } from './user-booking/user-booking.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
-
+import { GioiThieuComponent } from './gioi-thieu/gioi-thieu.component';
+import { LienHeComponent } from './lien-he/lien-he.component';
 
 export const routes: Routes = [
     {
@@ -25,7 +26,9 @@ export const routes: Routes = [
             { path: 'register', component: RegisterComponent },
             { path: 'user-profile', component: UserProfileComponent},
             { path: 'user-booking', component: UserBookingComponent},
-            { path: 'user-history', component: UserHistoryComponent}
+            { path: 'user-history', component: UserHistoryComponent},
+            { path: 'about', component: GioiThieuComponent},
+            { path: 'services', component: LienHeComponent}
         ]
     },
     { path: 'doctor', component: DoctorComponent },
