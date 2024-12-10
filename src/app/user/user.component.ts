@@ -3,11 +3,14 @@ import { AuthService } from '../service/auth.service';
 import { FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../model/user.model';
+import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SidebarAdminComponent, HeaderComponent, FooterComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })

@@ -1,75 +1,152 @@
-/* CSS cho phần quản lý bác sĩ */
+/* Sidebar */
+.sidebar {
+  flex: 0 0 250px; /* Đặt kích thước cố định cho sidebar */
+  height: 100vh;
+  background: #f8f9fa; 
+  border-right: 1px solid #ddd; 
+}
+
+.sidebar .nav-link {
+  color: #495057;
+  font-weight: bold;
+}
+
+.sidebar .nav-link.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Nội dung chính */
+.col-md-10 {
+  flex: 1; 
+  overflow: hidden;
+}
 
 .doctor-management {
-    background-color: #f8f9fa; // Màu nền nhẹ cho toàn phần quản lý bác sĩ
-    padding: 20px;
-    border-radius: 8px;
-  
-    h2 {
-      color: #007bff;
-      margin-bottom: 30px;
-    }
-  }
-  
-  .doctor-form {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-  
-    label {
-      font-weight: bold;
-    }
-  
-    .form-control {
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-  
-    .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
-      margin-top: 20px;
-    }
-  
-    .btn-primary:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-    }
-  }
-  
-  /* Bảng danh sách bác sĩ */
-  .table {
-    margin-top: 20px;
-  
-    .table-header {
-      background-color: #007bff;
-      color: #ffffff;
-    }
-  
-    th, td {
-      text-align: center;
-      vertical-align: middle;
-    }
-  
-    .btn-warning {
-      background-color: #ffc107;
-      border-color: #ffc107;
-    }
-  
-    .btn-warning:hover {
-      background-color: #e0a800;
-      border-color: #e0a800;
-    }
-  
-    .btn-danger {
-      background-color: #dc3545;
-      border-color: #dc3545;
-    }
-  
-    .btn-danger:hover {
-      background-color: #c82333;
-      border-color: #c82333;
-    }
-  }
-  
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 85%;
+  padding: 20px;
+  background-color: #fff;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwY43j3BYfAMMY70o-8QbZzeNyhYy-cAGoHA&s'); /* Đặt URL của ảnh nền tại đây */
+  background-size: cover; /* Đảm bảo ảnh phủ đầy khu vực */
+  background-position: center; /* Căn giữa ảnh */
+  background-repeat: no-repeat; /* Ngừng lặp lại ảnh nếu ảnh nhỏ hơn */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Phần Form */
+.doctor-form {
+  border: 2px solid #a5d8ff; /* Sử dụng màu xanh nhẹ cho viền */
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #f1f9ff; /* Nền sáng cho form */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Thêm bóng cho form */
+}
+
+.doctor-management h2 {
+  color: #007bff;
+  margin-bottom: 30px;
+  font-weight: bold; /* Thêm dòng này để in đậm */
+}
+
+.doctor-management label {
+  color: #007bff;
+  font-weight: bold; /* Thêm dòng này để in đậm */
+}
+
+.doctor-form .form-control {
+  border-radius: 8px;
+  border: 1px solid #cceeff; /* Viền nhẹ cho ô input */
+  padding: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out; /* Thêm hiệu ứng chuyển động khi người dùng nhập */
+}
+
+.doctor-form .form-control:focus {
+  border-color: #007bff; /* Đổi màu viền khi focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Tạo hiệu ứng shadow khi focus */
+}
+
+/* Nút submit */
+.doctor-form button {
+  background-color: #007bff; /* Màu xanh cho nút */
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.doctor-form button:hover {
+  background-color: #0056b3; /* Đổi màu khi hover */
+}
+
+/* Phần Bảng */
+.table {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.table thead {
+  background-color: #007bff; /* Màu nền cho tiêu đề bảng */
+  color: white;
+  font-weight: bold;
+}
+
+.table thead th {
+  padding: 12px;
+  text-align: center;
+}
+
+.table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f0f8ff; /* Màu nền khi hover qua các dòng */
+}
+
+.table tbody td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table .btn {
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.table .btn-warning {
+  background-color: #ffc107; /* Màu vàng cho nút chỉnh sửa */
+  color: #212529;
+}
+
+.table .btn-warning:hover {
+  background-color: #e0a800; /* Đổi màu khi hover */
+}
+
+.table .btn-danger {
+  background-color: #dc3545; /* Màu đỏ cho nút xóa */
+  color: white;
+}
+
+.table .btn-danger:hover {
+  background-color: #c82333; /* Đổi màu khi hover */
+}
+

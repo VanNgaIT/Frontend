@@ -3,10 +3,13 @@ import { TimeSlot } from '../model/timeslot.model';
 import { Schedule } from '../model/schedule.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-time-slot',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SidebarAdminComponent, HeaderComponent, FooterComponent],
   templateUrl: './time-slot.component.html',
   styleUrl: './time-slot.component.scss'
 })

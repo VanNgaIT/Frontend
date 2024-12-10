@@ -1,75 +1,80 @@
-/* CSS cho phần quản lý bác sĩ */
+/* Quản lý người dùng */
+.user-management {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 85%;
+  padding: 20px;
+  background-color: #fff;
+  background-image: url('/assets/bgr1.jpg'); /* Đặt URL của ảnh nền */
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-.doctor-management {
-    background-color: #f8f9fa; // Màu nền nhẹ cho toàn phần quản lý bác sĩ
-    padding: 20px;
-    border-radius: 8px;
-  
-    h2 {
-      color: #007bff;
-      margin-bottom: 30px;
-    }
-  }
-  
-  .doctor-form {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-  
-    label {
-      font-weight: bold;
-    }
-  
-    .form-control {
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-  
-    .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
-      margin-top: 20px;
-    }
-  
-    .btn-primary:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-    }
-  }
-  
-  /* Bảng danh sách bác sĩ */
-  .table {
-    margin-top: 20px;
-  
-    .table-header {
-      background-color: #007bff;
-      color: #ffffff;
-    }
-  
-    th, td {
-      text-align: center;
-      vertical-align: middle;
-    }
-  
-    .btn-warning {
-      background-color: #ffc107;
-      border-color: #ffc107;
-    }
-  
-    .btn-warning:hover {
-      background-color: #e0a800;
-      border-color: #e0a800;
-    }
-  
-    .btn-danger {
-      background-color: #dc3545;
-      border-color: #dc3545;
-    }
-  
-    .btn-danger:hover {
-      background-color: #c82333;
-      border-color: #c82333;
-    }
-  }
-  
+.user-management h2 {
+  color: #007bff;
+  margin-bottom: 30px;
+  font-weight: bold; /* Thêm dòng này để in đậm */
+}
+
+.user-management label {
+  color: #007bff;
+  font-weight: bold; /* Thêm dòng này để in đậm */
+}
+
+/* Form người dùng */
+.user-form {
+  border: 2px solid #a5d8ff; 
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #f1f9ff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Bảng danh sách người dùng */
+.table {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.table thead {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.table thead th {
+  padding: 12px;
+  text-align: center;
+}
+
+.table tbody tr:hover {
+  background-color: #f0f8ff; 
+}
+
+.table tbody td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table .btn {
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.table .btn-warning {
+  background-color: #ffc107;
+}
+
+.table .btn-danger {
+  background-color: #dc3545;
+}

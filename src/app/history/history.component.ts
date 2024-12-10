@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Histories } from '../model/history.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SidebarAdminComponent, HeaderComponent, FooterComponent],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
 })

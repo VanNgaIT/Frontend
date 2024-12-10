@@ -3,10 +3,13 @@ import { Doctor } from '../model/doctor.model';
 import { AuthService } from '../service/auth.service';
 import { FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
+import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-doctor',
   standalone: true,
-  imports: [FormsModule, CommonModule,],
+  imports: [FormsModule, CommonModule, SidebarAdminComponent, HeaderComponent, FooterComponent],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.scss'
 })

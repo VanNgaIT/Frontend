@@ -1,20 +1,26 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f7f9fc; /* Nền nhạt tạo sự thoải mái */
-    margin: 0;
-    padding: 0;
+.card-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 85%;
+    padding: 20px;
+    background: linear-gradient(135deg, #bec3c9, #28a745); /* Mix màu xanh dương và xanh lá */
+    border-radius: 12px; /* Làm bo góc cho nền */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Thêm hiệu ứng bóng */
 }
 
-.container-fluid {
-    padding: 20px;
-}
+
 
 .card {
+    max-width: 95%; /* Hoặc đặt một chiều rộng cố định như 600px */
+    margin: 0 auto;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Tăng độ mờ */
-    border: none;
-    background-color: #ffffff; /* Nền trắng sạch */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
 }
+
 
 .card-header {
     background-color: #007bff; /* Màu chính */
@@ -121,3 +127,13 @@ body {
 .btn-danger:hover {
     background-color: #c82333;
 }
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.card h2 {
+    color: #007bff;
+    margin-bottom: 30px;
+    font-weight: bold; /* Thêm dòng này để in đậm */
+  }

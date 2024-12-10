@@ -1,16 +1,17 @@
-/* Tăng cường cho sidebar */
+/* Sidebar chính */
 .sidebar {
     height: 100vh;
-    width: 250px;  /* Đặt chiều rộng cho sidebar */
+    width: 250px; /* Kích thước mặc định */
     padding: 20px 0;
-    background: linear-gradient(180deg, #f8f9fa, #e9ecef); /* Gradient background */
+    background: linear-gradient(to bottom right, #e3e5ec, #8ad6e9); /* Gradient từ xanh dương sang xanh lá */
+    background-attachment: fixed; /* Giữ ảnh nền cố định khi cuộn */
     border-right: 1px solid #ddd;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Thêm shadow cho sidebar */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, width 0.3s ease; /* Thêm transition cho width */
 }
 
 /* Các mục nav trong sidebar */
@@ -43,32 +44,60 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Thêm hiệu ứng cho sidebar khi thu vào hoặc mở ra */
-.sidebar.collapsed {
-    transform: translateX(-100%); /* Ẩn sidebar khi thu vào */
-}
-
-/* Tối ưu giao diện khi mở rộng */
-.sidebar .nav-link.active {
-    background-color: #0056b3; /* Đổi màu cho mục đang chọn */
-    color: white;
-    font-weight: bold;
-}
-
-/* Thêm hiệu ứng chuyển động cho các mục */
-.sidebar .nav-item a {
-    transition: all 0.3s ease-in-out;
-}
-
-/* Đảm bảo sidebar responsive */
+/* Thu nhỏ sidebar khi kích thước màn hình nhỏ hơn 768px */
 @media (max-width: 768px) {
     .sidebar {
-        width: 200px;
+        width: 60px; /* Thu nhỏ sidebar */
     }
 
     .sidebar .nav-link {
-        font-size: 14px;
-        padding: 10px 15px;
+        font-size: 0; /* Ẩn chữ trong nav-link */
+        padding: 10px 10px; /* Giảm padding */
+    }
+
+    .sidebar .nav-link span {
+        display: none; /* Ẩn chữ trong span */
+    }
+
+    /* Hiển thị biểu tượng lớn khi thu nhỏ */
+    .sidebar .nav-link i {
+        font-size: 20px; /* Làm to biểu tượng hơn */
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Khi hover vào icon, tên trang sẽ hiển thị */
+    .sidebar .nav-link:hover::before {
+        content: attr(data-title); /* Hiển thị tên trang khi hover */
+        font-size: 12px;
+        white-space: nowrap;
+        position: absolute;
+        left: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Căn giữa biểu tượng và thêm hiệu ứng khi hover */
+    .sidebar .nav-item {
+        text-align: center; /* Căn giữa biểu tượng */
     }
 }
 
+/* Responsive cho sidebar khi thu nhỏ cửa sổ */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0px; /* Điều chỉnh chiều rộng cho sidebar khi thu nhỏ */
+    }
+
+    .sidebar .nav-link {
+        font-size: 14px; /* Giảm kích thước font chữ */
+        padding: 10px 15px; /* Giảm khoảng padding */
+    }
+}

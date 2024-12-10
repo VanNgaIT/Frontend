@@ -1,25 +1,32 @@
-/* Cải thiện toàn bộ giao diện */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f7f9fc; /* Nền sáng, dễ chịu */
+    background-color: #f7f9fc; /* Nền sáng */
     color: #495057;
 }
 
-.card {
+.card-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: auto;
+    max-width: 85%;
+    padding: 20px;
+    background: linear-gradient(135deg, #bec3c9, #007bff); /* Gradient màu nền */
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Đổ bóng tinh tế */
-    background-color: #ffffff;
-    transition: all 0.3s ease-in-out; /* Thêm hiệu ứng chuyển động khi hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.card:hover {
-    transform: translateY(-5px); /* Đẩy lên một chút khi hover */
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1); /* Tăng độ đổ bóng */
+.card {
+    max-width: 95%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
 }
 
 .card-header {
-    background-color: #007bff; /* Màu xanh nổi bật */
-    color: #ffffff;
+    background-color: #007bff;
+    color: white;
     font-size: 1.2rem;
     font-weight: 600;
     padding: 15px 20px;
@@ -47,13 +54,12 @@ body {
     font-weight: 600;
     color: #555;
     padding: 15px;
-
     letter-spacing: 0.5px;
 }
 
 .table tbody tr {
     background-color: #fff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     border-radius: 10px;
 }
 
@@ -70,22 +76,26 @@ body {
     padding: 15px;
     text-align: center;
     vertical-align: middle;
-    border-bottom: 1px solid #ddd;
+}
+
+.img-thumbnail {
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    object-fit: cover;
 }
 
 .btn {
     font-weight: 600;
-    padding: 10px 20px;
+    padding: 8px 15px;
     text-transform: uppercase;
     border-radius: 6px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
     cursor: pointer;
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border: none;
+    background-color: #268342;
     color: white;
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -95,8 +105,8 @@ body {
 
 .btn-warning {
     background-color: #ffc107;
-    border: none;
     color: white;
+    transition: all 0.3s ease;
 }
 
 .btn-warning:hover {
@@ -106,8 +116,8 @@ body {
 
 .btn-danger {
     background-color: #dc3545;
-    border: none;
     color: white;
+    transition: all 0.3s ease;
 }
 
 .btn-danger:hover {
@@ -115,31 +125,6 @@ body {
     transform: scale(1.05);
 }
 
-.img-thumbnail {
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    object-fit: cover;
-}
-
-.status-pending {
-    color: #ffc107;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.status-confirmed {
-    color: #28a745;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.status-cancelled {
-    color: #dc3545;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-/* Hiệu ứng cho các input và select */
 input, select, textarea {
     border-radius: 6px;
     padding: 10px;
@@ -149,6 +134,12 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-    border-color: #007bff;
+    border-color: #163658;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
+
+.card h2 {
+    color: #007bff;
+    margin-bottom: 30px;
+    font-weight: bold; /* Thêm dòng này để in đậm */
+  }

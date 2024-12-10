@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Specialty } from '../model/specialty.model';
+import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-specialty',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SidebarAdminComponent, HeaderComponent, FooterComponent],
   templateUrl: './specialty.component.html',
   styleUrl: './specialty.component.scss'
 })

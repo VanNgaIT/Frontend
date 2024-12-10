@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Booking } from '../model/booking.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
+import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
 
 @Component({
   selector: 'app-booking',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SidebarAdminComponent, HeaderComponent, FooterComponent],
   templateUrl: './booking.component.html',
   styleUrl: './booking.component.scss'
 })

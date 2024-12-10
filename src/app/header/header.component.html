@@ -16,32 +16,48 @@
         <div class="collapse navbar-collapse col-md-10" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
+                    <a class="nav-link active" aria-current="page" href="/">
+                        <i class="fas fa-home"></i> Trang chủ
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">Giới thiệu</a>
+                    <a class="nav-link" href="/about">
+                        <i class="fas fa-info-circle"></i> Giới thiệu
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/services">Liên hệ</a>
+                    <a class="nav-link" href="/services">
+                        <i class="fas fa-phone-alt"></i> Liên hệ
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="'/user-booking'">Đặt lịch khám</a>
+                    <a class="nav-link" [routerLink]="'/user-booking'">
+                        <i class="fas fa-calendar-alt"></i> Đặt lịch khám
+                    </a>
                 </li>
 
                 <!-- Nếu người dùng đã đăng nhập -->
                 <li *ngIf="email" class="nav-item">
-                    <a class="nav-link" routerLink="/user-profile">Thông tin cá nhân</a>
+                    <a class="nav-link" routerLink="/user-profile">
+                        <i class="fas fa-user-circle"></i> Thông tin cá nhân
+                    </a>
                 </li>
                 <li *ngIf="email" class="nav-item">
-                    <a class="nav-link" routerLink="/user-history">Hồ sơ bệnh án</a>
+                    <a class="nav-link" routerLink="/user-history">
+                        <i class="fas fa-folder-open"></i> Hồ sơ bệnh án
+                    </a>
                 </li>
                 <li *ngIf="email" class="nav-item">
-                    <button class="nav-link text-danger" (click)="onLogout()">Đăng xuất</button>
+                    <button class="nav-link text-danger" (click)="onLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
                 </li>
 
                 <!-- Nếu người dùng chưa đăng nhập -->
                 <li *ngIf="!email" class="nav-item">
-                    <a class="nav-link btn btn-primary text-white px-3" [routerLink]="'/login'">Đăng nhập</a>
+                    <a class="nav-link btn btn-primary text-white px-3" [routerLink]="'/login'">
+                        <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                    </a>
                 </li>
             </ul>
         </div>
