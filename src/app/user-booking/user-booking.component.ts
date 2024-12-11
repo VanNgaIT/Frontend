@@ -167,11 +167,12 @@ export class UserBookingComponent implements OnInit {
       appointmentDate: this.appointmentDate,
       userId: 1  // Giả sử là người dùng hiện tại
     };
-
-    this.bookingService.createBooking(bookingData).subscribe(response => {
-      console.log('Cuộc hẹn đã được tạo thành công:', response);
-    }, error => {
-      console.log('Lỗi khi tạo cuộc hẹn:', error);
-    });
+    console.log
+    (bookingData)
+    // this.bookingService.createBooking(bookingData).subscribe(response => {
+    //   console.log('Cuộc hẹn đã được tạo thành công:', response);
+    // }, error => {
+    //   console.log('Lỗi khi tạo cuộc hẹn:', error);
+    // });
   }
 }
