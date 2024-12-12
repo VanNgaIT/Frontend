@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user.model';
+import { AuthService } from './auth.service';  // Import AuthService
 
 @Injectable({
   providedIn: 'root'
@@ -9,31 +10,42 @@ import { User } from '../model/user.model';
 export class UserService {
 
   private apiUrl = 'http://localhost:8080/api/users'; // Đảm bảo rằng bạn có URL API thích hợp
-  private getUserDetailAPIURL = 'http://localhost:8080/api/users/me';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-  // Lấy thông tin người dùng
-  getUserInfo(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`);
+  // Helper function to get the token and set the Authorization header
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.authService.getToken();  // Lấy token từ AuthService
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
-  // Lấy thông tin người dùng
-  getUserDetails(): Observable<User> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('auth_token')}`, // Token JWT nếu cần
-    });
-    return this.http.get<any>(this.getUserDetailAPIURL, { headers });
+  // Lấy tất cả người dùng
+  getAllUsers(): Observable<User[]> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<User[]>(`${this.apiUrl}`, { headers });
   }
 
-  getUser(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/me`);
+  // Lấy thông tin người dùng theo ID
+  getUserById(id: number): Observable<User> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<User>(`${this.apiUrl}/${id}`, { headers });
+  }
+  
+  // Tạo người dùng mới
+  createUser(user: User): Observable<User> {
+    const headers = this.getAuthHeaders();
+    return this.http.post<User>(`${this.apiUrl}/create-user`, user, { headers });
   }
 
-  updateUserDetails(user: User): Observable<User> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
-    });
-    return this.http.put<User>(this.getUserDetailAPIURL, user, { headers });
+  // Cập nhật người dùng
+  updateUser(id: number, user: User): Observable<User> {
+    const headers = this.getAuthHeaders();
+    return this.http.put<User>(`${this.apiUrl}/${id}`, user, { headers });
+  }
+
+  // Xóa người dùng
+  deleteUser(id: number): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
 }

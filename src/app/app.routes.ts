@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { DoctorComponent } from './doctor/doctor.component';
-import { UserComponent } from './user/user.component';
+import { UserManagementComponent } from './user/user.component';
 import { BookingComponent } from './booking/booking.component';
 import { HistoryComponent } from './history/history.component';
 import { SpecialtyComponent } from './specialty/specialty.component';
@@ -38,7 +38,7 @@ export const routes: Routes = [
         ]
     },
     { path: 'doctor', component: DoctorComponent },
-    { path: 'user', component: UserComponent },
+    { path: 'user', component: UserManagementComponent },
     { path: 'booking', component: BookingComponent },
     { path: 'history', component: HistoryComponent },
     { path: 'specialty', component: SpecialtyComponent },

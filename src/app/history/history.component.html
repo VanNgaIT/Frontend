@@ -13,12 +13,35 @@
             <div class="card-container mt-5 mb-5">
                 <!-- Bảng thông tin hồ sơ bệnh án -->
                 <div class="card shadow-sm">
-                    <h2 class="text-center">Quản lý Hồ Sơ Bệnh Án</h2>
+                    <!-- Thay thế card-header bằng form -->
+                    <form class="history-form shadow p-4 mb-4 bg-white rounded">
+                        <div class="row">
+                            <h2 class="text-center">Quản lý Hồ Sơ Bệnh Án</h2>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="patient" class="form-label">Bệnh nhân</label>
+                                <input type="text" class="form-control" id="patient" placeholder="Nhập tên bệnh nhân" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="doctor" class="form-label">Bác sĩ</label>
+                                <input type="text" class="form-control" id="doctor" placeholder="Nhập tên bác sĩ" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="description" class="form-label">Mô tả</label>
+                                <textarea class="form-control" id="description" rows="3" placeholder="Nhập mô tả hồ sơ bệnh án" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="createdAt" class="form-label">Ngày tạo</label>
+                                <input type="date" class="form-control" id="createdAt" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Lưu hồ sơ bệnh án</button>
+                    </form>
 
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>Danh sách hồ sơ bệnh án</span>
-                        <button class="btn btn-success" (click)="onAddHistory()">Thêm mới hồ sơ</button>
-                    </div>
                     <div class="card-body">
                         <table class="table table-striped table-hover">
                             <thead class="thead-light">

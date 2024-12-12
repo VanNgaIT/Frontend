@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { NgIf } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import { RouterOutlet } from '@angular/router';
-import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, RouterOutlet, SidebarAdminComponent],
+  imports: [RouterOutlet],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })

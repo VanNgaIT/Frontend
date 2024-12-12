@@ -1,6 +1,6 @@
 // role.model.ts
 export interface Role {
-    id: string;
+    id: number;
     roleName: string; // Ví dụ: "ADMIN", "USER"
   }
   

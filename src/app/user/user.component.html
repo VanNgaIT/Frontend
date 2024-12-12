@@ -16,24 +16,49 @@
                 <form (ngSubmit)="isEditMode ? updateUser() : addUser()" class="doctor-form shadow p-4 mb-5 bg-white rounded">
                     <div class="row">
                         <h2 class="text-center">Quản lý Người Dùng</h2>
+
+                        <!-- Tìm kiếm người dùng -->
                         <div class="col-md-6 mb-3">
-                            <label for="fullName" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" id="fullName" [(ngModel)]="newUser.fullName" name="fullName" placeholder="Nhập họ và tên" required>
+                            <label for="userSearch" class="form-label">Tìm kiếm người dùng theo ID</label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Nhập ID người dùng..." 
+                                [(ngModel)]="searchQuery" 
+                                name="searchQuery"
+                            />
                         </div>
+                        
+                        <!-- Nút tìm kiếm -->
                         <div class="col-md-6 mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" [(ngModel)]="newUser.email" name="email" placeholder="Nhập email" required>
+                            <label class="form-label">tìm kiếm</label>
+                            <button 
+                                class="btn btn-primary w-100" 
+                                (click)="searchUserById()">
+                                Tìm kiếm
+                            </button>
                         </div>
                     </div>
 
+                    <!-- Thêm hoặc chỉnh sửa thông tin người dùng -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="userName" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="userName" [(ngModel)]="newUser.userName" name="userName" placeholder="Nhập họ và tên" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="image" class="form-label">Ảnh đại diện</label>
+                            <input type="text" class="form-control" id="image" [(ngModel)]="newUser.image" name="image" placeholder="URL ảnh đại diện">
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="phoneNumber" class="form-label">Số điện thoại</label>
                             <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newUser.phoneNumber" name="phoneNumber" placeholder="Nhập số điện thoại" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="address" class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control" id="address" [(ngModel)]="newUser.address" name="address" placeholder="Nhập địa chỉ" required>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" [(ngModel)]="newUser.email" name="email" placeholder="Nhập email" required>
                         </div>
                     </div>
 
@@ -46,8 +71,8 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="image" class="form-label">Ảnh đại diện</label>
-                            <input type="text" class="form-control" id="image" [(ngModel)]="newUser.image" name="image" placeholder="URL ảnh đại diện">
+                            <label for="address" class="form-label">Địa chỉ</label>
+                            <input type="text" class="form-control" id="address" [(ngModel)]="newUser.address" name="address" placeholder="Nhập địa chỉ" required>
                         </div>
                     </div>
 
@@ -84,7 +109,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let user of users">
-                            <td>{{ user.fullName }}</td>
+                            <td>{{ user.userName }}</td>
                             <td>{{ user.email }}</td>
                             <td>{{ user.phoneNumber }}</td>
                             <td>{{ user.address }}</td>
