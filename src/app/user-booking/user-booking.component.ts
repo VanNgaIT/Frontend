@@ -8,6 +8,7 @@ import { Specialty } from '../model/specialty.model';
 import { SpecialtyService } from '../service/specialty.service';
 import { DatePipe } from '@angular/common';
 import { TimeSlot } from '../model/timeslot.model';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-booking',
@@ -160,19 +161,33 @@ export class UserBookingComponent implements OnInit {
       alert('Vui lòng chọn đầy đủ thông tin trước khi đặt lịch!');
       return;
     }
-
+  
     const bookingData = {
       doctorId: this.selectedDoctorId,
-      timeSlot: this.selectedTimeSlot,
+      timeSlot: this.selectedTimeSlot, // Đã là id rồi, không cần convert gì thêm
       appointmentDate: this.appointmentDate,
-      userId: 1  // Giả sử là người dùng hiện tại
+      
     };
-    console.log
-    (bookingData)
-    // this.bookingService.createBooking(bookingData).subscribe(response => {
-    //   console.log('Cuộc hẹn đã được tạo thành công:', response);
-    // }, error => {
-    //   console.log('Lỗi khi tạo cuộc hẹn:', error);
-    // });
+  
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Không tìm thấy token, vui lòng đăng nhập lại!');
+      return;
+    }
+  
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  
+    this.bookingService.createBooking(bookingData).subscribe(
+      (response) => {
+        alert('Cuộc hẹn đã được tạo thành công!');
+        console.log('Response:', response);
+      },
+      (error) => {
+        console.error('Lỗi khi tạo cuộc hẹn:', error);
+        alert('Đã xảy ra lỗi khi tạo cuộc hẹn. Vui lòng thử lại!');
+      }
+    );
   }
 }

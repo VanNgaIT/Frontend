@@ -38,18 +38,20 @@ export class BookingService {
   
 
   // Tạo cuộc hẹn
-  createBooking(bookingData: any): Observable<any> {
+  createBooking(bookingData: any): Observable<BookingApiResponse> {
     const formattedData = {
       doctorId: Number(bookingData.doctorId),
-      timeSlotId: this.mapTimeSlotToId(bookingData.timeSlot),
-      date: new Date(bookingData.appointmentDate),
-      patientId: bookingData.userId
+      timeSlotId: bookingData.timeSlot,
+      date: new Date(bookingData.appointmentDate).toISOString().split('T')[0],
     };
   
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    console.log('Booking data:', formattedData);
   
-    return this.http.post<BookingApiResponse>(`${this.apiUrl}/create-booking`, formattedData, { headers }).pipe(
+    return this.http.post<BookingApiResponse>(`${this.apiUrl}/create-booking`, formattedData, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    }).pipe(
       tap(response => {
         if (response?.message) {
           alert(response.message);  // Hiển thị thông báo thành công
@@ -57,27 +59,19 @@ export class BookingService {
         } else if (response?.error) {
           alert(response.error);  // Hiển thị thông báo lỗi nếu có lỗi từ API
         } else {
-          alert('Cuộc hẹn đã được tạo thành công'); // Nếu không có thông báo lỗi hay thành công trong response
+          alert('Cuộc hẹn đã được tạo thành công');
         }
       }),
       catchError(error => {
         console.error('Error occurred:', error);
-        alert('Bạn còn cuộc hẹn chưa khám, hãy hoàn thành để tạo cuộc hẹn khác!');
-        return of(null);  // Hoặc có thể trả về một giá trị mặc định nào đó
+        alert('Đã xảy ra lỗi khi tạo cuộc hẹn. Vui lòng thử lại!');
+        // Thay vì trả về null, trả về một đối tượng có kiểu BookingApiResponse
+        return of({ message: 'Lỗi khi tạo cuộc hẹn, vui lòng thử lại!', error: 'Unknown error' });
       })
     );
   }
   
-  // Hàm giả định để map timeSlot (chuỗi) sang timeSlotId
-  private mapTimeSlotToId(timeSlot: string): number {
-    const timeSlotMapping: { [key: string]: number } = {
-      "08:00:00": 1,
-      "09:00:00": 2,
-      "10:00:00": 3
-    };
   
-    return timeSlotMapping[timeSlot] || 0; // Trả về 0 nếu không tìm thấy
-  }
   
 
   // Xác nhận cuộc hẹn
