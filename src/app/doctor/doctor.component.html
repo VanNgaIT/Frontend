@@ -17,8 +17,8 @@
                     <div class="row">
                         <h2 class="text-center">Quản lý Bác Sĩ</h2>
                         <div class="col-md-6 mb-3">
-                            <label for="fullName" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" id="fullName" [(ngModel)]="newDoctor.fullName" name="fullName" placeholder="Nhập họ và tên" required>
+                            <label for="name" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="name" [(ngModel)]="newDoctor.name" name="name" placeholder="Nhập họ và tên" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">Email</label>
@@ -72,7 +72,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let doctor of doctors">
-                            <td>{{ doctor.fullName }}</td>
+                            <td>{{ doctor.name }}</td>
                             <td>{{ doctor.email }}</td>
                             <td>{{ doctor.phoneNumber }}</td>
                             <td>{{ doctor.specialty.name }}</td>

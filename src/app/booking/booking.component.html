@@ -72,8 +72,8 @@
                             <tbody>
                                 <tr *ngFor="let booking of bookings; let i = index">
                                     <td>{{ i + 1 }}</td>
-                                    <td>{{ booking.doctor.fullName }}</td>
-                                    <td>{{ booking.patient.fullName }}</td>
+                                    <td>{{ booking.doctor.name }}</td>
+                                    <td>{{ booking.patient.userName }}</td>
                                     <td>{{ booking.email }}</td>
                                     <td>{{ booking.date | date: 'yyyy-MM-dd' }}</td>
                                     <td>{{ booking.timeSlot.startTime }} - {{ booking.timeSlot.endTime }}</td>

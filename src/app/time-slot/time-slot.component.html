@@ -63,7 +63,7 @@
                             <tbody>
                                 <tr *ngFor="let timeslot of timeslots; let i = index">
                                     <td>{{ i + 1 }}</td>
-                                    <td>{{ timeslot.doctorId.fullName }}</td>
+                                    <td>{{ timeslot.doctorId.name }}</td>
                                     <td>{{ timeslot.schedule.id }}</td>
                                     <td>{{ timeslot.startTime }} - {{ timeslot.endTime }}</td>
                                     <td>

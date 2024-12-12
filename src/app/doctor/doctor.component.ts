@@ -15,7 +15,7 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class DoctorComponent {
   doctors: Doctor[] = [];
-  newDoctor: Doctor = { id: 0, fullName: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
+  newDoctor: Doctor = { id: 0, name: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
   isEditMode: boolean = false;
 
   constructor(private authService: AuthService) {}
@@ -33,7 +33,7 @@ export class DoctorComponent {
     });
 
     // Reset form
-    this.newDoctor = {id: 0, fullName: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
+    this.newDoctor = {id: 0, name: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
   }
 
   // Chỉnh sửa bác sĩ
@@ -48,7 +48,7 @@ export class DoctorComponent {
     if (index !== -1) {
       this.doctors[index] = { ...this.newDoctor };
       this.isEditMode = false;
-      this.newDoctor = {id: 0, fullName: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
+      this.newDoctor = {id: 0, name: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
     }
   }
 
