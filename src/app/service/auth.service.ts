@@ -19,11 +19,11 @@ export class AuthService {
     const body = { email, password, retypePassword};
     return this.http.post(this.apiUrlRegister, body, { responseType: 'text' }) ;
   }
-  loginUser(email: string, password: string) {
+  loginUser(email: string, password: string): Observable<any> {
     const body = { email, password };
     return this.http.post<string>('http://localhost:8080/api/auth/login', body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      responseType: 'text' as 'json'  // Đảm bảo Angular nhận phản hồi dưới dạng text
+      responseType: 'text' as 'json'
     }).pipe(
       tap(response => {
         try {

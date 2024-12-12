@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="container">
+  <!-- Form Quên Mật Khẩu -->
+  <div class="container">
+    <div class="forgot-form">
+      <!-- Form Quên mật khẩu -->
+      <form (ngSubmit)="onSubmit($event)" #forgotPasswordForm="ngForm" class="form" method="post">
+        <h2>Quên mật khẩu</h2>
+        <div class="form-group">
+          <input type="email" id="forgot-email" 
+                 name="email" 
+                 [(ngModel)]="email" 
+                 class="form-control" 
+                 placeholder="Nhập email của bạn" 
+                 required />
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!forgotPasswordForm.valid">Gửi yêu cầu đặt lại mật khẩu</button>
+      </form>
+      
+      <p> <a style="text-decoration: none;" [routerLink]="['/login']">Quay lại đăng nhập</a></p>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

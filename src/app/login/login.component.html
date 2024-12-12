@@ -25,10 +25,12 @@
                     <button type="submit">Đăng nhập</button>
                 </form>
                 <div class="forgot-password">
-                    <a href="#">Quên mật khẩu?</a>
+                    <a style="text-decoration: none;" [routerLink]="['/forgot-password']">Quên mật khẩu?</a>
+                    
+                    
                 </div>
                 <div class="register">
-                    <p>Chưa có tài khoản? <a [routerLink]="['/register']">Đăng ký ngay</a></p>
+                    <p>Chưa có tài khoản? <a style="text-decoration: none;" [routerLink]="['/register']">Đăng ký ngay</a></p>
                 </div>
                 <div class="social-login">
                     <button class="social-btn google-btn">

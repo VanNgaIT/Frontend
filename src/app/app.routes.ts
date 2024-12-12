@@ -10,6 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ForgotPassComponent } from './forgot-pass/forgotpass.component';
+import { ChangePassComponent } from './change-pass/changepass.component';
+import { ResetPassComponent } from './reset-pass/resetpass.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserBookingComponent } from './user-booking/user-booking.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
@@ -24,6 +27,9 @@ export const routes: Routes = [
             { path: '', component: HomeComponent }, // Trang chủ
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
+            { path: 'forgot-password', component: ForgotPassComponent },
+            { path: 'change-password', component: ChangePassComponent },
+            { path: 'reset-password', component: ResetPassComponent },
             { path: 'user-profile', component: UserProfileComponent},
             { path: 'user-booking', component: UserBookingComponent},
             { path: 'user-history', component: UserHistoryComponent},
@@ -37,5 +43,6 @@ export const routes: Routes = [
     { path: 'history', component: HistoryComponent },
     { path: 'specialty', component: SpecialtyComponent },
     { path: 'time-slot', component: TimeSlotComponent },
+    
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

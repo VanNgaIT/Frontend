@@ -48,10 +48,16 @@
                     </a>
                 </li>
                 <li *ngIf="email" class="nav-item">
+                    <a class="nav-link" routerLink="/change-password">
+                        <i class="fas fa-key"></i> Đổi mật khẩu
+                    </a>
+                </li>
+                <li *ngIf="email" class="nav-item">
                     <button class="nav-link text-danger" (click)="onLogout()">
                         <i class="fas fa-sign-out-alt"></i> Đăng xuất
                     </button>
                 </li>
+                
 
                 <!-- Nếu người dùng chưa đăng nhập -->
                 <li *ngIf="!email" class="nav-item">

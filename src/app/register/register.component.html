@@ -17,20 +17,9 @@
             <button type="submit">Đăng ký</button>
         </form>
         <div class="register">
-            <p>Đã có tài khoản? <a href="#">Đăng nhập</a></p>
+            <p>Đã có tài khoản? <a style="text-decoration: none;" [routerLink]="['/login']">Đăng nhập</a></p>
         </div>
-        <div class="social-login">
-            <button class="social-btn google-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo"
-                    class="social-icon">
-                Đăng nhập với Google
-            </button>
-            <button class="social-btn facebook-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                    alt="Facebook logo" class="social-icon">
-                Đăng nhập với Facebook
-            </button>
-        </div>
+        
     </div>
 </div>
 <app-footer></app-footer>
