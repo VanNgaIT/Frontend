@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
+import { AdminBookingService } from '../service/adbooking.service';
+import { BookingDetails } from '../model/bookingDetail.model';
 
 @Component({
   selector: 'app-booking',
@@ -14,51 +16,71 @@ import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component'
   styleUrl: './booking.component.scss'
 })
 export class BookingComponent implements OnInit {
-  bookings: Booking[] = []; // Danh sách lịch hẹn
+  bookings: Booking[] = [];
+  selectedBooking: Booking | null = null;
+  selectedBookingDetails: BookingDetails | null = null;
 
-  constructor() {}
+  constructor(private bookingService: AdminBookingService) {}
 
   ngOnInit(): void {
+    this.loadBookings();
   }
 
-  getStatusText(statusId: string): string {
-    switch (statusId) {
-      case 'PENDING':
-        return 'Chờ xác nhận';
-      case 'CONFIRMED':
-        return 'Đã xác nhận';
-      case 'CANCELLED':
-        return 'Đã hủy';
-      default:
-        return 'Không xác định';
+  // Lấy tất cả lịch hẹn
+  loadBookings(): void {
+    this.bookingService.getAllBookings().subscribe((data) => {
+      this.bookings = data;
+    });
+  }
+
+  onSelectBooking(bookingId: number): void {
+    this.bookingService.getBookingDetails(bookingId).subscribe((data) => {
+      this.selectedBookingDetails = data;
+      console.log('Booking details:', this.selectedBookingDetails);
+      // Bạn có thể hiển thị thông tin này trong form hoặc bảng
+    });
+  }
+  // Chỉnh sửa lịch hẹn
+  onEditBooking(booking: Booking): void {
+    this.bookingService.getBookingById(booking.id).subscribe((data) => {
+      this.selectedBooking = data;
+      // Giả sử bạn có một form để hiển thị thông tin lịch hẹn đã chọn
+    });
+  }
+
+  // Cập nhật lịch hẹn
+  onUpdateBooking(): void {
+    if (this.selectedBooking) {
+      this.bookingService.updateBooking(this.selectedBooking.id, this.selectedBooking).subscribe(() => {
+        this.loadBookings();
+        this.selectedBooking = null;
+      });
     }
+  }
+
+  // Xóa lịch hẹn
+  onDeleteBooking(id: number): void {
+    this.bookingService.deleteBooking(id).subscribe(() => {
+      this.loadBookings();
+    });
   }
 
   getStatusClass(statusId: string): string {
     switch (statusId) {
-      case 'PENDING':
-        return 'status-pending';
-      case 'CONFIRMED':
-        return 'status-confirmed';
-      case 'CANCELLED':
-        return 'status-cancelled';
-      default:
-        return '';
+      case 'PENDING': return 'text-warning';
+      case 'CONFIRMED': return 'text-success';
+      case 'CANCELLED': return 'text-danger';
+      default: return '';
     }
   }
 
-  onAddBooking(): void {
-    console.log('Thêm lịch hẹn');
-    // Logic thêm lịch hẹn
-  }
-
-  onEditBooking(booking: Booking): void {
-    console.log('Sửa lịch hẹn:', booking);
-    // Logic sửa lịch hẹn
-  }
-
-  onDeleteBooking(id: number): void {
-    console.log('Xóa lịch hẹn ID:', id);
-    // Logic xóa lịch hẹn
+  // Phương thức để lấy trạng thái dưới dạng văn bản
+  getStatusText(statusId: string): string {
+    switch (statusId) {
+      case 'PENDING': return 'Chờ xác nhận';
+      case 'CONFIRMED': return 'Đã xác nhận';
+      case 'CANCELLED': return 'Đã hủy';
+      default: return 'Không xác định';
+    }
   }
 }

@@ -28,10 +28,6 @@
                     
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Nhập email" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
                                 <label for="date" class="form-label">Ngày</label>
                                 <input type="date" class="form-control" id="date" required>
                             </div>
@@ -40,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="time" class="form-label">Thời gian</label>
-                                <input type="text" class="form-control" id="time" placeholder="Nhập thời gian (HH:mm - HH:mm)" required>
+                                <input type="text" class="form-control" id="time" placeholder="Start:... End...." required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="status" class="form-label">Trạng thái</label>
@@ -62,7 +58,6 @@
                                     <th>#</th>
                                     <th>Bác sĩ</th>
                                     <th>Bệnh nhân</th>
-                                    <th>Email</th>
                                     <th>Ngày</th>
                                     <th>Thời gian</th>
                                     <th>Trạng thái</th>
@@ -73,8 +68,7 @@
                                 <tr *ngFor="let booking of bookings; let i = index">
                                     <td>{{ i + 1 }}</td>
                                     <td>{{ booking.doctor.name }}</td>
-                                    <td>{{ booking.patient.userName }}</td>
-                                    <td>{{ booking.email }}</td>
+                                    <td>{{ booking.user.userName }}</td>
                                     <td>{{ booking.date | date: 'yyyy-MM-dd' }}</td>
                                     <td>{{ booking.timeSlot.startTime }} - {{ booking.timeSlot.endTime }}</td>
                                     <td>
