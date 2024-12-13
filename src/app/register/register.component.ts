@@ -19,18 +19,26 @@ export class RegisterComponent {
   password: string = '';
   retypePassword: string = '';
 
+  userName: string ='';
+  genDer: boolean = true;
+  address: string = '';
+
   constructor(private authService: AuthService, private router: Router) { }
 
   onRegister() {
     console.log("Email: ", this.email);
     console.log("Password: ", this.password);
     console.log("Retype Password: ", this.retypePassword);
+
+    console.log("Username: ", this.userName);
+    console.log("Gender: ", this.genDer);
+    console.log("Address: ", this.address);
     if (this.password !== this.retypePassword) {
       alert('Mật khẩu và xác nhận mật khẩu không khớp!');
       return;
     }
 
-    this.authService.registerUser(this.email, this.password, this.retypePassword).subscribe(
+    this.authService.registerUser(this.email, this.password, this.retypePassword, this.userName, this.genDer, this.address).subscribe(
       (response) => {
         alert('Đăng ký thành công');
         this.router.navigate(['/login']);

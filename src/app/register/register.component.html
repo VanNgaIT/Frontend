@@ -14,6 +14,22 @@
                 <input type="password" id="retypePassword" placeholder="Nhập lại mật khẩu" [(ngModel)]="retypePassword"
                     name="retypePassword" required [ngClass]="{'is-invalid': password !== retypePassword}">
             </div>
+            <div class="form-group">
+                <input type="text" id="userName" placeholder="Tên người dùng" [(ngModel)]="userName" name="userName" required>
+            </div>
+            <!-- Trường chọn giới tính -->
+            <div class="form-group">
+                <label for="genDer">Giới tính:</label>
+                <select style="margin-left: 10px; border-radius: 5px; border: 1px solid #ddd;" id="genDer" [(ngModel)]="genDer" name="genDer" required>
+                  <option [ngValue]="true">Nam</option>
+                  <option [ngValue]="false">Nữ</option>
+                </select>
+              </div>
+            
+            <!-- Trường nhập địa chỉ -->
+            <div class="form-group">
+                <input type="text" id="address" placeholder="Địa chỉ" [(ngModel)]="address" name="address" required>
+            </div>
             <button type="submit">Đăng ký</button>
         </form>
         <div class="register">

@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
 import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from '../footer/footer.component';
+import { DoctorService } from '../service/doctor.service'; // import service để lấy dữ liệu bác sĩ
+import { SpecialtyService } from '../service/specialty.service';
+import { Specialty } from '../model/specialty.model';
 @Component({
   selector: 'app-doctor',
   standalone: true,
@@ -15,45 +18,104 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class DoctorComponent {
   doctors: Doctor[] = [];
-  newDoctor: Doctor = { id: 0, name: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
+  specialties: Specialty[] = [];
+  selectedDoctor: Doctor | null = null;
+  newDoctor: Doctor = {
+    id: 0,
+    clinicId: 1,
+    roleId: 2,
+    name: '',
+    email: '',
+    phoneNumber: '',
+    gender: true, // mặc định Nam
+    profilePicture: '',
+    specialtyId: 0, // Dành cho việc chọn chuyên khoa khi thêm bác sĩ mới
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
   isEditMode: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private doctorService: DoctorService, private specialtyService: SpecialtyService) {}
 
-  // Thêm bác sĩ
-  addDoctor() { 
-    // Gán ID cho bác sĩ mới (tạo ngẫu nhiên hoặc từ database)
-    this.newDoctor.id = Math.floor(Math.random() * 10000);
-    this.doctors.push(this.newDoctor);
+  ngOnInit() {
+    this.loadDoctors();
+    this.loadSpecialties();
+  }
 
-    // Tạo user với role doctor
-    this.authService.registerUser(this.newDoctor.email, 'defaultPassword', 'defaultPassword').subscribe(response => {
-      // Sau khi tạo user thành công, cập nhật role thành doctor
-      // Gọi API để thêm user vào database với role là 'doctor'
+  loadDoctors() {
+    this.doctorService.getAllDoctors().subscribe((doctors) => {
+      this.doctors = doctors;
     });
-
-    // Reset form
-    this.newDoctor = {id: 0, name: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
   }
 
-  // Chỉnh sửa bác sĩ
-  editDoctor(doctor: Doctor) {
-    this.newDoctor = { ...doctor };
-    this.isEditMode = true;
+  loadSpecialties() {
+    this.specialtyService.getAllSpecialty().subscribe((specialties) => {
+      this.specialties = specialties;
+    });
   }
 
-  // Lưu thay đổi sau khi chỉnh sửa
-  updateDoctor() {
-    const index = this.doctors.findIndex(d => d.id === this.newDoctor.id);
-    if (index !== -1) {
-      this.doctors[index] = { ...this.newDoctor };
-      this.isEditMode = false;
-      this.newDoctor = {id: 0, name: '', email: '', phoneNumber: '', gender: true, profilePicture: '', createdAt: new Date(), updatedAt: new Date(), specialty: { id: 1, name: 'Dentistry', description: '', image: '', createdAt: new Date(), updatedAt: new Date()}};
+  // Khi người dùng chọn bác sĩ, hiển thị chuyên khoa của bác sĩ đó
+  selectDoctor(doctor: Doctor) {
+    this.selectedDoctor = doctor;
+    // Gán specialtyId cho bác sĩ theo id của chuyên khoa
+    const specialty = this.specialties.find(s => s.id === doctor.specialtyId);
+    if (specialty) {
+      doctor.specialtyId = specialty.id;  // Gán ID của chuyên khoa vào specialtyId của bác sĩ
     }
   }
 
+  // Thêm bác sĩ mới
+  addDoctor() {
+    this.doctorService.createDoctors(this.newDoctor).subscribe((newDoctor) => {
+      this.doctors.push(newDoctor);
+      this.resetForm();
+    });
+  }
+
+  editDoctor(doctor: Doctor) {
+    // Set the `newDoctor` object with the selected doctor data for editing
+    this.newDoctor = { ...doctor };
+    this.isEditMode = true; // Set edit mode flag to true
+  }
+  // Cập nhật bác sĩ
+  updateDoctor() {
+    if (this.newDoctor) {  // Kiểm tra nếu newDoctor đã được chọn
+      this.doctorService.updateDoctors(this.newDoctor.id, this.newDoctor).subscribe(() => {
+        this.loadDoctors(); // Tải lại danh sách bác sĩ sau khi cập nhật
+        this.resetForm();
+        this.isEditMode = false;  // Đặt lại chế độ chỉnh sửa về false sau khi cập nhật
+      });
+    }
+  }
+  
+
   // Xóa bác sĩ
   deleteDoctor(id: number) {
-    this.doctors = this.doctors.filter(doctor => doctor.id !== id);
+    this.doctorService.deleteDoctors(id).subscribe(() => {
+      this.loadDoctors();
+    });
+  }
+
+  // Reset form sau khi thêm mới hoặc cập nhật
+  resetForm() {
+    this.newDoctor = {
+      id: 0,
+      clinicId: 1,
+      roleId: 2,
+      name: '',
+      email: '',
+      phoneNumber: '',
+      gender: true,
+      profilePicture: '',
+      specialtyId: 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.isEditMode = false;
+  }
+
+  getSpecialtyName(specialtyId: number): string {
+    const specialty = this.specialties.find(s => s.id === specialtyId);
+    return specialty ? specialty.name : 'Không xác định';
   }
 }

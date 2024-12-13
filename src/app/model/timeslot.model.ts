@@ -3,8 +3,8 @@ import { Schedule } from './schedule.model';
 
 export interface TimeSlot {
   id: number;              // ID của TimeSlot
-  doctorId: Doctor;          // Thông tin bác sĩ liên quan
-  schedule: Schedule;      // Lịch trình liên quan
+  doctorId: number;          // Thông tin bác sĩ liên quan
+  scheduleId: number | null;      // Lịch trình liên quan
   startTime: string;       // Giờ bắt đầu (định dạng 'HH:mm:ss')
   endTime: string;         // Giờ kết thúc (định dạng 'HH:mm:ss')
   isAvailable: boolean;    // Tình trạng khả dụng
