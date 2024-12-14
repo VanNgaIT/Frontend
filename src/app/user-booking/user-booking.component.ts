@@ -181,12 +181,12 @@ export class UserBookingComponent implements OnInit {
   
     this.bookingService.createBooking(bookingData).subscribe(
       (response) => {
-        alert('Cuộc hẹn đã được tạo thành công!');
+        
         console.log('Response:', response);
       },
       (error) => {
         console.error('Lỗi khi tạo cuộc hẹn:', error);
-        alert('Đã xảy ra lỗi khi tạo cuộc hẹn. Vui lòng thử lại!');
+        alert('Bạn còn cuộc hẹn chưa khám, vui lòng hoàn thành!');
       }
     );
   }

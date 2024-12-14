@@ -18,7 +18,10 @@ import { BookingDetails } from '../model/bookingDetail.model';
 export class BookingComponent implements OnInit {
   bookings: Booking[] = [];
   selectedBooking: Booking | null = null;
-  selectedBookingDetails: BookingDetails | null = null;
+  selectedBookingDetails: BookingDetails[] = [];
+  selectedDoctor: any = null;
+  selectedTimeSlot: any = null;
+  selectedUser: any = null;
 
   constructor(private bookingService: AdminBookingService) {}
 
@@ -27,24 +30,48 @@ export class BookingComponent implements OnInit {
   }
 
   // Lấy tất cả lịch hẹn
+  // 
   loadBookings(): void {
     this.bookingService.getAllBookings().subscribe((data) => {
       this.bookings = data;
+      this.loadBookingDetails();  // Sau khi có danh sách booking, load chi tiết cho từng booking
+    });
+  }
+
+
+  loadBookingDetails(): void {
+    this.bookings.forEach((booking) => {
+      this.bookingService.getBookingDetails(booking.id).subscribe((details) => {
+        this.selectedBookingDetails.push(details); // Thêm thông tin chi tiết vào mảng
+      });
     });
   }
 
   onSelectBooking(bookingId: number): void {
-    this.bookingService.getBookingDetails(bookingId).subscribe((data) => {
-      this.selectedBookingDetails = data;
-      console.log('Booking details:', this.selectedBookingDetails);
-      // Bạn có thể hiển thị thông tin này trong form hoặc bảng
+    // Lấy thông tin chi tiết cuộc hẹn
+    this.bookingService.getBookingById(bookingId).subscribe((booking) => {
+      this.selectedBooking = booking;  // Lưu thông tin cuộc hẹn vào selectedBooking
+  
+      // Lấy thông tin bác sĩ, thời gian và người dùng
+      this.bookingService.getDoctor(bookingId).subscribe((doctor) => {
+        this.selectedDoctor = doctor;  // Lưu thông tin bác sĩ vào selectedDoctor
+      });
+  
+      this.bookingService.getTimeSlot(bookingId).subscribe((timeSlot) => {
+        this.selectedTimeSlot = timeSlot;  // Lưu thông tin thời gian vào selectedTimeSlot
+      });
+  
+      this.bookingService.getUser(bookingId).subscribe((user) => {
+        this.selectedUser = user;  // Lưu thông tin người dùng vào selectedUser
+      });
+    }, (error) => {
+      console.error('Error fetching booking details:', error);
     });
   }
   // Chỉnh sửa lịch hẹn
   onEditBooking(booking: Booking): void {
     this.bookingService.getBookingById(booking.id).subscribe((data) => {
       this.selectedBooking = data;
-      // Giả sử bạn có một form để hiển thị thông tin lịch hẹn đã chọn
     });
   }
 
@@ -83,4 +110,5 @@ export class BookingComponent implements OnInit {
       default: return 'Không xác định';
     }
   }
+  
 }

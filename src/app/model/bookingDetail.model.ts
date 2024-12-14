@@ -7,5 +7,5 @@ export interface BookingDetails {
     booking: Booking; // Thông tin về lịch hẹn
     doctor: Doctor;   // Thông tin bác sĩ
     timeSlot: TimeSlot; // Thông tin thời gian
-    patient: User;    // Thông tin bệnh nhân (user)
+    user: User;    // Thông tin bệnh nhân (user)
   }

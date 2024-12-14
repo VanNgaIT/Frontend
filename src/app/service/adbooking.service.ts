@@ -11,6 +11,7 @@ import { BookingDetails } from '../model/bookingDetail.model';
 
 export class AdminBookingService {
     private apiUrl = 'http://localhost:8080/api/bookings'; // URL của API bác sĩ
+    private apiUrlDetails = 'http://localhost:8080/api/bookings-details';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -19,16 +20,43 @@ export class AdminBookingService {
         return new HttpHeaders().set('Authorization', `Bearer ${token}`);
       }
 
-      getBookingDetails(bookingId: number): Observable<BookingDetails> {
-        const headers = this.getAuthHeaders();
-        return this.http.get<BookingDetails>(`${this.apiUrl}${bookingId}/details`, { headers });
+      // getBookingDetails(bookingId: number): Observable<BookingDetails> {
+      //   const headers = this.getAuthHeaders();
+      //   return this.http.get<BookingDetails>(`${this.apiUrl}/${bookingId}/details`, { headers });
+      // }
+
+      getBookingDetails(bookingId: number): Observable<any> {
+        return new Observable((observer) => {
+          this.getDoctor(bookingId).subscribe((doctor) => {
+            this.getTimeSlot(bookingId).subscribe((timeSlot) => {
+              this.getUser(bookingId).subscribe((user) => {
+                observer.next({ bookingId, doctor, timeSlot, user });
+                observer.complete();
+              });
+            });
+          });
+        });
       }
 
-  getAllBookings(): Observable<Booking[]> {
+    getDoctor(bookingId: number): Observable<any> {
+      return this.http.get(`${this.apiUrlDetails}/${bookingId}/doctor`);
+    }
+  
+    // API để lấy thông tin thời gian
+    getTimeSlot(bookingId: number): Observable<any> {
+      return this.http.get(`${this.apiUrlDetails}/${bookingId}/timeslot`);
+    }
+  
+    // API để lấy thông tin người dùng
+    getUser(bookingId: number): Observable<any> {
+      return this.http.get(`${this.apiUrlDetails}/${bookingId}/user`);
+    }
+
+    getAllBookings(): Observable<Booking[]> {
         const headers = this.getAuthHeaders();
         return this.http.get<Booking[]>(`${this.apiUrl}`, { headers });
      }
-  getBookingById(bookingId: number): Observable<Booking> {
+    getBookingById(bookingId: number): Observable<Booking> {
         const headers = this.getAuthHeaders();
         return this.http.get<Booking>(`${this.apiUrl}/${bookingId}`, { headers });
       }

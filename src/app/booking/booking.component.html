@@ -1,93 +1,87 @@
 <div class="container-fluid">
     <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-2">
-            <app-sidebar-admin></app-sidebar-admin>
-        </div>
-
-        <!-- Nội dung chính -->
-        <div class="col-md-10">
-            <app-header></app-header>
-
-            <!-- Thẻ cha cho phần card -->
-            <div class="card-container mt-5 mb-5">
-                <!-- Bảng thông tin lịch hẹn -->
-                <div class="card shadow-sm">
-                    <form class="booking-form shadow p-4 mb-5 bg-white rounded">
-                        <div class="row">
-                            <h2 class="text-center">Quản lý lịch hẹn</h2>
-                            <div class="col-md-6 mb-3">
-                                <label for="doctor" class="form-label">Bác sĩ</label>
-                                <input type="text" class="form-control" id="doctor" placeholder="Nhập tên bác sĩ" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="patient" class="form-label">Bệnh nhân</label>
-                                <input type="text" class="form-control" id="patient" placeholder="Nhập tên bệnh nhân" required>
-                            </div>
-                        </div>
-                    
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="date" class="form-label">Ngày</label>
-                                <input type="date" class="form-control" id="date" required>
-                            </div>
-                        </div>
-                    
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="time" class="form-label">Thời gian</label>
-                                <input type="text" class="form-control" id="time" placeholder="Start:... End...." required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="status" class="form-label">Trạng thái</label>
-                                <select class="form-control" id="status" required>
-                                    <option value="PENDING">Chờ xác nhận</option>
-                                    <option value="CONFIRMED">Đã xác nhận</option>
-                                    <option value="CANCELLED">Đã hủy</option>
-                                </select>
-                            </div>
-                        </div>
-                    
-                        <button type="submit" class="btn btn-primary w-100">Thêm lịch hẹn</button>
-                    </form>
-                    
-                    <div class="card-body">
-                        <table class="table table-striped table-hover">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Bác sĩ</th>
-                                    <th>Bệnh nhân</th>
-                                    <th>Ngày</th>
-                                    <th>Thời gian</th>
-                                    <th>Trạng thái</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let booking of bookings; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ booking.doctor.name }}</td>
-                                    <td>{{ booking.user.userName }}</td>
-                                    <td>{{ booking.date | date: 'yyyy-MM-dd' }}</td>
-                                    <td>{{ booking.timeSlot.startTime }} - {{ booking.timeSlot.endTime }}</td>
-                                    <td>
-                                        <span [ngClass]="getStatusClass(booking.statusId)">
-                                            {{ getStatusText(booking.statusId) }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm mr-2" (click)="onEditBooking(booking)">Sửa</button>
-                                        <button class="btn btn-danger btn-sm" (click)="onDeleteBooking(booking.id)">Xóa</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+      <!-- Sidebar -->
+      <div class="col-md-2">
+        <app-sidebar-admin></app-sidebar-admin>
+      </div>
+  
+      <!-- Nội dung chính -->
+      <div class="col-md-10">
+        <app-header></app-header>
+  
+        <!-- Thẻ cha cho phần card -->
+        <div class="card-container mt-5 mb-5">
+          <!-- Bảng thông tin lịch hẹn -->
+          <div class="card shadow-sm">
+            <form class="booking-form shadow p-4 mb-5 bg-white rounded">
+              <div class="row">
+                <h2 class="text-center">Quản lý lịch hẹn</h2>
+                <div class="col-md-6 mb-3">
+                  <label for="doctor" class="form-label">Bác sĩ</label>
+                  <input type="text" class="form-control" id="doctor" [value]="selectedDoctor?.name || ''" placeholder="Nhập tên bác sĩ" required disabled>
                 </div>
+                <div class="col-md-6 mb-3">
+                  <label for="patient" class="form-label">Bệnh nhân</label>
+                  <input type="text" class="form-control" id="patient" [value]="selectedUser?.userName || ''" placeholder="Nhập tên bệnh nhân" required disabled>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="time" class="form-label">Thời gian</label>
+                  <input type="text" class="form-control" id="time" [value]="selectedTimeSlot?.startTime + ' - ' + selectedTimeSlot?.endTime" required disabled>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="status" class="form-label">Trạng thái</label>
+                  <select class="form-control" id="status" [value]="selectedBooking?.statusId || ''" required disabled>
+                    <option value="PENDING">Chờ xác nhận</option>
+                    <option value="CONFIRMED">Đã xác nhận</option>
+                    <option value="CANCELLED">Đã hủy</option>
+                  </select>
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-primary w-100" [disabled]="!selectedBooking">Cập nhật lịch hẹn</button>
+            </form>
+  
+            <div class="card-body">
+              <table class="table table-striped table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th>#</th>
+                    <th>Bác sĩ</th>
+                    <th>Bệnh nhân</th>
+                    <th>Ngày</th>
+                    <th>Thời gian</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let booking of bookings; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ booking.doctor?.name || '' }}</td>
+                    <td>{{ booking.user?.userName || '' }}</td>
+                    <td>{{ booking.date | date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ booking.timeSlot?.startTime }} - {{ booking.timeSlot?.endTime }}</td>
+                    <td>
+                      <span [ngClass]="getStatusClass(booking.statusId)">
+                        {{ getStatusText(booking.statusId) }}
+                      </span>
+                    </td>
+                    <td>
+                      <button class="btn btn-warning btn-sm mr-2" (click)="onSelectBooking(booking.id)">Chi tiết</button>
+                      <button class="btn btn-danger btn-sm" (click)="onDeleteBooking(booking.id)">Xóa</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-
-            <app-footer></app-footer>
+          </div>
         </div>
+  
+        <app-footer></app-footer>
+      </div>
     </div>
-</div>
+  </div>
+  

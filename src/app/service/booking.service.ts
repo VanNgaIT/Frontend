@@ -58,13 +58,12 @@ export class BookingService {
           this.router.navigate(['/home']);
         } else if (response?.error) {
           alert(response.error);  // Hiển thị thông báo lỗi nếu có lỗi từ API
-        } else {
-          alert('Cuộc hẹn đã được tạo thành công');
-        }
+        } 
       }),
       catchError(error => {
         console.error('Error occurred:', error);
-        alert('Đã xảy ra lỗi khi tạo cuộc hẹn. Vui lòng thử lại!');
+        alert('Bạn còn cuộc hẹn chưa khám, vui lòng hoàn thành!');
+        this.router.navigate(['/home']);
         // Thay vì trả về null, trả về một đối tượng có kiểu BookingApiResponse
         return of({ message: 'Lỗi khi tạo cuộc hẹn, vui lòng thử lại!', error: 'Unknown error' });
       })
