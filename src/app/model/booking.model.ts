@@ -1,15 +1,16 @@
-import { Doctor } from './doctor.model';
-import { User } from './user.model';
-import { TimeSlot } from './timeslot.model';
 
 export interface Booking {
   id: number;
   statusId: string;        // Trạng thái của booking
-  doctor: Doctor;          // Thông tin bác sĩ
-  user: User;           // Thông tin bệnh nhân          // Email liên hệ
+  doctorId: number;          // Thông tin bác sĩ
+  doctorName: string;
+  userId: number;           // Thông tin bệnh nhân          // Email liên hệ
+  userName: string;
   cancelReason: string;    // Lý do hủy (nếu có)
   date: Date;              // Ngày đặt        // Loại thời gian
-  timeSlot: TimeSlot;      // Khung giờ
+  timeSlotId: number;      // Khung giờ
+  startTime: string;
+  endTime: string;
   createdAt: Date;         // Ngày tạo
   updatedAt: Date;         // Ngày cập nhật
 }

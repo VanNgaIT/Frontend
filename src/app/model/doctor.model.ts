@@ -3,7 +3,6 @@ import { Specialty } from "./specialty.model";
 // Doctor Model (doctor.model.ts)
 export interface Doctor {
     id: number;
-    clinicId: number;
     name: string;
     email: string;
     phoneNumber: string;
@@ -12,6 +11,5 @@ export interface Doctor {
     createdAt: Date;
     updatedAt: Date;
     specialtyId: number;
-    roleId: number;
   }
   

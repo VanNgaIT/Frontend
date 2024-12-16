@@ -1,6 +1,13 @@
+/* Cấu hình chung cho container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    text-align: center; /* Căn giữa toàn bộ nội dung trong container */
+}
+
+h2, h3, p {
+    text-align: center; /* Căn giữa các phần tử văn bản */
+    margin: 0 auto; /* Căn giữa văn bản */
 }
 
 h2 {
@@ -17,12 +24,13 @@ p {
     font-size: 18px;
 }
 
-
 .btn-primary {
     background-color: #3498db;
     border-color: #3498db;
     padding: 10px 20px;
     font-size: 18px;
+    text-align: center;
+    display: inline-block; /* Đảm bảo nút hiển thị như một phần tử inline để căn giữa */
 }
 
 a {
@@ -32,4 +40,24 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.row {
+    display: flex;
+    justify-content: center; /* Căn giữa các phần tử trong row */
+}
+
+.col-md-6 {
+    text-align: left; /* Nếu muốn căn trái nội dung trong col */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* CSS cho bản đồ */
+#map {
+    width: 85%; /* Đảm bảo bản đồ chiếm hết chiều rộng container */
+    max-width: 850px; /* Giới hạn chiều rộng tối đa của bản đồ (có thể thay đổi tùy vào yêu cầu) */
+    height: 400px; /* Chiều cao của bản đồ */
+    margin: 0 auto; /* Căn giữa bản đồ */
 }

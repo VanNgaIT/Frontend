@@ -4,11 +4,9 @@ import { FooterComponent } from '../footer/footer.component';
 import { BookingService } from '../service/booking.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Specialty } from '../model/specialty.model';
 import { SpecialtyService } from '../service/specialty.service';
-import { DatePipe } from '@angular/common';
-import { TimeSlot } from '../model/timeslot.model';
 import { HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-user-booking',
@@ -42,8 +40,19 @@ export class UserBookingComponent implements OnInit {
     this.minDate = today.toISOString().split('T')[0]; // Định dạng yyyy-MM-dd
     this.maxDate = oneYearFromNow.toISOString().split('T')[0]; // Định dạng yyyy-MM-dd
     this.loadSpecialties();
+    this.setMinMaxDates();
   }
 
+  setMinMaxDates(): void {
+    const today = new Date();
+    const endOfWeek = new Date(today);
+    endOfWeek.setDate(today.getDate() + (7 - today.getDay()));  // Chủ nhật của tuần này
+  
+    // Đặt giá trị min và max cho input ngày
+    this.minDate = this.formatDate(today);  // Ngày hôm nay
+    this.maxDate = this.formatDate(endOfWeek);  // Ngày Chủ nhật
+  }
+  
   loadSpecialties(): void {
     this.specialtyService.getSpecialties().subscribe(
       (response) => {
@@ -74,16 +83,28 @@ export class UserBookingComponent implements OnInit {
       console.error('Vui lòng chọn bác sĩ và ngày hợp lệ.');
     }
   }
-  // Kiểm tra ngày hợp lệ (không quá khứ và không quá xa 1 năm)
   isValidAppointmentDate(date: string): boolean {
     const selectedDate = new Date(date);
     const today = new Date();
-    const oneYearFromNow = new Date();
-    oneYearFromNow.setFullYear(today.getFullYear() + 1);
 
-    // Kiểm tra ngày không phải quá khứ hoặc quá xa trong tương lai
-    return selectedDate >= today && selectedDate <= oneYearFromNow;
-  }
+    // Chuyển đối tượng today và selectedDate về thời gian không có múi giờ
+    today.setHours(0, 0, 0, 0);  // Đặt giờ của hôm nay là 00:00:00
+    selectedDate.setHours(0, 0, 0, 0);  // Đặt giờ của selectedDate là 00:00:00
+
+    // Kiểm tra ngày không phải quá khứ
+    if (selectedDate < today) {
+        return false;
+    }
+
+    // Tính toán ngày cuối tuần (Chủ nhật)
+    const endOfWeek = new Date(today);
+    endOfWeek.setDate(today.getDate() + (7 - today.getDay())); // Chủ nhật là cuối tuần (getDay() trả về 0 cho Chủ nhật)
+
+    // Kiểm tra ngày không vượt quá ngày Chủ nhật
+    return selectedDate <= endOfWeek;
+}
+
+
 
   onDateChange(): void {
     this.isDateValid = this.isValidAppointmentDate(this.appointmentDate);
@@ -172,6 +193,7 @@ export class UserBookingComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (!token) {
       alert('Không tìm thấy token, vui lòng đăng nhập lại!');
+      
       return;
     }
   

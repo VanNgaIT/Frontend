@@ -22,8 +22,6 @@ export class DoctorComponent {
   selectedDoctor: Doctor | null = null;
   newDoctor: Doctor = {
     id: 0,
-    clinicId: 1,
-    roleId: 2,
     name: '',
     email: '',
     phoneNumber: '',
@@ -100,8 +98,6 @@ export class DoctorComponent {
   resetForm() {
     this.newDoctor = {
       id: 0,
-      clinicId: 1,
-      roleId: 2,
       name: '',
       email: '',
       phoneNumber: '',

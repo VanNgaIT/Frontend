@@ -3,8 +3,10 @@ import { Doctor } from './doctor.model';
 
 export interface Histories {
   id: number;                // ID của lịch sử khám bệnh
-  patientId: User;           // Thông tin bệnh nhân
-  doctor: Doctor;        // Thông tin bác sĩ
+  userId: number;           // Thông tin bệnh nhân
+  patienName: string;
+  doctorId: number;        // Thông tin bác sĩ
+  doctorName: string;
   description: string;       // Mô tả lịch sử khám bệnh
   files: string;             // Các file liên quan đến lịch sử khám bệnh
   createdAt: Date;           // Thời gian tạo

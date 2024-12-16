@@ -5,52 +5,67 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
 import { User } from '../model/user.model';
+import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-user-profile',
-  //standalone: true,
-  //imports: [HeaderComponent, FooterComponent, CommonModule, FormsModule],
+  standalone: true,
+  imports: [HeaderComponent, FooterComponent, CommonModule, FormsModule],
   templateUrl: './user-profile.component.html',
-  //styleUrl: './user-profile.component.scss'
+  styleUrl: './user-profile.component.scss'
 })
-export class UserProfileComponent {
-  // isEditing: boolean = false; // Trạng thái chỉnh sửa
-  // user: User = {} as User // Lưu thông tin người dùng
+export class UserProfileComponent implements OnInit {
+   isEditing: boolean = false;  
+   user: User = {   // Biến `user` để dùng trên HTML
+    id: 0,
+    password: '',
+    email: '',
+    userName: '',
+    address: '',
+    gender: true,
+    phoneNumber: '',
+    image: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    role: { id: 0, roleName: '' }
+  };
 
-  // constructor(private userService: UserService) {}
+   constructor(private userService: UserService) {}
 
-  // ngOnInit(): void {
-  //   this.loadUser();
-  // }
+   ngOnInit(): void {
+     this.loadUser();
+   }
 
-  // loadUser() {
-  //   this.userService.getUserDetails().subscribe(
-  //     (data: User) => {
-  //       this.user = data; // Lưu dữ liệu vào biến user
-  //     },
-  //     (error) => {
-  //       console.error('Có lỗi khi lấy thông tin người dùng', error);
-  //     }
-  //   );
-  // }
+   
+   loadUser() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken: any = jwtDecode(token); // Giải mã token
+      const userId = decodedToken.sub;  // Lấy sub ID từ token
+      console.log('User ID:', userId);  // In ra kiểm tra
+  
+      this.userService.getUserById(userId).subscribe((data: User) => {
+        this.user = data;
+      });
+    }
+  }
 
-  // toggleEdit() {
-  //   this.isEditing = true;
-  // }
+  
 
-  // save() {
-  //   this.userService.updateUserDetails(this.user).subscribe(
-  //     (updatedUser: User) => {
-  //       this.user = updatedUser; // Cập nhật lại dữ liệu người dùng sau khi lưu
-  //       this.toggleEdit(); // Quay lại chế độ xem
-  //     },
-  //     (error) => {
-  //       console.error('Không thể lưu thông tin', error);
-  //     }
-  //   );
-  // }
+  toggleEdit() {
+    this.isEditing = true;
+  }
 
-  // cancel() {
-  //   this.isEditing = false;
-  //   this.loadUser(); // Tải lại thông tin gốc
-  // }
+  save() {
+    if (this.user.id) {
+      this.userService.updateUser(this.user.id, this.user).subscribe((updatedUser: User) => {
+        this.user = updatedUser;  // Cập nhật lại `user` từ server
+        this.isEditing = false;
+      });
+    }
+  }
+
+  cancel() {
+    this.isEditing = false;
+    this.loadUser();  // Reload dữ liệu
+  }
 }

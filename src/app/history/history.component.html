@@ -17,15 +17,41 @@
                     <form class="history-form shadow p-4 mb-4 bg-white rounded">
                         <div class="row">
                             <h2 class="text-center">Quản lý Hồ Sơ Bệnh Án</h2>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="userSearch" class="form-label">Tìm kiếm hồ sơ bệnh án theo ID</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Nhập ID người dùng..." 
+                                    [(ngModel)]="searchQuery" 
+                                    name="searchQuery"
+                                />
+                            </div>
                             
+                            <!-- Nút tìm kiếm -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">tìm kiếm</label>
+                                <button 
+                                    class="btn btn-primary w-100" 
+                                    (click)="searchUserById()">
+                                    Tìm kiếm
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            
+
+                            <div class="col-md-6 mb-3">
+                                <label for="doctor" class="form-label">Bác sĩ</label>
+                                <input type="text" class="form-control" id="doctor" placeholder="Bác sĩ" required>
+                            </div>
                             <div class="col-md-6 mb-3">
                                 <label for="patient" class="form-label">Bệnh nhân</label>
                                 <input type="text" class="form-control" id="patient" placeholder="Nhập tên bệnh nhân" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="doctor" class="form-label">Bác sĩ</label>
-                                <input type="text" class="form-control" id="doctor" placeholder="Nhập tên bác sĩ" required>
-                            </div>
+                            
                         </div>
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -57,8 +83,8 @@
                             <tbody>
                                 <tr *ngFor="let history of histories; let i = index">
                                     <td>{{ i + 1 }}</td>
-                                    <td>{{ history.patientId.userName }}</td>
-                                    <td>{{ history.doctor.name }}</td>
+                                    <td>{{ history.userId }}</td>
+                                    <td>{{ history.doctorName }}</td>
                                     <td>{{ history.description }}</td>
                                     <td>{{ history.createdAt | date: 'yyyy-MM-dd' }}</td>
                                     <td>

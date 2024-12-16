@@ -6,6 +6,8 @@ import { Router } from '@angular/router'
 import { tap, catchError } from 'rxjs/operators';  
 import { BookingApiResponse } from '../model/bookingResponse.model';
 import { of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class BookingService {
 
   private apiUrl = 'http://localhost:8080/api/bookings';  // Địa chỉ API của bạn
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   getSpecialties(): Observable<any[]> {
     const token = this.authService.getToken();  // Lấy token từ AuthService
@@ -54,7 +56,12 @@ export class BookingService {
     }).pipe(
       tap(response => {
         if (response?.message) {
-          alert(response.message);  // Hiển thị thông báo thành công
+          Swal.fire({
+            title: 'Cuộc hẹn được tạo thành công',
+            text: 'Bạn có thể hủy cuộc hẹn trước khi phòng khám xác nhận!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }); // Hiển thị thông báo thành công
           this.router.navigate(['/home']);
         } else if (response?.error) {
           alert(response.error);  // Hiển thị thông báo lỗi nếu có lỗi từ API

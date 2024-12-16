@@ -1,54 +1,59 @@
-<!-- <app-header></app-header>
+<app-header></app-header>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="card my-4 shadow-sm">
-                <div class="card-header text-center">
-                    <h4>Thông Tin Cá Nhân</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="fullName">Họ và Tên:</label>
-                            <input type="text" id="fullName" class="form-control" [(ngModel)]="user.fullName"
-                                [disabled]="!isEditing" />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" class="form-control" [(ngModel)]="user.email" disabled />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="phone">Số điện thoại:</label>
-                            <input type="text" id="phone" class="form-control" [(ngModel)]="user.phoneNumber"
-                                [disabled]="!isEditing" />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="gender">Giới tính:</label>
-                            <input type="text" id="gender" class="form-control" [(ngModel)]="user.gender"
-                                [disabled]="!isEditing" />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="address">Địa chỉ</label>
-                            <input type="text" id="address" class="form-control" [(ngModel)]="user.address"
-                                [disabled]="!isEditing" />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="role">Vai trò</label>
-                            <input type="text" id="role" class="form-control" [(ngModel)]="user.role" disabled />
-                        </div>
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card my-4 shadow-sm">
+        <div class="card-header text-center">
+          <h4>Thông Tin Cá Nhân</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="fullName">Họ và Tên:</label>
+              <input type="text" id="fullName" class="form-control" [(ngModel)]="user.userName" [disabled]="!isEditing" />
+            </div>
+            <div class="col-md-6">
+              <label for="email">Email:</label>
+              <input type="email" id="email" class="form-control" [(ngModel)]="user.email" disabled />
+            </div>
+            <div class="col-md-6">
+              <label for="phone">Số điện thoại:</label>
+              <input type="text" id="phone" class="form-control" [(ngModel)]="user.phoneNumber" [disabled]="!isEditing" />
+            </div>
+            <div class="col-md-6">
+                <label for="gender">Giới tính:</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="genderMale" name="gender" [(ngModel)]="user.gender" [value]="true" [disabled]="!isEditing">
+                        <label class="form-check-label" for="genderMale">Nam</label>
                     </div>
-                    <div class="text-center mt-3">
-                        <button *ngIf="!isEditing" class="btn btn-primary" (click)="toggleEdit()">Sửa</button>
-                        <div *ngIf="isEditing">
-                            <button class="btn btn-success" (click)="save()">Lưu</button>
-                            <button class="btn btn-secondary" (click)="cancel()">Hủy</button>
-                        </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="genderFemale" name="gender" [(ngModel)]="user.gender" [value]="false" [disabled]="!isEditing">
+                        <label class="form-check-label" for="genderFemale">Nữ</label>
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+              <label for="address">Địa chỉ:</label>
+              <input type="text" id="address" class="form-control" [(ngModel)]="user.address" [disabled]="!isEditing" />
+            </div>
+            <div class="col-md-6">
+              <label for="role">Vai trò:</label>
+              <input type="text" id="role" class="form-control" [value]="user.role.roleName" disabled />
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <button *ngIf="!isEditing" class="btn btn-primary" (click)="toggleEdit()">Sửa</button>
+            <div *ngIf="isEditing">
+              <button class="btn btn-success" (click)="save()">Lưu</button>
+              <button class="btn btn-secondary" (click)="cancel()">Hủy</button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<app-footer></app-footer> -->
+<app-footer></app-footer>
