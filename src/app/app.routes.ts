@@ -18,6 +18,8 @@ import { UserBookingComponent } from './user-booking/user-booking.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { GioiThieuComponent } from './gioi-thieu/gioi-thieu.component';
 import { LienHeComponent } from './lien-he/lien-he.component';
+import { BaoCaoComponent } from './bao-cao/bao-cao.component';
+import { LichLamDoctorComponent } from './lich-lam-doctor/lich-lam-doctor.component';
 
 export const routes: Routes = [
     {
@@ -43,6 +45,8 @@ export const routes: Routes = [
     { path: 'history', component: HistoryComponent },
     { path: 'specialty', component: SpecialtyComponent },
     { path: 'time-slot', component: TimeSlotComponent },
+    { path: 'bao-cao', component: BaoCaoComponent },
+    { path: 'lichLam-doctor', component: LichLamDoctorComponent },
     
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

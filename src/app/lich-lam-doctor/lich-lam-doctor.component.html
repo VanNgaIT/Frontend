@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2">
+            <app-sidebar-admin></app-sidebar-admin>
+        </div>
+
+        <!-- Nội dung chính -->
+        <div class="col-md-10">
+            <app-header></app-header>
+
+            <!-- Nội dung xem lịch làm việc của bác sĩ -->
+            <div class="doctor-schedule-view container mt-5 mb-5">
+
+                <!-- Form xem lịch làm việc của bác sĩ -->
+                <form (ngSubmit)="viewSchedule()" class="schedule-form shadow p-4 mb-5 bg-white rounded">
+                    <div class="row">
+                        <h2 class="text-center">Xem Lịch Làm Việc Bác Sĩ</h2>
+                        <div class="col-md-6 mb-3">
+                            <label for="date" class="form-label">Chọn Ngày</label>
+                            <input type="date" class="form-control" id="date" [(ngModel)]="selectedDate" name="date" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="timeSlot" class="form-label">Khung Giờ</label>
+                            <select class="form-control" id="timeSlot" [(ngModel)]="selectedTimeSlot" name="timeSlot" required>
+                                <option *ngFor="let timeSlot of timeSlots" [value]="timeSlot.id">{{ timeSlot.start }} - {{ timeSlot.end }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Xem Lịch</button>
+                </form>
+
+                <!-- Danh sách ca làm việc của bác sĩ -->
+                <h3 class="mt-5">Danh sách ca làm việc</h3>
+                <table class="table table-striped shadow-sm">
+                    <thead class="table-header">
+                        <tr>
+                            <th>Khung Giờ</th>
+                            <th>Trạng Thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let shift of workShifts">
+                            <td>{{ shift.timeSlot.start }} - {{ shift.timeSlot.end }}</td>
+                            <td>{{ shift.isAvailable ? 'Còn trống' : 'Kết thúc' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Danh sách cuộc hẹn được đặt -->
+                <h3 class="mt-5">Danh sách Cuộc hẹn</h3>
+                <table class="table table-striped shadow-sm">
+                    <thead class="table-header">
+                        <tr>
+                            <th>Tên Khách Hàng</th>
+                            <th>Khung Giờ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let appointment of appointments">
+                            <td>{{ appointment.customerName }}</td>
+                            <td>{{ appointment.timeSlot.start }} - {{ appointment.timeSlot.end }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <app-footer></app-footer>
+        </div>
+    </div>
+</div>
+
+
