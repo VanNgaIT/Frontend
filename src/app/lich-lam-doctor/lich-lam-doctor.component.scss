@@ -1,3 +1,8 @@
+.container-fluid {
+  background: linear-gradient(135deg, #a8e3eb, #f6f7d7, #dfa230); /* Thêm 3 màu gradient */
+  /* Có thể thay đổi góc và các mã màu tùy thích */
+}
+
 .sidebar {
   flex: 0 0 250px; 
   height: 100vh;

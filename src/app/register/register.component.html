@@ -1,41 +1,52 @@
 <app-header></app-header>
-<div class="container">
-    <div class="login-form">
-        <h2>Đăng ký tài khoản</h2>
-        <form (submit)="onRegister()">
-            <div class="form-group">
-                <input type="email" id="email" placeholder="Email" [(ngModel)]="email" name="email" required email>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password"
-                    required minlength="6">
-            </div>
-            <div class="form-group">
-                <input type="password" id="retypePassword" placeholder="Nhập lại mật khẩu" [(ngModel)]="retypePassword"
-                    name="retypePassword" required [ngClass]="{'is-invalid': password !== retypePassword}">
-            </div>
-            <div class="form-group">
-                <input type="text" id="userName" placeholder="Tên người dùng" [(ngModel)]="userName" name="userName" required>
-            </div>
-            <!-- Trường chọn giới tính -->
-            <div class="form-group">
-                <label for="genDer">Giới tính:</label>
-                <select style="margin-left: 10px; border-radius: 5px; border: 1px solid #ddd;" id="genDer" [(ngModel)]="genDer" name="genDer" required>
-                  <option [ngValue]="true">Nam</option>
-                  <option [ngValue]="false">Nữ</option>
-                </select>
-              </div>
+<div class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="login-form bg-white rounded-4 shadow p-4">
+        <div class="row">
+            <!-- Xóa phần hình ảnh này vì hình ảnh đã được đưa vào background -->
+            <!-- <div class="col-lg-6 d-none d-lg-block">
+                <img src="https://hinduja-prod-assets.s3.ap-south-1.amazonaws.com/2022-03/Dental.png?VersionId=wxZ1WFYwTWlWfFPnOS1cbP3hGviv44n5" alt="" class="img-fluid rounded-4">
+            </div> -->
             
-            <!-- Trường nhập địa chỉ -->
-            <div class="form-group">
-                <input type="text" id="address" placeholder="Địa chỉ" [(ngModel)]="address" name="address" required>
+            <div class="col-lg-12">
+                <h2 class="text-center mb-4">Đăng ký</h2>
+                <form (submit)="onRegister()">
+                    <div class="mb-3">
+                        <input type="email" id="email" class="form-control" placeholder="Email" [(ngModel)]="email" name="email" required email>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password" required minlength="6">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <input type="password" id="retypePassword" class="form-control" placeholder="Nhập lại mật khẩu" [(ngModel)]="retypePassword" name="retypePassword" required [ngClass]="{'is-invalid': password !== retypePassword}">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <input type="text" id="userName" class="form-control" placeholder="Tên người dùng" [(ngModel)]="userName" name="userName" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="genDer" class="form-label">Giới tính:</label>
+                        <select id="genDer" class="form-select" [(ngModel)]="genDer" name="genDer" required>
+                            <option [ngValue]="true">Nam</option>
+                            <option [ngValue]="false">Nữ</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <input type="text" id="address" class="form-control" placeholder="Địa chỉ" [(ngModel)]="address" name="address" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 py-2">Đăng ký</button>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <p>Đã có tài khoản? <a class="text-decoration-none" [routerLink]="['/login']">Đăng nhập</a></p>
+                </div>
             </div>
-            <button type="submit">Đăng ký</button>
-        </form>
-        <div class="register">
-            <p>Đã có tài khoản? <a style="text-decoration: none;" [routerLink]="['/login']">Đăng nhập</a></p>
         </div>
-        
     </div>
 </div>
+
 <app-footer></app-footer>

@@ -1,114 +1,113 @@
-.container {
+/* Toàn bộ trang */
+.container-fluid {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f9f9f9;
+    background: linear-gradient(135deg, #a8e3eb, #f6f7d7); 
 }
 
 .login-form {
-    background-color: white;
+    background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20231229/pngtree-horizontal-dental-clinic-background-textured-teeth-with-healthy-and-carious-variations-image_13919559.png');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    color: white;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    height: 580px;
-    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
 }
 
-.login-form h2 {
-    font-size: 24px;
+h2.text-center {
+    font-size: 28px;
+    font-weight: 700;
+    color: black;
     margin-bottom: 20px;
-    color: #1055e9;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-size: 14px;
-    color: #555;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 5px;
-    border-radius: 5px;
+.form-control {
+    height: 50px;
+    border-radius: 8px;
     border: 1px solid #ddd;
+    font-size: 16px;
+    padding: 10px 15px;
 }
 
-button {
-    width: 100%;
-    padding: 12px;
+.form-control:focus {
+    border-color: #00bcd4 !important;
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.5) !important;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.form-label {
+    font-size: 14px;
+    color: #fff; /* Thay đổi thành màu trắng để phù hợp với ảnh nền */
+    margin-bottom: 5px;
+}
+
+.form-select {
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
     font-size: 16px;
-    background-color: #00bcd4;
+    padding: 10px 15px;
+}
+
+button[type="submit"] {
+    background-color: #1055e9;
     color: white;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s;
 }
 
-button:hover {
-    background-color: #0097a7;
+button[type="submit"]:hover {
+    background-color: #0d47a1;
 }
 
-.forgot-password {
-    text-align: center;
-    margin-top: 10px;
+.text-center a.text-decoration-none {
+    color: #fff; /* Đổi thành màu trắng để dễ nhìn trên nền hình ảnh */
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-.forgot-password a {
-    color: #00bcd4;
+.text-center a.text-decoration-none {
+    color: #000 !important; /* Thay đổi thành màu đen */
 }
 
-.register {
-    text-align: center;
+
+.text-center p {
     margin-top: 20px;
-}
-
-.register a {
-    color: #00bcd4;
-}
-.social-login {
-    margin-top: 20px;
-}
-
-.social-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px;
     font-size: 16px;
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    border: none;
+    color: #000 !important; /* Thay đổi thành màu đen */
 }
 
-.social-btn img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+
+.bg-white {
+    background-color: #ffffff !important;
 }
 
-.google-btn {
-    background-color: #db4437;
-    color: white;
+.shadow {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
 }
 
-.google-btn:hover {
-    background-color: #c1351d;
+.rounded-4 {
+    border-radius: 20px !important;
 }
 
-.facebook-btn {
-    background-color: #3b5998;
-    color: white;
+.btn-primary {
+    background-color: #1055e9;
+    border-color: #1055e9;
 }
 
-.facebook-btn:hover {
-    background-color: #2d4373;
+.btn-primary:hover {
+    background-color: #0d47a1;
+    border-color: #0d47a1;
 }

@@ -1,30 +1,34 @@
 <app-header></app-header>
-<div class="container">
+
+<div class="container-fluid">
   <div class="resetpass-form">
-    <!-- Form Đổi mật khẩu -->
-    <form id="reset-password-form" class="form" (ngSubmit)="onSubmit()">
+    <div class="col-lg-12">
       <h2>Đổi mật khẩu</h2>
-      <div class="form-group">
-        <input type="email" [(ngModel)]="email" name="email" class="form-control" placeholder="Nhập email" required />
+      <form id="reset-password-form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input type="email" [(ngModel)]="email" name="email" class="form-control" placeholder="Nhập email" required />
+        </div>
+        <div class="form-group">
+          <input type="password" [(ngModel)]="oldPassword" name="oldPassword" class="form-control"
+            placeholder="Nhập mật khẩu hiện tại" required />
+        </div>
+        <div class="form-group">
+          <input type="password" [(ngModel)]="newPassword" name="newPassword" class="form-control"
+            placeholder="Nhập mật khẩu mới" required />
+        </div>
+        <div class="form-group">
+          <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control"
+            placeholder="Nhập lại mật khẩu mới" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+      </form>
+      <div *ngIf="message" class="alert alert-info">
+        {{ message }}
       </div>
-      <div class="form-group">
-        <input type="password" [(ngModel)]="oldPassword" name="oldPassword" class="form-control" placeholder="Nhập mật khẩu hiện tại" required />
-      </div>
-      <div class="form-group">
-        <input type="password" [(ngModel)]="newPassword" name="newPassword" class="form-control" placeholder="Nhập mật khẩu mới" required />
-      </div>
-      <div class="form-group">
-        <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control" placeholder="Nhập lại mật khẩu mới" required />
-      </div>
-      <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
-    </form>
-
-    <div *ngIf="message" class="alert alert-info">
-      {{ message }}
+      <a (click)="onLogout()" style="text-decoration: none; margin-top: 20px;" [routerLink]="['/login']">Quay lại đăng
+        nhập</a>
     </div>
-
-    <a (click)="onLogout()" style="text-decoration: none; margin-top: 20px;" [routerLink]="['/login']">Quay lại đăng nhập</a>
-
   </div>
 </div>
+
 <app-footer></app-footer>

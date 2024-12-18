@@ -1,27 +1,16 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f7f9fc; /* Nền sáng */
-    color: #495057;
+.container-fluid {
+    background: linear-gradient(135deg, #a8e3eb, #f6f7d7, #ca33a4); /* Thêm 3 màu gradient */
+    /* Có thể thay đổi góc và các mã màu tùy thích */
 }
 
-.card-container {
+.card {
     padding-left: 20px;
     padding-right: 20px;
     margin: auto;
     max-width: 85%;
     padding: 20px;
-    background: linear-gradient(135deg, #bec3c9, #007bff); /* Gradient màu nền */
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.card {
-    max-width: 95%;
-    margin: auto;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
 }
 
 .card-header {

@@ -2,12 +2,11 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { CommonModule } from '@angular/common';
 import { Route, Router, RouterModule } from '@angular/router';
-import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule, SidebarAdminComponent],
+  imports: [CommonModule, RouterModule, ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

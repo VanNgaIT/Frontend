@@ -9,10 +9,8 @@
     <div class="col-md-10">
       <app-header></app-header>
 
-      <!-- Thẻ cha cho phần card -->
-      <div class="card-container mt-5 mb-5">
         <!-- Bảng thông tin ca làm việc -->
-        <div class="card shadow-sm">
+        <div class="card shadow-sm mt-5 mb-5">
           <!-- Form thêm ca làm việc -->
           <form *ngIf="!editableTimeSlot" class="history-form shadow p-4 mb-4 bg-white rounded" (ngSubmit)="createTimeSlot()">
             <div class="row">
@@ -214,7 +212,6 @@
             </table>
           </div>
         </div>
-      </div>
 
       <app-footer></app-footer>
     </div>
