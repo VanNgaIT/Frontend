@@ -1,0 +1,105 @@
+.sidebar {
+    flex: 0 0 250px; 
+    height: 100vh;
+    background: #f8f9fa; 
+    border-right: 1px solid #ddd; 
+  }
+  
+  /* Nội dung chính */
+  .col-md-10 {
+    flex: 1; 
+    overflow: hidden;
+  }
+  
+  .doctor-schedule-view {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 85%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .schedule-form {
+    border: 2px solid #a5d8ff;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #f1f9ff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .schedule-form h2 {
+    color: #007bff;
+    margin-bottom: 30px;
+    font-weight: bold;
+  }
+  
+  .schedule-form label {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .schedule-form .form-control {
+    border-radius: 8px;
+    border: 1px solid #cceeff;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .schedule-form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .schedule-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .schedule-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .table {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 30px;
+  }
+  
+  .table thead {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .table thead th {
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f0f8ff;
+  }
+  
+  .table tbody td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .table .btn {
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+  }

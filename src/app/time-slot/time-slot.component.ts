@@ -28,8 +28,10 @@ export class TimeSlotComponent implements OnInit {
     id: 0,
     startTime: '',
     endTime: '',
-    doctorId: 0,  // Giá trị mặc định là null
+    doctorId: 0,
+    doctorName: '',
     scheduleId: null,
+    scheduleDate: new Date(),
     isAvailable: true,
     createdAt: new Date(),
     updatedAt: new Date()
@@ -107,7 +109,9 @@ export class TimeSlotComponent implements OnInit {
                   startTime: '',
                   endTime: '',
                   doctorId: 0,
+                  doctorName: '',
                   scheduleId: null,
+                  scheduleDate: new Date(),
                   isAvailable: true,
                   createdAt: new Date(),
                   updatedAt: new Date()

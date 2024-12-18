@@ -1,4 +1,4 @@
-import { Specialty } from "./specialty.model";
+
 
 // Doctor Model (doctor.model.ts)
 export interface Doctor {
@@ -11,5 +11,6 @@ export interface Doctor {
     createdAt: Date;
     updatedAt: Date;
     specialtyId: number;
+    password: string;
   }
   

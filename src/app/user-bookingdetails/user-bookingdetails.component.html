@@ -1,0 +1,60 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card my-4 shadow-sm">
+                <div class="card-header text-center">
+                    <h4>Lịch sử đặt hẹn của bạn</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên</th>
+                                <th>Bác sĩ</th>
+                                <th>Ngày</th>
+                                <th>Giờ Bắt đầu</th>
+                                <th>Giờ kết thúc</th>
+                                <th>Trạng thái</th>
+                                <th>Hủy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let record of history; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ record.userName }}</td>
+                                <td>{{ record.doctorName }}</td>
+                                <td>{{ record.date | date: 'yyyy-MM-dd' }}</td>
+                                <td>{{ record.startTime }}</td>
+                                <td>{{ record.endTime }}</td>
+                                <td>
+                                    <ng-container [ngSwitch]="record.statusId">
+                                        <span *ngSwitchCase="'WAIT'">Chờ khám</span>
+                                        <span *ngSwitchCase="'COMPLETE'">Đã tham gia</span>
+                                        <span *ngSwitchCase="'NOT-ATTENDED'">Không tham gia</span>
+                                        <span *ngSwitchCase="'CANCELED'">Bị từ chối</span>
+                                        <span *ngSwitchCase="'PENDING'">Đang chờ xử lý</span>
+                                        <span *ngSwitchDefault>Không xác định</span>
+                                    </ng-container>
+                                </td>
+                                
+                                <!-- Hiển thị nút "Hủy" nếu statusId là "PENDING" -->
+                                <td>
+                                    <button
+                                        *ngIf="record.statusId === 'PENDING'"
+                                        class="btn btn-danger btn-sm"
+                                        (click)="cancelBooking(record.id)">
+                                        Hủy
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

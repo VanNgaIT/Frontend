@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2">
+            <app-sidebar-admin></app-sidebar-admin>
+        </div>
+
+        <!-- Nội dung chính -->
+        <div class="col-md-10">
+            <app-header></app-header>
+
+            <!-- Nội dung xem lịch làm việc của bác sĩ -->
+            <div class="doctor-schedule-view container mt-5 mb-5">
+
+                <!-- Form xem lịch làm việc của bác sĩ -->
+                
+
+                <!-- Danh sách ca làm việc của bác sĩ -->
+                <h3 class="mt-5">Danh sách ca làm việc</h3>
+                <table class="table table-striped shadow-sm">
+                    <thead class="table-header">
+                        <tr>
+                            <th>id</th>
+                            <th>Bác sĩ</th>
+                            <th>lịch làm việc</th>
+                            <th>Khung Giờ</th>
+                            <th>Trạng Thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let shift of workShifts">
+                            <td>{{ shift.id}}</td>
+                            <td>{{ shift.doctorName}}</td>
+                            <td>{{ shift.scheduleDate}}</td>
+                            <td>{{ shift.startTime }} - {{ shift.endTime }}</td>
+                            <td>{{ shift.isAvailable ? 'Còn trống' : 'Khám' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Danh sách cuộc hẹn được đặt -->
+                <h3 class="mt-5">Danh sách Cuộc hẹn</h3>
+                <table class="table table-striped shadow-sm">
+                    <thead class="table-header">
+                        <tr>
+                            <th>Mã số</th>
+                            <th>Tên Khách Hàng</th>
+                            <th>Tên bác sĩ</th>
+                            <th>Ngày</th>
+                            <th>Khung Giờ</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let appointment of appointments">
+                            <td>{{ appointment.userId}}</td>
+                            <td>{{ appointment.userName }}</td>
+                            <td>{{ appointment.doctorName }}</td>
+                            <td>{{ appointment.date | date: 'yyyy-MM-dd'}}</td>
+                            <td>{{ appointment.startTime }} - {{ appointment.endTime }}</td>
+                            <td>
+                                <ng-container [ngSwitch]="appointment.statusId">
+                                    <span *ngSwitchCase="'WAIT'">Chờ khám</span>
+                                    <span *ngSwitchCase="'COMPLETE'">Đã tham gia</span>
+                                    <span *ngSwitchCase="'NOT-ATTENDED'">Không tham gia</span>
+                                    <span *ngSwitchCase="'CANCELED'">Bị từ chối</span>
+                                    <span *ngSwitchCase="'PENDING'">Đang chờ duyệt</span>
+                                    <span *ngSwitchDefault>Không xác định</span>
+                                </ng-container>
+                            </td>
+                            <td>
+                                <button
+                                    *ngIf="appointment.statusId === 'PENDING'"
+                                    class="btn btn-danger btn-sm"
+                                    (click)="updateBooking(appointment.id)">
+                                    Hoàn thành
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <app-footer></app-footer>
+        </div>
+    </div>
+</div>

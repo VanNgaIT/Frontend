@@ -49,8 +49,6 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  
-
   toggleEdit() {
     this.isEditing = true;
   }

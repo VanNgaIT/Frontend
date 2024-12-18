@@ -6,12 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SpecialtyService } from '../service/specialty.service';
 import { HttpHeaders } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-user-booking',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule],
+  imports: [HeaderComponent,RouterModule, FooterComponent, FormsModule, CommonModule],
   templateUrl: './user-booking.component.html',
   styleUrls: ['./user-booking.component.scss']
 })
@@ -30,29 +31,28 @@ export class UserBookingComponent implements OnInit {
 
   isDateValid: boolean = true; // Biến kiểm tra tính hợp lệ của ngày
 
-  constructor(private bookingService: BookingService, private specialtyService: SpecialtyService) {}
+  constructor(private bookingService: BookingService, private specialtyService: SpecialtyService, private router: Router) {}
 
   ngOnInit(): void {
     const today = new Date();
     const oneYearFromNow = new Date();
     oneYearFromNow.setFullYear(today.getFullYear() + 1);
-
     this.minDate = today.toISOString().split('T')[0]; // Định dạng yyyy-MM-dd
     this.maxDate = oneYearFromNow.toISOString().split('T')[0]; // Định dạng yyyy-MM-dd
     this.loadSpecialties();
     this.setMinMaxDates();
   }
 
+
   setMinMaxDates(): void {
     const today = new Date();
     const endOfWeek = new Date(today);
     endOfWeek.setDate(today.getDate() + (7 - today.getDay()));  // Chủ nhật của tuần này
-  
-    // Đặt giá trị min và max cho input ngày
     this.minDate = this.formatDate(today);  // Ngày hôm nay
     this.maxDate = this.formatDate(endOfWeek);  // Ngày Chủ nhật
   }
   
+
   loadSpecialties(): void {
     this.specialtyService.getSpecialties().subscribe(
       (response) => {
@@ -71,11 +71,10 @@ export class UserBookingComponent implements OnInit {
     });
   }
 
+
   // Thêm hàm onDoctorChange() vào đây để xử lý khi người dùng chọn bác sĩ
   onDoctorChange(): void {
-    // Reset khung giờ trước khi gọi lại API
     this.timeSlots = [];
-  
     // Kiểm tra xem bác sĩ và ngày có hợp lệ không
     if (this.selectedDoctorId && this.appointmentDate) {
       this.loadAvailableTimeSlots();  // Gọi lại hàm tải khung giờ mới
@@ -86,24 +85,18 @@ export class UserBookingComponent implements OnInit {
   isValidAppointmentDate(date: string): boolean {
     const selectedDate = new Date(date);
     const today = new Date();
-
     // Chuyển đối tượng today và selectedDate về thời gian không có múi giờ
     today.setHours(0, 0, 0, 0);  // Đặt giờ của hôm nay là 00:00:00
     selectedDate.setHours(0, 0, 0, 0);  // Đặt giờ của selectedDate là 00:00:00
-
     // Kiểm tra ngày không phải quá khứ
     if (selectedDate < today) {
         return false;
     }
-
     // Tính toán ngày cuối tuần (Chủ nhật)
     const endOfWeek = new Date(today);
     endOfWeek.setDate(today.getDate() + (7 - today.getDay())); // Chủ nhật là cuối tuần (getDay() trả về 0 cho Chủ nhật)
-
-    // Kiểm tra ngày không vượt quá ngày Chủ nhật
     return selectedDate <= endOfWeek;
-}
-
+  }
 
 
   onDateChange(): void {
@@ -115,6 +108,7 @@ export class UserBookingComponent implements OnInit {
       this.loadAvailableTimeSlots();  // Nếu ngày hợp lệ, tải lại khung giờ
     }
   }
+
 
   // Tải lại khung giờ cho bác sĩ và ngày đã chọn
   loadAvailableTimeSlots(): void {
@@ -132,39 +126,36 @@ export class UserBookingComponent implements OnInit {
     }
   }
 
+
   convertToTimeString(time: string): string {
     if (!time || typeof time !== 'string' || !time.includes(':')) {
       console.error('Thời gian không hợp lệ:', time);
       return 'Giờ không hợp lệ';  // Trả về chuỗi thông báo nếu thời gian không hợp lệ
     }
-
     const [hours, minutes] = time.split(':').map(Number);
-
     if (isNaN(hours) || isNaN(minutes)) {
       console.error('Giá trị giờ, phút không hợp lệ:', time);
       return 'Giờ không hợp lệ';  // Trả về chuỗi thông báo nếu thời gian không hợp lệ
     }
-
     return `${hours}:${minutes < 10 ? '0' + minutes : minutes}`; // Trả về định dạng giờ:phút
   }
+
 
   convertToDate(time: string): Date {
     if (!time || typeof time !== 'string' || !time.includes(':')) {
       console.error('Thời gian không hợp lệ:', time);
       return new Date();  // Trả về ngày mặc định nếu thời gian không hợp lệ
     }
-
     const [hours, minutes, seconds] = time.split(':').map(Number);
-
     if (isNaN(hours) || isNaN(minutes) || isNaN(seconds)) {
       console.error('Giá trị giờ, phút, giây không hợp lệ:', time);
       return new Date();  // Trả về ngày mặc định nếu giờ, phút, giây không hợp lệ
     }
-
     const now = new Date();
     now.setHours(hours, minutes, seconds, 0);  // Thiết lập giờ, phút, giây
     return now;
   }
+
 
   // Chuyển đổi ngày thành yyyy-MM-dd
   formatDate(date: any): string {
@@ -175,35 +166,27 @@ export class UserBookingComponent implements OnInit {
     return `${year}-${month}-${day}`; // Trả về định dạng yyyy-MM-dd
   }
 
-  
-  // Đặt lịch
+
   onSubmit(): void {
     if (!this.appointmentDate || !this.selectedDoctorId || !this.selectedTimeSlot || !this.selectedSpecialtyId) {
       alert('Vui lòng chọn đầy đủ thông tin trước khi đặt lịch!');
       return;
     }
-  
     const bookingData = {
       doctorId: this.selectedDoctorId,
       timeSlot: this.selectedTimeSlot, // Đã là id rồi, không cần convert gì thêm
       appointmentDate: this.appointmentDate,
-      
     };
-  
     const token = localStorage.getItem('token');
     if (!token) {
       alert('Không tìm thấy token, vui lòng đăng nhập lại!');
-      
       return;
     }
-  
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-  
     this.bookingService.createBooking(bookingData).subscribe(
       (response) => {
-        
         console.log('Response:', response);
       },
       (error) => {
@@ -212,4 +195,17 @@ export class UserBookingComponent implements OnInit {
       }
     );
   }
+
+  onCancel(bookingId: number): void {
+    this.bookingService.deleteBooking(bookingId).subscribe(
+      () => {
+        console.log('Hủy cuộc hẹn thành công!');
+      },
+      (error) => {
+        console.error('Lỗi khi hủy cuộc hẹn:', error);
+        // Xử lý lỗi khi gọi API nếu có
+      }
+    );
+  }
+  
 }

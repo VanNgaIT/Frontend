@@ -14,30 +14,32 @@
                                 <th>Bác sĩ</th>
                                 <th>Ngày</th>
                                 <th>Mô tả</th>
+                                <th>Đánh Giá</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Ví dụ dữ liệu lịch sử khám bệnh -->
-                            <tr>
-                                <td>1</td>
-                                <td>Bác sĩ Nguyễn Văn A</td>
-                                <td>2024-11-25</td>
-                                <td>Khám răng miệng định kỳ</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bác sĩ Trần Thị B</td>
-                                <td>2024-11-18</td>
-                                <td>Điều trị sâu răng</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Bác sĩ Lê Hoàng C</td>
-                                <td>2024-11-10</td>
-                                <td>Khám tổng quát</td>
+                            <tr *ngFor="let record of history; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ record.doctorName }}</td>
+                                <td>{{ record.createdAt | date: 'yyyy-MM-dd' }}</td>
+                                <td>{{ record.description }}</td>
+                                <td>
+                                    <!-- Chọn đánh giá -->
+                                    <select class="form-select" [(ngModel)]="record.rating">
+                                        <option value="" disabled>Chọn đánh giá</option>
+                                        <option value="1">1 - Rất tệ</option>
+                                        <option value="2">2 - Tệ</option>
+                                        <option value="3">3 - Bình thường</option>
+                                        <option value="4">4 - Tốt</option>
+                                        <option value="5">5 - Rất tốt</option>
+                                    </select>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                    <div class="text-end mt-3">
+                        <button class="btn btn-primary" (click)="saveRatings()">Lưu Đánh Giá</button>
+                    </div>
                 </div>
             </div>
         </div>

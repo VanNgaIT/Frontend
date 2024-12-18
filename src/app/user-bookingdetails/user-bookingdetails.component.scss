@@ -1,0 +1,130 @@
+/* Cài đặt font và màu nền chung */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Header */
+app-header {
+    margin-bottom: 30px;
+}
+
+/* Container chung */
+.container-fluid {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* Card */
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-top: 30px;
+    padding: 25px;
+}
+
+/* Hiệu ứng hover cho card */
+.card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+}
+
+/* Tiêu đề card */
+.card-header {
+    background-color: #a6c3e2;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 20px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Bảng lịch sử khám bệnh */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Tiêu đề bảng */
+th {
+    background-color: #007bff;
+    color: #fff;
+    padding: 14px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    letter-spacing: 1px;
+}
+
+/* Các hàng trong bảng */
+td {
+    text-align: center;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 400;
+    border-bottom: 1px solid #e4e9f2;
+}
+
+/* Hiệu ứng hover cho hàng bảng */
+tr:hover {
+    background-color: #f0f8ff;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+/* Các hàng bảng chẵn có màu nền nhạt */
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Footer */
+app-footer {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* Hiệu ứng hover cho footer */
+app-footer:hover {
+    background-color: #495057;
+}
+
+/* Responsive - Màn hình nhỏ */
+@media (max-width: 767px) {
+    .card {
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    .container-fluid {
+        padding: 15px;
+    }
+
+    .card-header h4 {
+        font-size: 1.4rem;
+    }
+
+    th, td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Thu nhỏ card-header */
+    .card-header {
+        font-size: 1.5rem;
+    }
+}

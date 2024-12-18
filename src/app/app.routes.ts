@@ -18,6 +18,9 @@ import { UserBookingComponent } from './user-booking/user-booking.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { GioiThieuComponent } from './gioi-thieu/gioi-thieu.component';
 import { LienHeComponent } from './lien-he/lien-he.component';
+import { UserBookingDetailsComponent } from './user-bookingdetails/user-bookingdetails.component';
+import { DoctorScheduleComponent } from './doctor-schedule/doctor-schedule.component';
+import { BookingDesireComponent } from './bookingdesire/bookingdesire.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +36,8 @@ export const routes: Routes = [
             { path: 'user-profile', component: UserProfileComponent},
             { path: 'user-booking', component: UserBookingComponent},
             { path: 'user-history', component: UserHistoryComponent},
+            { path: 'user-bookingdetails', component: UserBookingDetailsComponent},
+            { path: 'bookingdesire', component: BookingDesireComponent},
             { path: 'about', component: GioiThieuComponent},
             { path: 'services', component: LienHeComponent}
         ]
@@ -43,6 +48,7 @@ export const routes: Routes = [
     { path: 'history', component: HistoryComponent },
     { path: 'specialty', component: SpecialtyComponent },
     { path: 'time-slot', component: TimeSlotComponent },
+    { path: 'doctor-schedule', component: DoctorScheduleComponent },
     
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

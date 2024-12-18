@@ -40,9 +40,9 @@
                   [(ngModel)]="newTimeSlot.scheduleId"
                   name="schedule"
                 >
-                  <option *ngFor="let schedule of schedules" [ngValue]="schedule.id">
-                    {{ schedule.id }}
-                  </option>
+                <option *ngFor="let schedule of schedules" [ngValue]="schedule.id">
+                  {{ schedule.date }}
+                </option>
                 </select>
               </div>
             </div>
@@ -185,7 +185,7 @@
                 <tr *ngFor="let timeslot of timeSlots; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ getDoctorName(timeslot.doctorId) }}</td>
-                  <td>{{ timeslot.scheduleId }}</td>
+                  <td>{{ timeslot.scheduleDate }}</td>
                   <td>{{ timeslot.startTime }} - {{ timeslot.endTime }}</td>
                   <td>
                     <span

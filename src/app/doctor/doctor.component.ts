@@ -28,6 +28,7 @@ export class DoctorComponent {
     gender: true, // mặc định Nam
     profilePicture: '',
     specialtyId: 0, // Dành cho việc chọn chuyên khoa khi thêm bác sĩ mới
+    password: '',
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -104,6 +105,7 @@ export class DoctorComponent {
       gender: true,
       profilePicture: '',
       specialtyId: 0,
+      password: '',
       createdAt: new Date(),
       updatedAt: new Date(),
     };

@@ -6,6 +6,9 @@ import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component'
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HistoryService } from '../service/history.service';
+import { Doctor } from '../model/doctor.model';
+import { AuthService } from '../service/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-history',
@@ -15,49 +18,126 @@ import { HistoryService } from '../service/history.service';
   styleUrl: './history.component.scss'
 })
 export class HistoryComponent implements OnInit {
-  
-  searchQuery: string = ''; // Biến lưu trữ giá trị tìm kiếm
-  histories: Histories[] = []; // Danh sách hồ sơ bệnh án
-  selectedHistory: Histories | null = null; // Hồ sơ bệnh án đang chọn để chỉnh sửa
 
-  constructor(private historyService: HistoryService) { }
+  doctorName: string = '';
+  searchQuery: string = '';
+  histories: Histories[] = []; 
+  selectedHistory: any = {
+    id: 0,
+    userId: 0,
+    userName: '',
+    doctorId: 0,
+    doctorName: '',
+    description: '',
+    files: '',
+    createdAt: new Date,
+    updatedAt: new Date,
+    }  // Hồ sơ bệnh án đang chọn để chỉnh sửa
+
+  constructor(private historyService: HistoryService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.getAllHistories(); // Lấy tất cả hồ sơ bệnh án khi component được khởi tạo
-  }
-
-  // Lấy tất cả hồ sơ bệnh án
-  getAllHistories(): void {
-    this.historyService.getAllHistorys().subscribe(
-      (data: Histories[]) => {
-        this.histories = data;
+    this.historyService.getDoctorByUserId().subscribe({
+      next: (doctorData) => {
+        this.doctorName = doctorData.name;  // Gán tên bác sĩ vào doctorName
       },
-      (error) => {
-        console.error('Error fetching histories', error);
-      }
-    );
+    });
+    
+    const token = localStorage.getItem('token');
+    if (token) {
+          const decodedToken: any = jwtDecode(token); // Giải mã token
+          const userId = decodedToken.sub; 
+          this.getDoctorId(userId);
+          }
+    
+    this.loadHistories();
   }
 
-  // Tìm kiếm hồ sơ bệnh án theo ID người dùng
-  searchUserById(): void {
-    if (this.searchQuery) {
-      this.historyService.getHistoryById(Number(this.searchQuery)).subscribe(
-        (data: Histories) => {
-          this.histories = [data]; // Chỉ hiển thị một hồ sơ bệnh án khi tìm kiếm
+  searchHistory(): void {
+    const id = this.searchQuery;
+
+    if (id) {
+      // Chuyển id sang kiểu số nếu cần
+      const historyId = Number(id);
+
+      // Gọi API để tìm hồ sơ bệnh án theo ID
+      this.historyService.findHistoryByUserId(historyId).subscribe(
+        (history: Histories) => {
+          this.selectedHistory = history;
+          console.log('Hồ sơ bệnh án tìm được:', history);
         },
-        (error) => {
-          console.error('Error fetching history by ID', error);
-        }
+        
+      );
+    } else {
+      console.log('Vui lòng nhập ID hồ sơ bệnh án');
+    }
+  }
+
+  getDoctorId(userId: number): void {
+    if (userId) {
+      this.historyService.getDoctorId(userId).subscribe(
+        (doctorId: number) => {
+          this.selectedHistory.doctorId = doctorId; // Gán doctorId vào selectedHistory
+        },
+        
       );
     }
   }
 
-  // Thực hiện thao tác chỉnh sửa hồ sơ bệnh án
-  onEditHistory(history: Histories): void {
-    this.selectedHistory = history; // Chọn hồ sơ bệnh án để chỉnh sửa
+  loadHistories(): void {
+    this.historyService.getDoctorByUserId().subscribe(
+      (doctor: Doctor) => {
+        const doctorId = doctor.id;
+        this.historyService.getAllHistorys(doctorId).subscribe(
+          (data: Histories[]) => {
+            this.histories = data;
+          },
+          (error) => {
+            console.error('Error fetching histories', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error fetching doctor info', error);
+      }
+    );
   }
+  
+  
 
-  // Xóa hồ sơ bệnh án
+  onEditHistory(history: Histories): void {
+
+    this.historyService.getHistoryById(history.id).subscribe(
+      (data: Histories) => {
+        this.selectedHistory = { ...data };  // Cập nhật selectedHistory
+      },
+      (error) => {
+        console.log('Error fetching history for edit', error);
+      }
+    );
+  }
+  
+
+  onUpdateHistory(): void {
+      if (this.selectedHistory.id) {
+        this.historyService.updateHistory(this.selectedHistory.id, this.selectedHistory).subscribe((history: Histories) => {
+          this.loadHistories();
+          this.selectedHistory = {
+            id: 0,
+            userId: 0,
+            userName: '',
+            doctorId: 0,
+            doctorName: '',
+            description: '',
+            files: '',
+            createdAt: new Date,
+            updatedAt: new Date,
+          }
+        });
+      }
+    }
+
+
   onDeleteHistory(id: number): void {
     this.historyService.deleteHistory(id).subscribe(
       () => {
@@ -69,30 +149,45 @@ export class HistoryComponent implements OnInit {
     );
   }
 
-  // Tạo mới hoặc chỉnh sửa hồ sơ bệnh án
-  saveHistory(formData: any): void {
-    if (this.selectedHistory) {
-      // Cập nhật hồ sơ bệnh án
-      this.historyService.updateHistory(this.selectedHistory.id, formData).subscribe(
-        (updatedHistory) => {
-          // Cập nhật lại danh sách sau khi chỉnh sửa
-          const index = this.histories.findIndex(history => history.id === updatedHistory.id);
-          this.histories[index] = updatedHistory;
-        },
-        (error) => {
-          console.error('Error updating history', error);
-        }
-      );
+  onSelectHistory(history: Histories) {
+    // Gán toàn bộ dữ liệu history, bao gồm cả doctorId, vào selectedHistory
+    this.selectedHistory = { ...history };
+    console.log('Selected history:', this.selectedHistory); // Kiểm tra để đảm bảo doctorId có giá trị
+  }
+
+  addHistory() {
+    if (this.selectedHistory.id) {
+      // Nếu có id, tức là đang cập nhật
+      this.historyService.updateHistory(this.selectedHistory.id, this.selectedHistory)
+        .subscribe((history: Histories) => {
+          this.histories = this.histories.map(h => h.id === history.id ? history : h);
+          this.resetSelectedHistory();
+        });
     } else {
-      // Tạo mới hồ sơ bệnh án
-      this.historyService.createHistory(formData).subscribe(
-        (newHistory) => {
-          this.histories.push(newHistory); // Thêm hồ sơ mới vào danh sách
-        },
-        (error) => {
-          console.error('Error creating history', error);
-        }
-      );
+
+      const userId = this.selectedHistory.userId; 
+      this.historyService.createHistory(userId, this.selectedHistory)
+        .subscribe((history: Histories) => { // Kiểm tra dữ liệu trả về từ backend
+          this.histories.push(history); // Thêm vào danh sách
+          this.resetSelectedHistory();
+        });
     }
   }
+  
+
+
+resetSelectedHistory() {
+  this.selectedHistory = {
+    id: 0,
+    userId: 0,  // Chắc chắn rằng userId được reset nếu cần
+    userName: '',
+    doctorId: 0,
+    doctorName: '',
+    description: '',
+    files: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+}
+
 }

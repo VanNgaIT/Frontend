@@ -18,6 +18,11 @@ export class BookingService {
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.authService.getToken();  // Lấy token từ AuthService
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
   getSpecialties(): Observable<any[]> {
     const token = this.authService.getToken();  // Lấy token từ AuthService
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -61,36 +66,42 @@ export class BookingService {
             text: 'Bạn có thể hủy cuộc hẹn trước khi phòng khám xác nhận!',
             icon: 'success',
             confirmButtonText: 'OK',
-          }); // Hiển thị thông báo thành công
-          this.router.navigate(['/home']);
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/home']); // Chuyển về trang home khi nhấn OK
+            }
+          });
         } else if (response?.error) {
-          alert(response.error);  // Hiển thị thông báo lỗi nếu có lỗi từ API
+          Swal.fire({
+            title: 'Lỗi!',
+            text: response.error,
+            icon: 'error',
+            confirmButtonText: 'OK',
+          }); // Hiển thị thông báo lỗi nếu có lỗi từ API
         } 
       }),
       catchError(error => {
         console.error('Error occurred:', error);
-        alert('Bạn còn cuộc hẹn chưa khám, vui lòng hoàn thành!');
-        this.router.navigate(['/home']);
+        Swal.fire({
+          title: 'Cảnh báo',
+          text: 'Bạn còn cuộc hẹn chưa hoàn thành',
+          icon: 'warning',
+          confirmButtonText: 'OK',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/home']); // Chuyển về trang home khi nhấn OK
+          }
+        });
         // Thay vì trả về null, trả về một đối tượng có kiểu BookingApiResponse
         return of({ message: 'Lỗi khi tạo cuộc hẹn, vui lòng thử lại!', error: 'Unknown error' });
       })
     );
   }
   
-  
-  
 
-  // Xác nhận cuộc hẹn
-  confirmBooking(id: number): Observable<any> {
-    const token = this.authService.getToken();  // Lấy token từ AuthService
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.put(`${this.apiUrl}/confirm/${id}`, {}, { headers });
-  }
+  deleteBooking(bookingId: number): Observable<void> {
+  const headers = this.getAuthHeaders();  
+  return this.http.delete<void>(`${this.apiUrl}/cust/${bookingId}`, { headers });
+}
 
-  // Hủy cuộc hẹn
-  cancelBooking(id: number, reason: string): Observable<any> {
-    const token = this.authService.getToken();  // Lấy token từ AuthService
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(`${this.apiUrl}/cancel/${id}?reason=${reason}`, {}, { headers });
-  }
 }

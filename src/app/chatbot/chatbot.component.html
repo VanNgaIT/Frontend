@@ -1,0 +1,24 @@
+
+
+<!-- Hộp chat -->
+<div *ngIf="isChatOpen" class="chat-container">
+  <div class="chat-box">
+    <div class="chat-header">
+      <button (click)="toggleChat()">X</button>
+    </div>
+    <div class="chat-body">
+      <input type="text" [(ngModel)]="userMessage" placeholder="Nhập tin nhắn..." />
+      <button (click)="sendMessage()">Gửi</button>
+
+      <div *ngIf="botResponse" class="bot-response">
+        <h4>Phản hồi từ Bot:</h4>
+        <p>{{ botResponse }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Icon chat ở góc dưới -->
+<button class="chat-icon" (click)="toggleChat()">
+  <img src="https://img.icons8.com/ios/50/000000/chat.png" alt="Chat Icon" />
+</button>

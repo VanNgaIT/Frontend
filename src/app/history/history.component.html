@@ -1,104 +1,172 @@
 <div class="container-fluid">
     <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-2">
-            <app-sidebar-admin></app-sidebar-admin>
-        </div>
-
-        <!-- Nội dung chính -->
-        <div class="col-md-10">
-            <app-header></app-header>
-
-            <!-- Thẻ cha cho phần card -->
-            <div class="card-container mt-5 mb-5">
-                <!-- Bảng thông tin hồ sơ bệnh án -->
-                <div class="card shadow-sm">
-                    <!-- Thay thế card-header bằng form -->
-                    <form class="history-form shadow p-4 mb-4 bg-white rounded">
-                        <div class="row">
-                            <h2 class="text-center">Quản lý Hồ Sơ Bệnh Án</h2>
-
-                            <div class="col-md-6 mb-3">
-                                <label for="userSearch" class="form-label">Tìm kiếm hồ sơ bệnh án theo ID</label>
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="Nhập ID người dùng..." 
-                                    [(ngModel)]="searchQuery" 
-                                    name="searchQuery"
-                                />
-                            </div>
-                            
-                            <!-- Nút tìm kiếm -->
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">tìm kiếm</label>
-                                <button 
-                                    class="btn btn-primary w-100" 
-                                    (click)="searchUserById()">
-                                    Tìm kiếm
-                                </button>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            
-
-                            <div class="col-md-6 mb-3">
-                                <label for="doctor" class="form-label">Bác sĩ</label>
-                                <input type="text" class="form-control" id="doctor" placeholder="Bác sĩ" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="patient" class="form-label">Bệnh nhân</label>
-                                <input type="text" class="form-control" id="patient" placeholder="Nhập tên bệnh nhân" required>
-                            </div>
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <label for="description" class="form-label">Mô tả</label>
-                                <textarea class="form-control" id="description" rows="3" placeholder="Nhập mô tả hồ sơ bệnh án" required></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="createdAt" class="form-label">Ngày tạo</label>
-                                <input type="date" class="form-control" id="createdAt" required>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Lưu hồ sơ bệnh án</button>
-                    </form>
-
-                    <div class="card-body">
-                        <table class="table table-striped table-hover">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Bệnh nhân</th>
-                                    <th>Bác sĩ</th>
-                                    <th>Mô tả</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let history of histories; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ history.userId }}</td>
-                                    <td>{{ history.doctorName }}</td>
-                                    <td>{{ history.description }}</td>
-                                    <td>{{ history.createdAt | date: 'yyyy-MM-dd' }}</td>
-                                    <td>
-                                        <button class="btn btn-warning btn-sm mr-2" (click)="onEditHistory(history)">Sửa</button>
-                                        <button class="btn btn-danger btn-sm" (click)="onDeleteHistory(history.id)">Xóa</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+      <!-- Sidebar -->
+      <div class="col-md-2">
+        <app-sidebar-admin></app-sidebar-admin>
+      </div>
+  
+      <!-- Nội dung chính -->
+      <div class="col-md-10">
+        <app-header></app-header>
+  
+        <!-- Thẻ cha cho phần card -->
+        <div class="card-container mt-5 mb-5">
+          <!-- Bảng thông tin hồ sơ bệnh án -->
+          <div class="card shadow-sm">
+            <!-- Form để thêm và chỉnh sửa hồ sơ bệnh án -->
+            <form (ngSubmit)="onUpdateHistory()" class="history-form shadow p-4 mb-4 bg-white rounded">
+              <div class="row">
+                <h2 class="text-center mb-4">Quản lý Hồ Sơ Bệnh Án</h2>
+  
+                <!-- Tìm kiếm hồ sơ bệnh án -->
+                <div class="col-md-6 mb-3">
+                  <label for="searchQuery" class="form-label">Tìm kiếm hồ sơ bệnh án theo ID</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Nhập ID người dùng..." 
+                    [(ngModel)]="searchQuery" 
+                    name="searchQuery"
+                  />
                 </div>
+                <div class="col-md-6 mb-3 align-self-end">
+                  <button 
+                    type="button" 
+                    class="btn btn-primary w-100" (click)="searchHistory()">
+                    Tìm kiếm
+                  </button>
+                </div>
+              </div>
+  
+              <!-- Form nhập liệu -->
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="name" class="form-label">Bác sĩ</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    placeholder="Tên bác sĩ" 
+                    [(ngModel)]="doctorName" 
+                    name="name" 
+                    required
+                    [readonly]="true" 
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="doctorId" class="form-label">Mã số bác sĩ</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="doctorId"
+                    placeholder="Mã số bác sĩ"
+                    [value]="selectedHistory.doctorId"
+                    name="doctorId"
+                    readonly
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="userName" class="form-label">Bệnh nhân</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="userName" 
+                    placeholder="Tên bệnh nhân" 
+                    [(ngModel)]="selectedHistory.userName" 
+                    name="userName" 
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="name" class="form-label">Nhập mã số bệnh nhân</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="userId" 
+                    placeholder="Mã số khách hàng" 
+                    [(ngModel)]="selectedHistory.userId"
+                    name="userId" 
+                    required
+                  />
+                </div>
+                
+                
+              </div>
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="description" class="form-label">Mô tả</label>
+                  <textarea 
+                    class="form-control" 
+                    id="description" 
+                    rows="3" 
+                    placeholder="Nhập mô tả hồ sơ bệnh án" 
+                    [(ngModel)]="selectedHistory.description" 
+                    name="description" 
+                    required>
+                  </textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="createdAt" class="form-label">Ngày tạo</label>
+                  <input 
+                    type="date" 
+                    class="form-control" 
+                    id="createdAt" 
+                    [(ngModel)]="selectedHistory.createdAt" 
+                    name="createdAt" 
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3 align-self-end">
+                  <button type="submit" class="btn btn-success w-100" (click)="addHistory()">
+                    {{ selectedHistory.id ? 'Cập nhật' : 'Thêm mới' }} hồ sơ
+                  </button>
+                </div>
+              </div>
+            </form>
+  
+            <!-- Bảng hiển thị danh sách hồ sơ bệnh án -->
+            <div class="card-body">
+              <table class="table table-striped table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th>#</th>
+                    <th>Bệnh nhân</th>
+                    <th>Bác sĩ</th>
+                    <th>Mô tả</th>
+                    <th>Ngày tạo</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let history of histories; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ history.userName }}</td>
+                    <td>{{ history.doctorName }}</td>
+                    <td>{{ history.description }}</td>
+                    <td>{{ history.createdAt | date: 'yyyy-MM-dd' }}</td>
+                    <td>
+                      <button 
+                        class="btn btn-warning btn-sm mr-2" 
+                        (click)="onEditHistory(history)">
+                        Sửa
+                      </button>
+                      <button 
+                        class="btn btn-danger btn-sm" 
+                        (click)="onDeleteHistory(history.id)">
+                        Xóa
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-
-            <app-footer></app-footer>
+          </div>
         </div>
+  
+        <app-footer></app-footer>
+      </div>
     </div>
-</div>
+  </div>
+  

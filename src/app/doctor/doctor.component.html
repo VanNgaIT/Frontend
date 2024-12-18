@@ -38,7 +38,12 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">Mật khẩu cho bác sĩ</label>
+                            <input type="text" class="form-control" id="password" [(ngModel)]="newDoctor.password" name="password" placeholder="Nhập mật khẩu" required>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="gender" class="form-label">Giới tính</label>

@@ -14,7 +14,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 
-bootstrapApplication(MainComponent, {
+
+bootstrapApplication(MainComponent,  {
   providers: [
     provideHttpClient(),
     provideRouter(routes),  
