@@ -48,8 +48,11 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="profilePicture" class="form-label">Ảnh đại diện</label>
-                            <input type="text" class="form-control" id="profilePicture" [(ngModel)]="newDoctor.profilePicture" name="profilePicture" placeholder="URL ảnh đại diện">
+                            <label for="formFileMultiple" class="form-label">Ảnh đại diện</label>
+                            <input class="form-control" type="file" [(ngModel)]="newDoctor.profilePicture" name="profilePicture" id="formFileMultiple" multiple />
+
+                           <!--  <label for="profilePicture" class="form-label">Ảnh đại diện</label>
+                            <input type="text" class="form-control" id="profilePicture" [(ngModel)]="newDoctor.profilePicture" name="profilePicture" placeholder="URL ảnh đại diện"> -->
                         </div>
                     </div>
 

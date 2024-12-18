@@ -46,9 +46,13 @@
                             <label for="userName" class="form-label">Họ và tên</label>
                             <input type="text" class="form-control" id="userName" [(ngModel)]="newUser.userName" name="userName" placeholder="Nhập họ và tên" required>
                         </div>
+                        
                         <div class="col-md-6 mb-3">
-                            <label for="image" class="form-label">Ảnh đại diện</label>
-                            <input type="text" class="form-control" id="image" [(ngModel)]="newUser.image" name="image" placeholder="URL ảnh đại diện">
+                            <label for="formFileMultiple" class="form-label">Ảnh đại diện</label>
+                            <input class="form-control" type="file" [(ngModel)]="newUser.image" name="image" id="formFileMultiple" multiple />
+
+                           <!--  <label for="image" class="form-label">Ảnh đại diện</label>
+                            <input type="text" class="form-control" id="image" [(ngModel)]="newUser.image" name="image" placeholder="URL ảnh đại diện"> -->
                         </div>
                     </div>
                     <div class="row">
