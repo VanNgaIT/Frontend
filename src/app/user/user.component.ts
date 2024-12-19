@@ -54,9 +54,9 @@ export class UserManagementComponent implements OnInit {
   updateUser() {
     if (this.newUser.id) {
       this.userService.updateUser(this.newUser.id, this.newUser).subscribe((user: User) => {
-        const index = this.users.findIndex(u => u.id === user.id);
+        const index = this.users.findIndex(u => u.id === user.id); //Tìm vị trí id = user.id trong mảng this.users
         if (index !== -1) {
-          this.users[index] = user;
+          this.users[index] = user; // Cập nhật thông tin người dùng tại vị trí index trong mảng this.users
         }
         this.isEditMode = false;
         this.newUser = { id: 0, password: '', email: '', userName: '', address: '', gender: true, phoneNumber: '', image: '', createdAt: new Date(), updatedAt: new Date(), role: { id: 0, roleName: '' } };
@@ -74,7 +74,7 @@ export class UserManagementComponent implements OnInit {
       this.users = this.users.filter(user => user.id !== id);
     });
   }
-  searchUsers() {
+ /*  searchUsers() {
     if (this.searchQuery) {
       this.users = this.users.filter(user =>
         user.userName.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -82,7 +82,7 @@ export class UserManagementComponent implements OnInit {
     } else {
       this.loadUsers();  // Reload tất cả người dùng nếu không tìm kiếm
     }
-  }
+  } */
   searchUserById() {
     const userId = Number(this.searchQuery);  // Chuyển đổi searchQuery thành kiểu số
     if (isNaN(userId)) {  // Kiểm tra nếu giá trị không phải là một số hợp lệ

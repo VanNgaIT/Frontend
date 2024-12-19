@@ -11,6 +11,7 @@ export class UserService {
 
   private apiUrl = 'http://localhost:8080/api/users'; // Đảm bảo rằng bạn có URL API thích hợp
 
+  // Khởi tạo service UserService với HttpClient để thực hiện các yêu cầu HTTP và AuthService để lấy token xác thực.
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   // Helper function to get the token and set the Authorization header
@@ -19,14 +20,14 @@ export class UserService {
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
-  // Lấy tất cả người dùng
+  // Lấy tất cả người dùng trả về mảng
   getAllUsers(): Observable<User[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<User[]>(`${this.apiUrl}`, { headers });
   }
 
   // Lấy thông tin người dùng theo ID
-  getUserById(id: number): Observable<User> {
+  getUserById(id: number): Observable<User> { // tham số number
     const headers = this.getAuthHeaders();
     return this.http.get<User>(`${this.apiUrl}/${id}`, { headers });
   }
