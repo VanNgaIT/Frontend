@@ -6,7 +6,6 @@ import 'bootstrap';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AdminDashboardComponent } from './app/admin-dashboard/admin-dashboard.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './app/app.routes';
 import { MainComponent } from './app/main/main.component';

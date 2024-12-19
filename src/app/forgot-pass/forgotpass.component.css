@@ -1,11 +1,11 @@
-.container {
+.container-fluid {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f9f9f9;
-}
+  background: linear-gradient(135deg, #a8e3eb, #f6f7d7, #cfb827); /* Thêm 3 màu gradient */
 
+}
 .forgot-form {
   background-color: white;
   padding: 30px;

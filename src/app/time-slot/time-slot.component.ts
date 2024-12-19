@@ -37,6 +37,10 @@ export class TimeSlotComponent implements OnInit {
     updatedAt: new Date()
   };  // Thông tin timeSlot mới
 
+  currentPage: number = 1; // Trang hiện tại
+  itemsPerPage: number = 5; // Số hàng trên mỗi trang
+  paginatedTimeSlots: TimeSlot[] = []; // Danh sách timeSlots đã phân trang
+
   constructor(
     private timeSlotService: TimeSlotService,
     private doctorService: DoctorService,
@@ -53,8 +57,15 @@ export class TimeSlotComponent implements OnInit {
         this.newTimeSlot.doctorId = this.doctors[0].id;  // Chỉ gán id, không phải đối tượng
       }
     });
+    this.loadUsers();
   }
 
+  loadUsers() {
+      this.timeSlotService.getAllTimeSlots().subscribe((data: TimeSlot[]) => {
+        this.timeSlots = data;
+        this.updatePaginatedTimeSlots();
+      });
+    }
   // Khi chọn bác sĩ, lấy lịch trình của bác sĩ đó
   onDoctorSelect(): void {
     const doctorId = this.newTimeSlot.doctorId;
@@ -68,6 +79,12 @@ export class TimeSlotComponent implements OnInit {
     } else {
       console.error('DoctorId is null or undefined');
     }
+  }
+
+  updatePaginatedTimeSlots(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedTimeSlots = this.timeSlots.slice(startIndex, endIndex);
   }
 
   // Khi chọn lịch trình, lấy timeSlots của lịch trình đó
@@ -104,6 +121,7 @@ export class TimeSlotComponent implements OnInit {
             this.timeSlotService.createTimeSlots(this.newTimeSlot).subscribe(
               (createdTimeSlot) => {
                 this.timeSlots.push(createdTimeSlot);
+                this.updatePaginatedTimeSlots(); // Cập nhật danh sách đã phân trang
                 this.newTimeSlot = {
                   id: 0,
                   startTime: '',
@@ -131,6 +149,7 @@ export class TimeSlotComponent implements OnInit {
         console.error('Chưa chọn bác sĩ.');
       }
     }
+    this.loadUsers();
   }
   
   
@@ -181,5 +200,23 @@ saveUpdatedTimeSlot(): void {
         console.error('Lỗi khi xóa timeSlot:', error);
       }
     );
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedTimeSlots();
+    }
+  }
+  
+  nextPage(): void {
+    if (this.currentPage < this.totalPages()) {
+      this.currentPage++;
+      this.updatePaginatedTimeSlots();
+    }
+  }
+  
+  totalPages(): number {
+    return Math.ceil(this.timeSlots.length / this.itemsPerPage);
   }
 }

@@ -1,9 +1,9 @@
-.container {
+.container-fluid {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f9f9f9;
+    background: linear-gradient(135deg, #a8e3eb, #f6f7d7);
 }
 
 .login-form {
@@ -72,6 +72,7 @@ button:hover {
 .register a {
     color: #00bcd4;
 }
+
 .social-login {
     margin-top: 20px;
 }

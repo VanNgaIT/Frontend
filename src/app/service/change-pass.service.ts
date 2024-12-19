@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ChangePasswordService {
 
-  private apiUrl = 'http://localhost:8080/api/auth/changePassword'; // Thay bằng URL của API Spring Boot
+  private apiUrl = 'http://localhost:8080/api/auth/changePassword'; 
 
   constructor(private http: HttpClient) {}
 

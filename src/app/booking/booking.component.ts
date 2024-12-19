@@ -13,7 +13,7 @@ import { DoctorService } from '../service/doctor.service';
   standalone: true,
   imports: [CommonModule, FormsModule, SidebarAdminComponent, HeaderComponent, FooterComponent],
   templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss']  // fixed typo `styleUrl` -> `styleUrls`
+  styleUrls: ['./booking.component.scss'] 
 })
 export class BookingComponent implements OnInit {
   searchQuery: string = '';

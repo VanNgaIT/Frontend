@@ -1,22 +1,17 @@
-.card-container {
+.container-fluid {
+    background: linear-gradient(135deg, #a8e3eb, #f6f7d7, #cfb827); /* Thêm 3 màu gradient */
+    /* Có thể thay đổi góc và các mã màu tùy thích */
+}
+
+.card {
     padding-left: 20px;
     padding-right: 20px;
     margin-left: auto;
     margin-right: auto;
     max-width: 85%;
     padding: 20px;
-    background: linear-gradient(135deg, #cacbcc, #f0e479); /* Mix màu xanh dương và xanh lá */
     border-radius: 12px; /* Bo góc */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng */
-}
-
-.card {
-    max-width: 95%;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
 }
 
 .card-header {

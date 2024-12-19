@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { error } from 'console';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -78,8 +79,39 @@ export class AuthService {
     localStorage.removeItem('user');
   }
 
+  // getUserRole(): string | null {
+  //   const user = this.getUserFromToken();
+  //   return user ? user.role : null;
+  // }
   getUserRole(): string | null {
-    const user = this.getUserFromLocalStorage();
-    return user ? user.role : null;
+    const token = localStorage.getItem('token');  // Lấy token từ localStorage
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const decodedToken: any = jwtDecode(token);  // Giải mã token
+      const roles = decodedToken.roles || [];  // Lấy mảng roles từ token
+
+      // Nếu có quyền trong mảng roles, trả về quyền đầu tiên (hoặc tùy chỉnh theo yêu cầu)
+      return roles.length > 0 ? roles[0] : null;
+    } catch (error) {
+      console.error('Error decoding token', error);
+      return null;
+    }
+  }
+
+  getUserFromToken(): any {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    }
+
+    try {
+      return jwtDecode(token);  // Giải mã token và trả về thông tin người dùng
+    } catch (error) {
+      console.error('Error decoding token', error);
+      return null;
+    }
   }
 }

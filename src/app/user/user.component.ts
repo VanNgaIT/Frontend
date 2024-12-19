@@ -88,6 +88,7 @@ export class UserManagementComponent implements OnInit {
     if (isNaN(userId)) {  // Kiểm tra nếu giá trị không phải là một số hợp lệ
       alert('Vui lòng nhập một ID hợp lệ!');
       return;
+    
     }
     
     this.userService.getUserById(userId).subscribe(user => {

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Booking } from '../model/booking.model';
 import { UserBookingDetailService } from '../service/user-bookingdetails.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -38,7 +39,11 @@ export class UserBookingDetailsComponent {
       // Gửi yêu cầu hủy đến backend
       this.bookingDetailService.deleteBookingByUser(id).subscribe({
           next: () => {
-              alert('Hủy đặt hẹn thành công');
+              Swal.fire({
+                          title: 'Hủy cuộc hẹn thành công',
+                          icon: 'success',
+                          confirmButtonText: 'OK',
+                        })
               this.loadHistory(); // Load lại danh sách sau khi hủy
           },
           error: (err) => {

@@ -1,45 +1,52 @@
-<div class="bg-light sidebar">
-    <ul class="nav flex-column">
+<!-- admin-layout.component.html -->
+<div class="admin-layout">
+    <div class="bg-light sidebar">
+      <!-- Sidebar bạn đã gửi -->
+      <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link active" routerLink="/admin-dashboard">
-                <i class="fas fa-tachometer-alt"></i><span> Tổng quan</span>
-            </a>
+          <a class="nav-link active" routerLink="/admindb/tong-quan">
+            <i class="fas fa-tachometer-alt"></i><span> Tổng quan</span>
+          </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="/user">
-                <i class="fas fa-users"></i><span> Quản lý người dùng</span>
-            </a>
+          <a class="nav-link" routerLink="/admindb/user">
+            <i class="fas fa-users"></i><span> Quản lý người dùng</span>
+          </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="/doctor">
-                <i class="fas fa-user-md"></i><span> Quản lý bác sĩ</span>
-            </a>
+          <a class="nav-link" routerLink="/admindb/doctor">
+            <i class="fas fa-user-md"></i><span> Quản lý bác sĩ</span>
+          </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="/booking">
-                <i class="fas fa-calendar-check"></i><span> Quản lý đặt lịch khám</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/history">
-                <i class="fas fa-file-medical-alt"></i><span> Quản lý hồ sơ bệnh án</span>
-            </a>
+          <a class="nav-link" routerLink="/admindb/booking">
+            <i class="fas fa-calendar-check"></i><span> Quản lý đặt lịch khám</span>
+          </a>
         </li>
         
         <li class="nav-item">
-            <a class="nav-link" routerLink="/time-slot">
-                <i class="fas fa-clock"></i><span> Quản lý ca làm</span>
-            </a>
+          <a class="nav-link" routerLink="/admindb/time-slot">
+            <i class="fas fa-clock"></i><span> Quản lý ca làm</span>
+          </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="/specialty">
-                <i class="fas fa-stethoscope"></i><span> Quản lý chuyên khoa</span>
-            </a>
+          <a class="nav-link" routerLink="/admindb/specialty">
+            <i class="fas fa-stethoscope"></i><span> Quản lý chuyên khoa</span>
+          </a>
         </li>
+        
         <li class="nav-item">
-            <a class="nav-link" routerLink="/doctor-schedule">
-                <i class="fas fa-calendar-alt"></i><span> Lịch làm việc bác sĩ</span>
-            </a>
-        </li> 
-    </ul>
-</div>
+          <a class="nav-link" routerLink="/admindb/statistical">
+            <i class="fas fa-bar-chart"></i><span> Báo cáo thống kê</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Nội dung thay đổi tùy theo route -->
+     
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  

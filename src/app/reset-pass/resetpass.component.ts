@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FooterComponent } from "../footer/footer.component";
 import { HeaderComponent } from '../header/header.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-resetpass',
@@ -21,7 +22,7 @@ export class ResetPassComponent implements OnInit {
   message: string = '';
   error: string = '';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient,private router: Router) {}
 
   ngOnInit(): void {
     // Lấy token từ URL (do backend đã chuyển hướng)
@@ -38,18 +39,31 @@ export class ResetPassComponent implements OnInit {
     event.preventDefault();
 
     if (this.newPassword !== this.confirmPassword) {
-      this.error = 'Mật khẩu và xác nhận mật khẩu không khớp!';
+      Swal.fire({
+                title: 'Lỗi',
+                text:'Mật khẩu và xác nhận mật khẩu không khớp',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                })
       return;
     }
 
-    // Gửi yêu cầu đổi mật khẩu đến backend
+
     this.http.post(`http://localhost:8080/p-reset-password`, {
       token: this.token,
       newPassword: this.newPassword
     }).subscribe({
       next: (response: any) => {
-        this.message = "Mật khẩu đã được thay đổi thành công!";
-        this.error = '';
+        Swal.fire({
+          title: 'Lỗi',
+          text:'Mật khẩu thay đổi thành công',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/home']);
+             } 
+            })
       },
       error: (error) => {
         console.error('Error:', error);

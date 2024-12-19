@@ -1,0 +1,30 @@
+<!-- admin-layout.component.html -->
+<div class="doctor-layout">
+    <div class="bg-light sidebar">
+      <!-- Sidebar bạn đã gửi -->
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/doctor-dashboard">
+            <i class="fas fa-tachometer-alt"></i><span> Tổng quan</span>
+          </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/doctordb/doctor-schedule">
+                <i class="fas fa-calendar-alt"></i><span> Lịch làm việc bác sĩ</span>
+            </a>
+        </li> 
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/doctordb/history">
+                <i class="fas fa-file-medical-alt"></i><span> Quản lý hồ sơ bệnh án</span>
+            </a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Nội dung thay đổi tùy theo route -->
+     
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  

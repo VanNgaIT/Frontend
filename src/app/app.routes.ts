@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { UserManagementComponent } from './user/user.component';
 import { BookingComponent } from './booking/booking.component';
@@ -20,35 +19,62 @@ import { GioiThieuComponent } from './gioi-thieu/gioi-thieu.component';
 import { LienHeComponent } from './lien-he/lien-he.component';
 import { UserBookingDetailsComponent } from './user-bookingdetails/user-bookingdetails.component';
 import { DoctorScheduleComponent } from './doctor-schedule/doctor-schedule.component';
-import { BookingDesireComponent } from './bookingdesire/bookingdesire.component';
+import { StatisticalComponent } from './statistical/statistical.component';
+import { AuthGuard } from './authgual/authgual.component';
+import { UnauthorizedComponent } from './authgual/unauthorized.component';
+import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
+import { SidebarDoctorComponent } from './sidebar-doctor/sidebar-doctor.component';
+import { TongQuanComponent } from './tong-quan/tong-quan.component';
 
 export const routes: Routes = [
     {
         path: '',
         component: MainComponent,
         children: [
-            { path: '', component: HomeComponent }, // Trang chủ
-            { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegisterComponent },
-            { path: 'forgot-password', component: ForgotPassComponent },
-            { path: 'change-password', component: ChangePassComponent },
-            { path: 'reset-password', component: ResetPassComponent },
-            { path: 'user-profile', component: UserProfileComponent},
-            { path: 'user-booking', component: UserBookingComponent},
-            { path: 'user-history', component: UserHistoryComponent},
-            { path: 'user-bookingdetails', component: UserBookingDetailsComponent},
-            { path: 'bookingdesire', component: BookingDesireComponent},
-            { path: 'about', component: GioiThieuComponent},
-            { path: 'services', component: LienHeComponent}
-        ]
-    },
-    { path: 'doctor', component: DoctorComponent },
-    { path: 'user', component: UserManagementComponent },
-    { path: 'booking', component: BookingComponent },
-    { path: 'history', component: HistoryComponent },
-    { path: 'specialty', component: SpecialtyComponent },
-    { path: 'time-slot', component: TimeSlotComponent },
-    { path: 'doctor-schedule', component: DoctorScheduleComponent },
-    
-    { path: '**', redirectTo: '', pathMatch: 'full' }
+          { path: '', component: HomeComponent }, // Trang chủ
+          { path: 'login', component: LoginComponent },
+          { path: 'register', component: RegisterComponent },
+          { path: 'forgot-password', component: ForgotPassComponent },
+          { path: 'change-password', component: ChangePassComponent },
+          { path: 'reset-password', component: ResetPassComponent },
+          { path: 'user-profile', component: UserProfileComponent },
+          { path: 'user-booking', component: UserBookingComponent },
+          { path: 'user-history', component: UserHistoryComponent },
+          { path: 'user-bookingdetails', component: UserBookingDetailsComponent },
+          { path: 'about', component: GioiThieuComponent },
+          { path: 'services', component: LienHeComponent },
+        ],
+      },
+      {
+        path: 'admindb',
+        canActivate: [AuthGuard],
+        data: { role: 'CUST' },
+        component: SidebarAdminComponent, // Cần quyền admin để vào
+        children: [
+          { path: 'user', component: UserManagementComponent },
+          { path: 'booking', component: BookingComponent },
+          { path: 'specialty', component: SpecialtyComponent },
+          { path: 'time-slot', component: TimeSlotComponent },
+          { path: 'doctor', component: DoctorComponent },
+          { path: 'statistical', component: StatisticalComponent },
+          { path: 'tong-quan', component: TongQuanComponent },
+          { path: 'doctor-schedule', component: DoctorScheduleComponent },
+          { path: 'history', component: HistoryComponent },
+        ],
+      },
+      {
+        path: 'doctordb',
+        canActivate: [AuthGuard],
+        data: { role: 'STAFF' },
+        component: SidebarDoctorComponent,
+        children: [
+          { path: 'doctor-schedule', component: DoctorScheduleComponent },
+          { path: 'history', component: HistoryComponent },
+        ],
+      },
+      {
+        path: 'unauthorized',
+        component: UnauthorizedComponent,
+      },
+      { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

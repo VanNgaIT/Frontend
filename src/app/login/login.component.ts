@@ -4,6 +4,9 @@ import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from "../footer/footer.component";
 import { HeaderComponent } from '../header/header.component';
+import Swal from 'sweetalert2';
+
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,8 +24,8 @@ export class LoginComponent {
       () => {
         const token = localStorage.getItem('token'); // Lấy token từ localStorage
         if (token) {
-          console.log('Login success, token:', token);
-          // Chuyển hướng đến trang home
+          console.log(token);
+
           this.router.navigate(['/home']);
         } else {
           console.error('Token không có trong localStorage');
@@ -30,7 +33,12 @@ export class LoginComponent {
       },
       (error) => {
         console.error('Login error:', error);
-        alert('Đăng nhập thất bại: ' + error.message);
+        Swal.fire({
+            title: 'Đăng nhập thất bại',
+            text: 'Email hoặc mật khẩu sai',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            })
       }
     );
   }

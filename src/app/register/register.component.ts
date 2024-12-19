@@ -6,11 +6,12 @@ import { Router, RouterModule } from '@angular/router';
 import { provideRouter } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [HeaderComponent,RouterModule, FooterComponent, FormsModule, CommonModule],
+  imports: [HeaderComponent, RouterModule, FooterComponent, FormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -26,26 +27,33 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   onRegister() {
-    console.log("Email: ", this.email);
-    console.log("Password: ", this.password);
-    console.log("Retype Password: ", this.retypePassword);
-
-    console.log("Username: ", this.userName);
-    console.log("Gender: ", this.genDer);
-    console.log("Address: ", this.address);
+    
     if (this.password !== this.retypePassword) {
-      alert('Mật khẩu và xác nhận mật khẩu không khớp!');
+      Swal.fire({
+        title: 'Đăng ký thất bại',
+        text: 'Mật khẩu không trùng khớp!',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        })
       return;
     }
 
     this.authService.registerUser(this.email, this.password, this.retypePassword, this.userName, this.genDer, this.address).subscribe(
       (response) => {
-        alert('Đăng ký thành công');
+        Swal.fire({
+          title: 'Đăng ký thành công',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          })
         this.router.navigate(['/login']);
       },
       (error) => {
         console.error("Đăng ký thất bại", error);
-        alert('Đăng ký thất bại: ' + error.message);
+        Swal.fire({
+          title: 'Lỗi',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          })
       }
     );
   }

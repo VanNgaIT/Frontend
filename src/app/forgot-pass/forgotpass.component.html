@@ -1,7 +1,6 @@
 <app-header></app-header>
-<div class="container">
   <!-- Form Quên Mật Khẩu -->
-  <div class="container">
+  <div class="container-fluid">
     <div class="forgot-form">
       <!-- Form Quên mật khẩu -->
       <form (ngSubmit)="onSubmit($event)" #forgotPasswordForm="ngForm" class="form" method="post">
@@ -20,5 +19,4 @@
       <p> <a style="text-decoration: none;" [routerLink]="['/login']">Quay lại đăng nhập</a></p>
     </div>
   </div>
-</div>
 <app-footer></app-footer>

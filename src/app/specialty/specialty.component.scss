@@ -1,7 +1,6 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f7f9fc; /* Nền sáng */
-    color: #495057;
+.container-fluid {
+    background: linear-gradient(135deg, #a8e3eb, #f6f7d7, #2cbcb7); /* Thêm 3 màu gradient */
+    /* Có thể thay đổi góc và các mã màu tùy thích */
 }
 
 .card-container {

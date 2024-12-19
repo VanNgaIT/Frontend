@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container">
+<div class="container-fluid">
     <div class="login-form">
         <h2>Đăng ký tài khoản</h2>
         <form (submit)="onRegister()">
@@ -7,12 +7,10 @@
                 <input type="email" id="email" placeholder="Email" [(ngModel)]="email" name="email" required email>
             </div>
             <div class="form-group">
-                <input type="password" id="password" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password"
-                    required minlength="6">
+                <input type="password" id="password" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password" required minlength="6">
             </div>
             <div class="form-group">
-                <input type="password" id="retypePassword" placeholder="Nhập lại mật khẩu" [(ngModel)]="retypePassword"
-                    name="retypePassword" required [ngClass]="{'is-invalid': password !== retypePassword}">
+                <input type="password" id="retypePassword" placeholder="Nhập lại mật khẩu" [(ngModel)]="retypePassword" name="retypePassword" required [ngClass]="{'is-invalid': password !== retypePassword}">
             </div>
             <div class="form-group">
                 <input type="text" id="userName" placeholder="Tên người dùng" [(ngModel)]="userName" name="userName" required>
@@ -24,8 +22,7 @@
                   <option [ngValue]="true">Nam</option>
                   <option [ngValue]="false">Nữ</option>
                 </select>
-              </div>
-            
+            </div>
             <!-- Trường nhập địa chỉ -->
             <div class="form-group">
                 <input type="text" id="address" placeholder="Địa chỉ" [(ngModel)]="address" name="address" required>
@@ -35,7 +32,6 @@
         <div class="register">
             <p>Đã có tài khoản? <a style="text-decoration: none;" [routerLink]="['/login']">Đăng nhập</a></p>
         </div>
-        
     </div>
 </div>
 <app-footer></app-footer>

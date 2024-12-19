@@ -1,10 +1,7 @@
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f9f9f9;
-  }
+.container-fluid {
+  background: linear-gradient(135deg, #a8e3eb, #f6f7d7, #cfb827); /* Thêm 3 màu gradient */
+  /* Có thể thay đổi góc và các mã màu tùy thích */
+}
   
   .reset-form {
     background-color: white;

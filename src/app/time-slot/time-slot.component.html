@@ -10,11 +10,14 @@
       <app-header></app-header>
 
       <!-- Thẻ cha cho phần card -->
-      <div class="card-container mt-5 mb-5">
-        <!-- Bảng thông tin ca làm việc -->
-        <div class="card shadow-sm">
+      
+        <div class="card shadow-sm mt-5 mb-5">
           <!-- Form thêm ca làm việc -->
-          <form *ngIf="!editableTimeSlot" class="history-form shadow p-4 mb-4 bg-white rounded" (ngSubmit)="createTimeSlot()">
+          <form
+            *ngIf="!editableTimeSlot"
+            class="history-form shadow p-4 mb-4 bg-white rounded"
+            (ngSubmit)="createTimeSlot()"
+          >
             <div class="row">
               <h2 class="text-center">Quản lý Ca Làm Việc</h2>
 
@@ -28,7 +31,9 @@
                   (change)="onDoctorSelect()"
                 >
                   <option value="">-- Chọn bác sĩ --</option>
-                  <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">{{ doctor.name }}</option>
+                  <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
+                    {{ doctor.name }}
+                  </option>
                 </select>
               </div>
 
@@ -40,16 +45,21 @@
                   [(ngModel)]="newTimeSlot.scheduleId"
                   name="schedule"
                 >
-                <option *ngFor="let schedule of schedules" [ngValue]="schedule.id">
-                  {{ schedule.date }}
-                </option>
+                  <option
+                    *ngFor="let schedule of schedules"
+                    [ngValue]="schedule.id"
+                  >
+                    {{ schedule.date }}
+                  </option>
                 </select>
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="startTime" class="form-label">Thời gian bắt đầu</label>
+                <label for="startTime" class="form-label"
+                  >Thời gian bắt đầu</label
+                >
                 <input
                   type="time"
                   class="form-control"
@@ -60,7 +70,9 @@
                 />
               </div>
               <div class="col-md-6 mb-3">
-                <label for="endTime" class="form-label">Thời gian kết thúc</label>
+                <label for="endTime" class="form-label"
+                  >Thời gian kết thúc</label
+                >
                 <input
                   type="time"
                   class="form-control"
@@ -88,11 +100,17 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Lưu ca làm việc</button>
+            <button type="submit" class="btn btn-primary w-100">
+              Lưu ca làm việc
+            </button>
           </form>
 
           <!-- Form sửa ca làm việc -->
-          <form *ngIf="editableTimeSlot" class="history-form shadow p-4 mb-4 bg-white rounded" (ngSubmit)="saveUpdatedTimeSlot()">
+          <form
+            *ngIf="editableTimeSlot"
+            class="history-form shadow p-4 mb-4 bg-white rounded"
+            (ngSubmit)="saveUpdatedTimeSlot()"
+          >
             <div class="row">
               <h2 class="text-center">Sửa Ca Làm Việc</h2>
 
@@ -106,7 +124,9 @@
                   (change)="onDoctorSelect()"
                 >
                   <option value="">-- Chọn bác sĩ --</option>
-                  <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">{{ doctor.name }}</option>
+                  <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
+                    {{ doctor.name }}
+                  </option>
                 </select>
               </div>
 
@@ -118,7 +138,10 @@
                   [(ngModel)]="editableTimeSlot.scheduleId"
                   name="schedule"
                 >
-                  <option *ngFor="let schedule of schedules" [ngValue]="schedule.id">
+                  <option
+                    *ngFor="let schedule of schedules"
+                    [ngValue]="schedule.id"
+                  >
                     {{ schedule.id }}
                   </option>
                 </select>
@@ -127,7 +150,9 @@
 
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="startTime" class="form-label">Thời gian bắt đầu</label>
+                <label for="startTime" class="form-label"
+                  >Thời gian bắt đầu</label
+                >
                 <input
                   type="time"
                   class="form-control"
@@ -138,7 +163,9 @@
                 />
               </div>
               <div class="col-md-6 mb-3">
-                <label for="endTime" class="form-label">Thời gian kết thúc</label>
+                <label for="endTime" class="form-label"
+                  >Thời gian kết thúc</label
+                >
                 <input
                   type="time"
                   class="form-control"
@@ -166,7 +193,9 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Lưu thay đổi</button>
+            <button type="submit" class="btn btn-primary w-100">
+              Lưu thay đổi
+            </button>
           </form>
 
           <div class="card-body">
@@ -182,7 +211,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let timeslot of timeSlots; let i = index">
+                <tr *ngFor="let timeslot of paginatedTimeSlots; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ getDoctorName(timeslot.doctorId) }}</td>
                   <td>{{ timeslot.scheduleDate }}</td>
@@ -190,9 +219,13 @@
                   <td>
                     <span
                       class="status-badge"
-                      [ngClass]="timeslot.isAvailable ? 'status-available' : 'status-unavailable'"
+                      [ngClass]="
+                        timeslot.isAvailable
+                          ? 'status-available'
+                          : 'status-unavailable'
+                      "
                     >
-                      {{ timeslot.isAvailable ? 'Có sẵn' : 'Không có sẵn' }}
+                      {{ timeslot.isAvailable ? "Có sẵn" : "Không có sẵn" }}
                     </span>
                   </td>
                   <td>
@@ -212,9 +245,20 @@
                 </tr>
               </tbody>
             </table>
+            <div>
+              <button (click)="previousPage()" [disabled]="currentPage === 1">
+                Trang trước
+              </button>
+              <span>Trang {{ currentPage }}</span>
+              <button
+                (click)="nextPage()"
+                [disabled]="currentPage === totalPages()"
+              >
+                Trang sau
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
       <app-footer></app-footer>
     </div>
