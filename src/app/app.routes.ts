@@ -48,7 +48,7 @@ export const routes: Routes = [
       {
         path: 'admindb',
         canActivate: [AuthGuard],
-        data: { role: 'CUST' },
+        data: { role: 'MANAGE' },
         component: SidebarAdminComponent, // Cần quyền admin để vào
         children: [
           { path: 'user', component: UserManagementComponent },

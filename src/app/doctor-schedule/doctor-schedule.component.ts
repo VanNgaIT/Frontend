@@ -49,7 +49,7 @@ export class DoctorScheduleComponent implements OnInit {
         this.timeslots = timeslotData;  // Lưu timeslot vào biến timeslots
         this.workShifts = timeslotData; // Hiển thị ngay ca làm việc sau khi có dữ liệu timeslot
       },
-      
+  
     });
   }
 

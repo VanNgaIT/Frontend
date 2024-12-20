@@ -35,7 +35,7 @@ export class TelegramChatComponent {
       }).subscribe({
         next: (res) => {
           console.log('Message sent:', res);
-          this.botResponse = `Bot đã nhận tin nhắn: "${this.userMessage}"`;
+          this.botResponse = `Phòng khám xin chào bạn`;
           this.userMessage = '';
         },
         error: (err) => {

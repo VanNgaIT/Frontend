@@ -2,7 +2,7 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-2">
-            <app-sidebar-admin></app-sidebar-admin>
+                
         </div>
 
         <!-- Nội dung chính -->
@@ -62,7 +62,7 @@
                                 <ng-container [ngSwitch]="appointment.statusId">
                                     <span *ngSwitchCase="'WAIT'">Chờ khám</span>
                                     <span *ngSwitchCase="'COMPLETE'">Đã tham gia</span>
-                                    <span *ngSwitchCase="'NOT-ATTENDED'">Không tham gia</span>
+                                    <span *ngSwitchCase="'NOT_ATTENDED'">Không tham gia</span>
                                     <span *ngSwitchCase="'CANCELED'">Bị từ chối</span>
                                     <span *ngSwitchCase="'PENDING'">Đang chờ duyệt</span>
                                     <span *ngSwitchDefault>Không xác định</span>

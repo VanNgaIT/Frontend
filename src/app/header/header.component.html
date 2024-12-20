@@ -1,83 +1,121 @@
 <header class="header navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <div class="container">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand col-md-2" href="/">
+      <img src="assets/logo.png" alt="Dental Clinic Logo" class="logo" />
+    </a>
 
-        <!-- Logo -->
-        <a class="navbar-brand col-md-2" href="/">
-            <img src="assets/logo.png" alt="Dental Clinic Logo" class="logo">
-        </a>
+    <!-- Navigation Toggle Button (for small screens) -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <!-- Navigation Toggle Button (for small screens) -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Navigation Links -->
+    <div class="collapse navbar-collapse col-md-10" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">
+            <i class="fas fa-home"></i> Trang chủ
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">
+            <i class="fas fa-info-circle"></i> Giới thiệu
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/services">
+            <i class="fas fa-phone-alt"></i> Liên hệ
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/user-booking'">
+            <i class="fas fa-calendar-alt"></i> Đặt lịch khám
+          </a>
+        </li>
 
-        <!-- Navigation Links -->
-        <div class="collapse navbar-collapse col-md-10" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">
-                        <i class="fas fa-home"></i> Trang chủ
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">
-                        <i class="fas fa-info-circle"></i> Giới thiệu
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/services">
-                        <i class="fas fa-phone-alt"></i> Liên hệ
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="'/user-booking'">
-                        <i class="fas fa-calendar-alt"></i> Đặt lịch khám
-                    </a>
-                </li>
+        <!-- Nếu người dùng đã đăng nhập -->
+        <li *ngIf="email" class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-user-circle"></i> Thông tin cá nhân
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" routerLink="/user-history">
+                <i class="fas fa-folder-open"></i> Hồ sơ bệnh án
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/change-password">
+                <i class="fas fa-key"></i> Đổi mật khẩu
+              </a>
+            </li>
 
-                <!-- Nếu người dùng đã đăng nhập -->
-                <li *ngIf="email" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle"></i> Thông tin cá nhân
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" routerLink="/user-history">
-                        <i class="fas fa-folder-open"></i> Hồ sơ bệnh án
-                      </a></li>
-                      <li><a class="dropdown-item" routerLink="/change-password">
-                        <i class="fas fa-key"></i> Đổi mật khẩu
-                      </a></li>
+            <li>
+              <a class="dropdown-item" routerLink="/user-bookingdetails">
+                <i class="fas fa-calendar-check"></i> Lịch sử đặt hẹn
+              </a>
+            </li>
 
-                      <li><a class="dropdown-item" routerLink="/user-booking">
-                        <i class="fas fa-calendar-check"></i> Lịch sử đặt hẹn
-                      </a></li>
-                    
-                    <li><a class="dropdown-item" routerLink="/user-profile">
-                        <i class="fas fa-user"></i> Thông tin cá nhân
-                    </a></li>
-                    
+            <li>
+              <a class="dropdown-item" routerLink="/user-profile">
+                <i class="fas fa-user"></i> Thông tin cá nhân
+              </a>
+            </li>
 
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" (click)="onLogout()">
-                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
-                      </a></li>
-                    </ul>
-                </li>
-                
+            <li>
+              <a class="dropdown-item" routerLink="/admindb">
+                <i class="fas fa-user"></i> Quản lý người dùng
+              </a>
+            </li>
 
-                <!-- Nếu người dùng chưa đăng nhập -->
-                <li *ngIf="!email" class="nav-item">
-                    <a class="nav-link btn btn-primary text-white px-3" [routerLink]="'/login'">
-                        <i class="fas fa-sign-in-alt"></i> Đăng nhập
-                    </a>
-                </li>
-                <li *ngIf="!email" class="nav-item">
-                    <a class="nav-link btn btn-primary text-white px-3" routerLink="/register">
-                        <i class="fas fa-user-plus"></i> Đăng ký
-                    </a>                    
-                </li>    
-            </ul>
-        </div>
+            <li>
+              <a class="dropdown-item" routerLink="/doctordb">
+                <i class="fas fa-user"></i> Bác sĩ
+              </a>
+            </li>
+
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" (click)="onLogout()">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Nếu người dùng chưa đăng nhập -->
+        <li *ngIf="!email" class="nav-item">
+          <a
+            class="nav-link btn btn-primary text-white px-3"
+            [routerLink]="'/login'"
+          >
+            <i class="fas fa-sign-in-alt"></i> Đăng nhập
+          </a>
+        </li>
+        <li *ngIf="!email" class="nav-item">
+          <a
+            class="nav-link btn btn-primary text-white px-3"
+            routerLink="/register"
+          >
+            <i class="fas fa-user-plus"></i> Đăng ký
+          </a>
+        </li>
+      </ul>
     </div>
+  </div>
 </header>

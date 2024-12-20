@@ -9,7 +9,7 @@ export interface Booking {
   cancelReason: string;    // Lý do hủy (nếu có)
   date: Date;              // Ngày đặt        // Loại thời gian
   timeSlotId: number;      // Khung giờ
-  startTime: string;
+  startTime: string;  
   endTime: string;
   createdAt: Date;         // Ngày tạo
   updatedAt: Date;         // Ngày cập nhật

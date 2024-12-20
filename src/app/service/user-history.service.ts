@@ -29,7 +29,9 @@ export class UserHistoryService {
 
   saveRatings(histories: Histories[]): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/save`, histories, { headers });
+
+    
+    return this.http.put(`${this.apiUrlRating}/save`, histories, { headers });
 }
   
 }

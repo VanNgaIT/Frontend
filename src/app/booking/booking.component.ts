@@ -109,7 +109,8 @@ export class BookingComponent implements OnInit {
     switch (statusId) {
       case 'PENDING': return 'Chờ xác nhận';
       case 'WAIT': return 'Đã xác nhận';
-      case 'CANCELLED': return 'Đã hủy';
+      case 'COMPLETE': return 'Đã hoàn thành';
+      case 'CANCELED': return 'Từ chối';
       case 'NOT_ATTENDED': return 'Không tham gia';
       default: return 'Không xác định';
     }
