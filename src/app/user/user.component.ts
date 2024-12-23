@@ -45,6 +45,8 @@ export class UserManagementComponent implements OnInit {
   }
 
   addUser() {
+    if (!this.validateUserData(this.newUser)) return;
+      
     this.userService.createUser(this.newUser).subscribe((user: User) => {
       this.users.push(user);
       this.newUser = { id: 0, password: '', email: '', userName: '', address: '', gender: true, phoneNumber: '', image: '', createdAt: new Date(), updatedAt: new Date(), role: { id: 0, roleName: '' } };
@@ -52,6 +54,8 @@ export class UserManagementComponent implements OnInit {
   }
 
   updateUser() {
+    if (!this.validateUserData(this.newUser)) return;
+
     if (this.newUser.id) {
       this.userService.updateUser(this.newUser.id, this.newUser).subscribe((user: User) => {
         const index = this.users.findIndex(u => u.id === user.id);
@@ -101,5 +105,47 @@ export class UserManagementComponent implements OnInit {
     }, error => {
       console.error('Có lỗi khi tìm kiếm người dùng:', error);
     });
+  }
+
+  // return true nếu hợp lệ, false nếu không hợp lệ
+  validateUserData(user: User): boolean {
+    if (!user.userName || user.userName.length < 3) {
+      alert('Họ và tên phải có ít nhất 3 ký tự.');
+      return false;
+    }
+
+    if (!this.validateEmail(user.email)) {
+      alert('Email không hợp lệ. VD: nguoiDung1@gmail.com.vn');
+      return false;
+    }
+
+    if (!this.validatePhoneNumber(user.phoneNumber)) {
+      alert('Số điện thoại phải là số từ 10-11 chữ số và bắt đầu bằng 0.');
+      return false;
+    }
+
+    if (!user.password || user.password.length < 6) {
+      alert('Mật khẩu phải có ít nhất 6 ký tự.');
+      return false;
+    }
+
+    if (!user.address) {
+      alert('Địa chỉ không được để trống.');
+      return false;
+    }
+
+    return true;
+  }
+
+  // kiểm email
+  validateEmail(email: string): boolean {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+  }
+
+  // kiểm sđth
+  validatePhoneNumber(phoneNumber: string): boolean {
+    const phoneRegex = /^0\d{9,10}$/;
+    return phoneRegex.test(phoneNumber);
   }
 }

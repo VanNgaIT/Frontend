@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Doctor } from '../model/doctor.model';
 import { AuthService } from '../service/auth.service';
 import { FormsModule} from '@angular/forms';
@@ -16,7 +16,7 @@ import { Specialty } from '../model/specialty.model';
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.scss'
 })
-export class DoctorComponent {
+export class DoctorComponent implements OnInit {
   doctors: Doctor[] = [];
   specialties: Specialty[] = [];
   selectedDoctor: Doctor | null = null;
@@ -25,16 +25,17 @@ export class DoctorComponent {
     name: '',
     email: '',
     phoneNumber: '',
-    gender: true, // mặc định Nam
+    gender: true,  // mặc định Nam
     profilePicture: '',
-    specialtyId: 0, // Dành cho việc chọn chuyên khoa khi thêm bác sĩ mới
+    specialtyId: 0,  // Dành cho việc chọn chuyên khoa khi thêm bác sĩ mới
     password: '',
     createdAt: new Date(),
     updatedAt: new Date(),
   };
   isEditMode: boolean = false;
+  errorMessages: string[] = [];  // Mảng chứa thông báo lỗi
 
-  constructor(private doctorService: DoctorService, private specialtyService: SpecialtyService) {}
+  constructor(private doctorService: DoctorService, private specialtyService: SpecialtyService) { }
 
   ngOnInit() {
     this.loadDoctors();
@@ -56,7 +57,6 @@ export class DoctorComponent {
   // Khi người dùng chọn bác sĩ, hiển thị chuyên khoa của bác sĩ đó
   selectDoctor(doctor: Doctor) {
     this.selectedDoctor = doctor;
-    // Gán specialtyId cho bác sĩ theo id của chuyên khoa
     const specialty = this.specialties.find(s => s.id === doctor.specialtyId);
     if (specialty) {
       doctor.specialtyId = specialty.id;  // Gán ID của chuyên khoa vào specialtyId của bác sĩ
@@ -65,28 +65,74 @@ export class DoctorComponent {
 
   // Thêm bác sĩ mới
   addDoctor() {
+    if (!this.isValidDoctor(this.newDoctor)) return;
+    
+    if (!this.newDoctor.password || this.newDoctor.password.length < 6) {
+      alert('Mật khẩu phải có ít nhất 6 ký tự.');
+      return;
+    }
+
     this.doctorService.createDoctors(this.newDoctor).subscribe((newDoctor) => {
       this.doctors.push(newDoctor);
       this.resetForm();
     });
   }
 
+  // Chỉnh sửa bác sĩ
   editDoctor(doctor: Doctor) {
-    // Set the `newDoctor` object with the selected doctor data for editing
     this.newDoctor = { ...doctor };
-    this.isEditMode = true; // Set edit mode flag to true
+    this.isEditMode = true;  // Đặt chế độ chỉnh sửa thành true
+
+    this.newDoctor.password = doctor.password || '';
   }
+
   // Cập nhật bác sĩ
   updateDoctor() {
-    if (this.newDoctor) {  // Kiểm tra nếu newDoctor đã được chọn
-      this.doctorService.updateDoctors(this.newDoctor.id, this.newDoctor).subscribe(() => {
-        this.loadDoctors(); // Tải lại danh sách bác sĩ sau khi cập nhật
-        this.resetForm();
-        this.isEditMode = false;  // Đặt lại chế độ chỉnh sửa về false sau khi cập nhật
-      });
-    }
+    if (!this.isValidDoctor(this.newDoctor)) return;
+
+    this.doctorService.updateDoctors(this.newDoctor.id, this.newDoctor).subscribe(() => {
+      this.loadDoctors();
+      this.resetForm();
+      this.isEditMode = false;  // Đặt lại chế độ chỉnh sửa thành false
+    });
   }
-  
+
+  // Kiểm tra hợp lệ thông tin bác sĩ
+  isValidDoctor(doctor: Doctor): boolean {
+    if (!doctor.name || doctor.name.length < 3) {
+      alert('Họ và tên bác sĩ phải có ít nhất 3 ký tự.');
+      return false;
+    }
+
+    if (!this.isValidEmail(doctor.email)) {
+      alert('Email không hợp lệ. Ví dụ: abc@example.com');
+      return false;
+    }
+
+    if (!this.isValidPhoneNumber(doctor.phoneNumber)) {
+      alert('Số điện thoại phải có ít nhất 10 chữ số và bắt đầu bằng số 0.');
+      return false;
+    }
+
+    if (!doctor.specialtyId) {
+      alert('Chuyên khoa là bắt buộc.');
+      return false;
+    }
+
+    return true;
+  }
+
+  // Kiểm tra email hợp lệ
+  isValidEmail(email: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+  }
+
+  // Kiểm tra số điện thoại hợp lệ
+  isValidPhoneNumber(phoneNumber: string): boolean {
+    const phonePattern = /^0\d{9,10}$/;  // Kiểm tra số điện thoại bắt đầu bằng 0 và có 10-11 chữ số
+    return phonePattern.test(phoneNumber);
+  }
 
   // Xóa bác sĩ
   deleteDoctor(id: number) {
@@ -110,8 +156,10 @@ export class DoctorComponent {
       updatedAt: new Date(),
     };
     this.isEditMode = false;
+    this.errorMessages = [];  // Reset lỗi
   }
 
+  // Lấy tên chuyên khoa
   getSpecialtyName(specialtyId: number): string {
     const specialty = this.specialties.find(s => s.id === specialtyId);
     return specialty ? specialty.name : 'Không xác định';
