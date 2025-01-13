@@ -55,7 +55,7 @@ export class ResetPassComponent implements OnInit {
     }).subscribe({
       next: (response: any) => {
         Swal.fire({
-          title: 'Lỗi',
+          title: 'Thành công',
           text:'Mật khẩu thay đổi thành công',
           icon: 'success',
           confirmButtonText: 'OK',

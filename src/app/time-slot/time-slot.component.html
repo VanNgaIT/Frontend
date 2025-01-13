@@ -217,46 +217,29 @@
                   <td>{{ timeslot.scheduleDate }}</td>
                   <td>{{ timeslot.startTime }} - {{ timeslot.endTime }}</td>
                   <td>
-                    <span
-                      class="status-badge"
-                      [ngClass]="
-                        timeslot.isAvailable
-                          ? 'status-available'
-                          : 'status-unavailable'
-                      "
-                    >
+                    <span class="status-badge"[ngClass]="timeslot.isAvailable? 'status-available': 'status-unavailable'">
                       {{ timeslot.isAvailable ? "Có sẵn" : "Không có sẵn" }}
                     </span>
                   </td>
                   <td>
-                    <button
-                      class="btn btn-warning btn-sm mr-2"
-                      (click)="editTimeSlot(timeslot.id)"
-                    >
-                      Sửa
+                    <button class="btn btn-warning btn-sm mr-2"(click)="editTimeSlot(timeslot.id)">Sửa
                     </button>
-                    <button
-                      class="btn btn-danger btn-sm"
-                      (click)="deleteTimeSlot(timeslot.id)"
-                    >
-                      Xóa
+                    <button class="btn btn-danger btn-sm"(click)="deleteTimeSlot(timeslot.id)">Xóa
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <div>
-              <button (click)="previousPage()" [disabled]="currentPage === 1">
-                Trang trước
-              </button>
-              <span>Trang {{ currentPage }}</span>
-              <button
-                (click)="nextPage()"
-                [disabled]="currentPage === totalPages()"
-              >
-                Trang sau
-              </button>
-            </div>
+            
+          </div>
+          <div>
+            <button (click)="previousPage()" [disabled]="currentPage === 1">
+              <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </button>
+            <span>Trang {{ currentPage }}</span>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages()">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </button>
           </div>
         </div>
 

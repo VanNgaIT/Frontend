@@ -1,5 +1,3 @@
-
-
 <!-- Hộp chat -->
 <div *ngIf="isChatOpen" class="chat-container">
   <div class="chat-box">
@@ -7,12 +5,21 @@
       <button (click)="toggleChat()">X</button>
     </div>
     <div class="chat-body">
-      <input type="text" [(ngModel)]="userMessage" placeholder="Nhập tin nhắn..." />
-      <button (click)="sendMessage()">Gửi</button>
-
-      <div *ngIf="botResponse" class="bot-response">
-        <p>{{ botResponse }}</p>
+      <!-- Hiển thị các tin nhắn -->
+      <div class="messages-container">
+        <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
+          <p>{{ message.text }}</p>
+        </div>
       </div>
+
+      <!-- Form nhập tin nhắn -->
+      <div class="input-container">
+        <input type="text" [(ngModel)]="userMessage" placeholder="Nhập tin nhắn..." />
+        <button (click)="sendMessage()">Gửi</button>
+      </div>
+
+      <!-- Hiển thị phản hồi của bot -->
+      
     </div>
   </div>
 </div>
